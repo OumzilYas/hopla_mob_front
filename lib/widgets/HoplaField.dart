@@ -10,9 +10,19 @@ class HoplaField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.getHeight(context)/4,
-      width: SizeConfig.getWidth(context)/3,
-      child:const  Text(""),
+      height: SizeConfig.getHeight(context)*.045,
+      width: SizeConfig.getWidth(context)*.3,
+      child:const  Center(
+        child: Text(
+          'Continue',
+          style: TextStyle(
+            fontFamily: 'Product Sans',
+            fontSize: 15,
+            color:  Color(0xffffffff),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
       decoration:const  BoxDecoration(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -22,12 +32,12 @@ class HoplaField extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black26,
+            color: Color(0xffff9a08),
           ),
           BoxShadow(
-            color:  Colors.white,
-            spreadRadius: 1.0,
-            blurRadius: 12.0,
+            color: Colors.orangeAccent,
+            spreadRadius: -12.0,
+            blurRadius: 10.0,
           ),
         ],
       ),);

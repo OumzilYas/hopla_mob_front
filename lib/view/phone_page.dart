@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/widgets/HoplaTextField.dart';
+import 'package:hopla_front_mob/view/verification_page.dart';
+import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -139,7 +140,13 @@ class _MyHomePageState extends State<PhonePage> {
                   ],
                 ),),),
               SizedBox(height:height*.03 ,),
-              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, const  Color(0xffff9a08), "Send Code",(){}),),),
+              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, const  Color(0xffff9a08), "Send Code",(){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return VerificationPage();
+                }));
+
+
+              }),),),
               Center(child: SizedBox(
                 width: width*.85,
                 height: height*.07,

@@ -7,7 +7,7 @@ class HoplaButton extends StatelessWidget {
   final double  height;
   final Color  color;
   final String  text;
-  final Function press ;
+  final  press ;
   HoplaButton(this.width,this.height ,this.color,this.text,this.press,{ Key ?key}) : super(key: key);
 
   @override
@@ -37,12 +37,7 @@ class HoplaButton extends StatelessWidget {
           ),
           textAlign: TextAlign.left,
         ),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context){
-            return PhonePage();
-          }));
-
-        },
+        onPressed: press,
       ),
     );
   }

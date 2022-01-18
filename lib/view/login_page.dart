@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/widgets/HoplaTextField.dart';
+import 'package:hopla_front_mob/view/phone_page.dart';
+import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -63,7 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
                ),
              ),
               SizedBox(height:height*.047 ,),
-              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){}),),),
+              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return PhonePage();
+                }));
+
+              }),),),
 
               SizedBox(height:height*.055 ,),
               Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, const  Color(0xffff9a08), "Create account",(){}),),),
