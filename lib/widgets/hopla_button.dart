@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/phone_page.dart';
 
 class HoplaButton extends StatelessWidget {
   final double  width;
@@ -37,8 +38,9 @@ class HoplaButton extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
         onPressed: () {
-          print(SizeConfig.getHeight(context).toString());
-          print(SizeConfig.getWidth(context).toString());
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return PhonePage();
+          }));
 
         },
       ),

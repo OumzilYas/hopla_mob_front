@@ -17,8 +17,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color randomColor() =>
-      Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  style: TextStyle(
                    fontFamily: 'Product Sans',
                    fontSize: 37,
-                   color: const Color(0x9cffffff),
+                   color:  Color(0x9cffffff),
                  ),
                  textAlign: TextAlign.left,
                ),
