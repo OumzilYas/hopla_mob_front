@@ -6,9 +6,11 @@ class HoplaButton extends StatelessWidget {
   final double  width;
   final double  height;
   final Color  color;
+  final Color  textColor;
+
   final String  text;
   final  press ;
-  HoplaButton(this.width,this.height ,this.color,this.text,this.press,{ Key ?key}) : super(key: key);
+  HoplaButton(this.textColor , this.width,this.height ,this.color,this.text,this.press,{ Key ?key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +30,16 @@ class HoplaButton extends StatelessWidget {
             ),
           ),
         ),
-        child:  Text(
-          text,
-          style: const TextStyle(
-            fontFamily: 'Product Sans',
-            fontSize: 17,
-            color:  Color(0xffffffff),
+        child: Center(
+          child:  Text(
+            text,
+            style:  TextStyle(
+              fontFamily: 'Product Sans',
+              fontSize: 17,
+              color:  textColor,
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
         ),
         onPressed: press,
       ),

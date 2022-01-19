@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                ),
              ),
               SizedBox(height:height*.047 ,),
-              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
+              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff),width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return PhonePage();
                 }));
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }),),),
 
               SizedBox(height:height*.055 ,),
-              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, const  Color(0xffff9a08), "Create account",(){}),),),
+              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Create account",(){}),),),
               SizedBox(height:height*.036 ,),
               const Center(
                 child:  Text(

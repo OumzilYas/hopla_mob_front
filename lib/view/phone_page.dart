@@ -140,7 +140,7 @@ class _MyHomePageState extends State<PhonePage> {
                   ],
                 ),),),
               SizedBox(height:height*.03 ,),
-              Center(child: SizedBox(child: HoplaButton(width*.85,height*.07, const  Color(0xffff9a08), "Send Code",(){
+              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Send Code",(){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return VerificationPage();
                 }));

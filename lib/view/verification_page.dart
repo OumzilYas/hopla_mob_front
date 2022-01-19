@@ -9,6 +9,8 @@ import 'package:hopla_front_mob/widgets/hopla_button.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
+import 'home_page.dart';
+
 class VerificationPage extends StatefulWidget {
 
 
@@ -167,7 +169,14 @@ class _MyHomePageState extends State<VerificationPage> {
                               ],
                             ),),
                           const SizedBox(height: 20,),
-                          HoplaField('', '')
+                          HoplaField('Continue', '',()
+                          {
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return HomePage();
+                          }
+                          )
+                          );
+                          })
                         ],
                       ),
                     ),
