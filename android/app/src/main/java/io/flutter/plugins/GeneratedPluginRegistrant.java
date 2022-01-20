@@ -15,5 +15,35 @@ import io.flutter.embedding.engine.FlutterEngine;
 public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
+    try {
+      flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin flutter_plugin_android_lifecycle, io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new io.flutter.plugins.googlemaps.GoogleMapsPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin google_maps_flutter, io.flutter.plugins.googlemaps.GoogleMapsPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new com.codeheadlabs.libphonenumber.LibphonenumberPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin libphonenumber, com.codeheadlabs.libphonenumber.LibphonenumberPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new com.example.libphonenumber_plugin.LibphonenumberPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin libphonenumber_plugin, com.example.libphonenumber_plugin.LibphonenumberPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin path_provider_android, io.flutter.plugins.pathprovider.PathProviderPlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new com.tekartik.sqflite.SqflitePlugin());
+    } catch(Exception e) {
+      Log.e(TAG, "Error registering plugin sqflite, com.tekartik.sqflite.SqflitePlugin", e);
+    }
   }
 }

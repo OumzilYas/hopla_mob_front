@@ -9,6 +9,7 @@ import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/details_page.dart';
+import 'package:hopla_front_mob/view/pathway_page.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
@@ -324,7 +325,11 @@ class _MyHomePageState extends State<DetailsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      HoplaButton(Color(0xffff9a08),width*.3, height*.07, Color(0xffffffff), 'Lock', (){}),
+                      HoplaButton(Color(0xffff9a08),width*.3, height*.07, Color(0xffffffff), 'Lock', (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return PathWay();
+                        }));
+                      }),
                       HoplaButton(Color(0xffff9a08),width*.3, height*.07,  Color(0xffffffff), 'Reselect', (){}),
 
               ],))),

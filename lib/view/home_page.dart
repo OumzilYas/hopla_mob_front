@@ -1,6 +1,6 @@
 
 
-import 'package:barcode_scan/barcode_scan.dart';
+//import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -167,7 +167,7 @@ class _MyHomePageState extends State<HomePage> {
             child: Container(width: 10,height: 50,
             child: Row(
               children: [HoplaField('Select', 'type',() async {
-                 await BarcodeScanner.scan();
+                // await BarcodeScanner.scan();
 
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return DetailsPage();
