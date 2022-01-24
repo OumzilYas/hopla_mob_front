@@ -16,7 +16,8 @@ final List<Widget> scooters = scooterData.map(
                 bottomRight: Radius.circular(10)
             ),
           ),
-          child: Column(
+          child: ListView(
+            padding:  EdgeInsets.all(10),
             children: [
               Container(height: 180,width: 150, decoration:const
               BoxDecoration(
@@ -55,75 +56,83 @@ final List<Widget> scooters = scooterData.map(
                width: 150,
                child : Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: const[
-                 Text(
-                   'Battery',
-                   style: TextStyle(
-                     fontFamily: 'Product Sans',
-                     fontSize: 15,
-                     color:  Color(0xff707070),
+                 children: [
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: const [
+                       Text(
+                         'Battery',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 15,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                       Text(
+                         '80%',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 9,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                     ],
                    ),
-                   textAlign: TextAlign.center,
-                 ),
-                 Text(
-                   'Speed',
-                   style: TextStyle(
-                     fontFamily: 'Product Sans',
-                     fontSize: 15,
-                     color:  Color(0xff707070),
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: const [
+                       Text(
+                         'Speed',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 15,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                       Text(
+                         '  20 km/h',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 9,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                     ],
                    ),
-                   textAlign: TextAlign.center,
-                 ),
-                 Text(
-                   'Weight',
-                   style: TextStyle(
-                     fontFamily: 'Product Sans',
-                     fontSize: 15,
-                     color:  Color(0xff707070),
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: const [
+                       Text(
+                         'Wight',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 15,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                       Text(
+                         '20Kg',
+                         style: TextStyle(
+                           fontFamily: 'Product Sans',
+                           fontSize: 9,
+                           color:  Color(0xff707070),
+                         ),
+                         textAlign: TextAlign.center,
+                       ),
+                     ],
                    ),
-                   textAlign: TextAlign.center,
-                 ),
-               ],),
+
+                 ],),
 
              ),
-              Container(
-                width: 135,
-                child : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const[
-                    SizedBox(width: 5,),
-                    Text(
-                      '80%',
-                      style: TextStyle(
-                        fontFamily: 'Product Sans',
-                        fontSize: 9,
-                        color:  Color(0xff707070),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(width: 0.6 ,),
-                    Text(
-                      '19 km/h',
-                      style: TextStyle(
-                        fontFamily: 'Product Sans',
-                        fontSize: 9,
-                        color:  Color(0xff707070),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(width: 2 ,),
-                    Text(
-                      '10 kg',
-                      style: TextStyle(
-                        fontFamily: 'Product Sans',
-                        fontSize: 9,
-                        color:  Color(0xff707070),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],),
-
-              ),
 
             ],
           ),
@@ -142,7 +151,7 @@ class ScooterSlider extends StatelessWidget {
         aspectRatio: 2.0,
         initialPage: 1,
         enableInfiniteScroll: false,
-        height: MediaQuery.of(context).size.height*0.35,
+        height: MediaQuery.of(context).size.height*0.3,
       ),
       items: scooters,
     );

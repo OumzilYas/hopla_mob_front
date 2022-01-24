@@ -19,8 +19,7 @@ class PhonePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<PhonePage> {
-  String initialCountry = 'US';
-  PhoneNumber number = PhoneNumber(isoCode: 'US');
+  PhoneNumber number = PhoneNumber(isoCode: 'MA');
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +90,14 @@ class _MyHomePageState extends State<PhonePage> {
                       height: 75,
                       width: 280,
                       child: InternationalPhoneNumberInput(
-                        onInputChanged: (PhoneNumber number) {
-                          print(number.phoneNumber);
+                        onInputChanged: (PhoneNumber number2) {
+                          print('pppp' + number.isoCode.toString());
                         },
                         onInputValidated: (bool value) {
                           print(value);
                         },
                         initialValue: number,
+
                         selectorConfig: const SelectorConfig(
                           selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                         ),

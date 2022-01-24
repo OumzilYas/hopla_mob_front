@@ -311,7 +311,7 @@ class _MyHomePageState extends State<DetailsPage> {
                           image: AssetImage("assets/e_scooter.png"),
                         ),
                       ),
-                      child: MapPage(),),
+                    ),
                   ],),
 
                 ],),

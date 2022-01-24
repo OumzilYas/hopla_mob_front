@@ -1,14 +1,11 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/countdown.dart';
-import 'package:flutter_countdown_timer/countdown_controller.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/recap_page.dart';
+import 'package:hopla_front_mob/widgets/app_bar.dart';
+import 'package:hopla_front_mob/widgets/bottom_bar.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -81,101 +78,16 @@ class _MyHomePageState extends State<PathWay2> {
               BoxDecoration(
                 color:  Color(0xff7c94b6),
                 image:   DecorationImage(
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                   image: AssetImage("assets/MAPS2.png"),
                 ),
-              ),
-              child: MapPage(),),
+              ),),
           ),
           Positioned(
             top: 0.0,
             left: 0.0,
             right: 0.0,
-            child: Container(
-              height: height*.22,
-              decoration:const  BoxDecoration(
-                color:  Color(0xffff9a08),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)
-                ),
-              ),
-              child: Center(
-                  child:Container(
-                    child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(width: width*.05,),
-                        Container(
-                          width: width*.12,
-                          height: width*.12,
-                          decoration: const  BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: IconButton(
-                              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                                icon:const FaIcon(FontAwesomeIcons.bars,color: Colors.grey,size: 25,),
-                                onPressed: () { _scaffoldKey.currentState?.openDrawer();}
-                            ),),                      ),
-                        SizedBox(width: width*.05,),
-                        SizedBox(
-                          width: width*.54,
-                          height: height*.055,
-                          child: Container(
-                              decoration:const  BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)
-                                ),
-
-                              ),
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                                      icon:const FaIcon(FontAwesomeIcons.search,color: Colors.grey,size: 18,),
-                                      onPressed: () { _scaffoldKey.currentState?.openDrawer();}
-                                  ),
-                                  Container(
-                                    width: width*.4,
-                                    height: height*.045,
-                                    child:  TextField(
-                                      decoration:  InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Search locations',
-                                        hintStyle: GoogleFonts.montserrat(
-                                          textStyle: const TextStyle(color: Colors.grey,fontSize: 16),
-                                        ),
-                                      ),
-
-                                    ),
-                                  )
-                                ],
-                              )
-                          ),
-                        ),
-                        SizedBox(width: width*.02,),
-                        SizedBox(
-                          width: width*.15,
-                          child: Center(
-                            child: IconButton(
-                              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                                icon:const FaIcon(FontAwesomeIcons.slidersH,color: Colors.white,size: 35,),
-                                onPressed: () { print("Pressed"); }
-                            ),),
-                        ),
-                        SizedBox(width: width*.05,)
-
-                      ],
-                    ),
-                  )
-              ),
-            ),),
+            child: AppBarH((){_scaffoldKey.currentState?.openDrawer();}),),
           Positioned(
             bottom: 90.0,
             left: 10.0,
@@ -263,7 +175,7 @@ class _MyHomePageState extends State<PathWay2> {
                                 builder: (context, snap) {
                                   final value = snap.data!;
                                   final displayTime =
-                                  StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                                  StopWatchTimer.getDisplayTime(value, hours: _isHours,milliSecond: false);
                                   return Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -305,6 +217,9 @@ class _MyHomePageState extends State<PathWay2> {
                                     onPressed: () {
                                       _stopWatchTimer.onExecute
                                           .add(StopWatchExecute.stop);
+                                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                                        return RecapPage();
+                                      }));
                                     },
                                   ),
                                 ),
@@ -319,7 +234,7 @@ class _MyHomePageState extends State<PathWay2> {
             ),
           ),
           Positioned(
-            top : 130,
+            top : 90,
             left: 40.0,
             right: 40.0,
             child:Container(
@@ -369,55 +284,7 @@ class _MyHomePageState extends State<PathWay2> {
               bottom: 0.0,
               left: 0.0,
               right: 0.0,
-              child: Container(width: 100,height: 80,
-                child: Row(
-                  children: [
-                    SizedBox(width: width*.051,),
-                    InkWell(
-                      onTap: (){},
-                      child: Container(
-                        height: width*.1,
-                        width: width*.1,
-                        decoration:const BoxDecoration(
-                          image:   DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage("assets/home-button.png"),
-                          ),
-                        ),),
-                    ),
-                    SizedBox(width: width*.28,),
-                    InkWell(
-                      onTap: (){},
-                      child: Container(
-                        height: width*.1,
-                        width: width*.1,
-                        decoration:const BoxDecoration(
-                          image:   DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage("assets/wallet.png"),
-                          ),
-                        ),),
-                    ),
-                    SizedBox(width: width*.3,),
-                    InkWell(
-                      onTap: (){},
-                      child: Container(
-                        height: width*.1,
-                        width: width*.1,
-                        decoration:const BoxDecoration(
-                          image:   DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage("assets/images.png"),
-                          ),
-                        ),),
-                    ),
-
-
-                  ],
-                ),
-                decoration:const BoxDecoration(
-                  color: Colors.white,
-                ),)),
+              child: BBarH()),
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

@@ -80,7 +80,6 @@ class _MyHomePageState extends State<DrawerComp> {
                                   ),
                                 )),
                           )),
-
                     ],
                   )
                 ],),
@@ -104,7 +103,7 @@ class _MyHomePageState extends State<DrawerComp> {
                                 children: [
                                   Icon(FontAwesomeIcons.fileInvoiceDollar,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
                                   SizedBox( width: 15,),
-                                  Text('offers',  style: GoogleFonts.montserrat(
+                                  Text('Offers',  style: GoogleFonts.montserrat(
                                     fontSize: 20,
                                     color: const Color(0xff241332),
                                   ))
@@ -206,9 +205,35 @@ class _MyHomePageState extends State<DrawerComp> {
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.assistiveListeningSystems,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  Icon(FontAwesomeIcons.fileInvoiceDollar,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
                                   SizedBox( width: 15,),
-                                  Text('Assistance',  style: GoogleFonts.montserrat(
+                                  Text('Offers',  style: GoogleFonts.montserrat(
+                                    fontSize: 20,
+                                    color: const Color(0xff241332),
+                                  ))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.025,),
+                    Row(
+                      children: [
+                        SizedBox(width: MediaQuery
+                            .of(context)
+                            .size
+                            .width*.09,),
+                        InkWell(
+                            child: Container(padding: const EdgeInsets.only(top: 10),
+                              width: 220,
+                              child: Row(
+                                children: [
+                                  Icon(FontAwesomeIcons.angleDoubleUp,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  SizedBox( width: 15,),
+                                  Text('Activity',  style: GoogleFonts.montserrat(
                                     fontSize: 20,
                                     color: const Color(0xff241332),
                                   ))
@@ -274,7 +299,6 @@ class _MyHomePageState extends State<DrawerComp> {
                             )),
                       ],
                     ),
-
                   ],
                 ),
               ),
