@@ -204,61 +204,92 @@ class _MyHomePageState extends State<PathWay> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                height: 50,
                                 width: 50,
-                                child:FloatingActionButton(
-                                  backgroundColor: Colors.orangeAccent,
-                                  child:
-                                  Icon(isRunning ? Icons.pause : Icons.play_arrow),
-                                  onPressed: () {
-                                    if (!countdownController1.isRunning) {
-                                      countdownController1.start();
-                                      countdownController2.stop();
+                                height: 50,
+                                child:Center(
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child: FloatingActionButton(
+                                      backgroundColor: Colors.white,
+                                      child:
+                                      Icon(isRunning ? Icons.pause : Icons.play_arrow
+                                      ,color: Colors.orangeAccent,),
+                                      onPressed: () {
+                                        if (!countdownController1.isRunning) {
+                                          countdownController1.start();
+                                          countdownController2.stop();
 
-                                      setState(() {
-                                        isRunning = true;
-                                      });
-                                    } else {
-                                      countdownController1.stop();
-                                      countdownController2.start();
+                                          setState(() {
+                                            isRunning = true;
+                                          });
+                                        } else {
+                                          countdownController1.stop();
+                                          countdownController2.start();
 
-                                      setState(() {
-                                        isRunning = false;
-                                      });
-                                    }
+                                          setState(() {
+                                            isRunning = false;
+                                          });
+                                        }
 
-                                  },
+                                      },
+                                    ),
+                                  ),
                                 ),
+                                decoration:const  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.orangeAccent,),
                               ),
+
                               Container(
-                                height: 50,
                                 width: 50,
-                                child:FloatingActionButton(
-                                  backgroundColor: Colors.green,
-                                  child:
-                                  Icon(lock ? Icons.lock_open :  Icons.lock ),
-                                  onPressed: () {
-                                    setState(() {
-                                      lock = !lock;
-                                    });
+                                height: 50,
+                                child:Center(
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child: FloatingActionButton(
+                                      backgroundColor: Colors.white,
+                                      child:
+                                      Icon(lock ? Icons.lock_open :  Icons.lock ,color: Colors.green,),
+                                      onPressed: () {
+                                        setState(() {
+                                          lock = !lock;
+                                        });
 
-                                  },
+                                      },
+                                    ),
+                                  ),
                                 ),
+                                decoration:const  BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  color: Colors.green,),
                               ),
+
                               Container(
-                                height: 50,
                                 width: 50,
-                                child:FloatingActionButton(
-                                  backgroundColor: Colors.deepOrangeAccent,
-                                  child:
-                                  Icon(Icons.stop),
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context){
-                                      return PathWay2();
-                                    }));
-                                  },
+                                height: 50,
+                                child:Center(
+                                  child: SizedBox(
+                                    height: 40,
+                                    width: 40,
+                                    child: FloatingActionButton(
+                                      backgroundColor: Colors.white,
+                                      child:
+                                      Icon(Icons.stop,color: Colors.deepOrangeAccent,),
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return PathWay2();
+                                        }));
+                                      },
+                                    ),
+                                  ),
                                 ),
+                                decoration:const  BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.deepOrangeAccent),
                               ),
+
 
                             ],
                           )

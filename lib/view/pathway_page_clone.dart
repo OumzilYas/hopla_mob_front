@@ -207,21 +207,31 @@ class _MyHomePageState extends State<PathWay2> {
                             child:Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+
                                 Container(
-                                  height: 80,
-                                  width: 80,
-                                  child:FloatingActionButton(
-                                    backgroundColor: Colors.green,
-                                    child:
-                                    Icon(Icons.lock),
-                                    onPressed: () {
-                                      _stopWatchTimer.onExecute
-                                          .add(StopWatchExecute.stop);
-                                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                                        return RecapPage();
-                                      }));
-                                    },
+                                  width: 50,
+                                  height: 50,
+                                  child:Center(
+                                    child: SizedBox(
+                                      height: 40,
+                                      width: 40,
+                                      child: FloatingActionButton(
+                                        backgroundColor: Colors.white,
+                                        child:
+                                        Icon(Icons.lock,color: Colors.green,),
+                                        onPressed: () {
+                                          _stopWatchTimer.onExecute
+                                              .add(StopWatchExecute.stop);
+                                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                                            return RecapPage();
+                                          }));
+                                        },
+                                      ),
+                                    ),
                                   ),
+                                  decoration:const  BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.green,),
                                 ),
 
                               ],

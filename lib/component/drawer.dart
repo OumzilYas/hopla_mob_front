@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hopla_front_mob/view/offersPage.dart';
+import 'package:hopla_front_mob/view/offersTest.dart';
 
 class DrawerComp extends StatefulWidget {
 
@@ -18,8 +20,9 @@ class _MyHomePageState extends State<DrawerComp> {
     final textTheme = theme.textTheme;
 
     return ListView(
+
             // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+      padding:  EdgeInsets.all(0),
             children: <Widget>[
               Container(
                 height: MediaQuery
@@ -29,15 +32,13 @@ class _MyHomePageState extends State<DrawerComp> {
                 width: 300,
                 decoration: const BoxDecoration(
                     color: Color(0xffff9a08),
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/image.png"),
-                      fit: BoxFit.cover,
-                    ),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(80.0),
                       //topRight: Radius.circular(80.0),
                     )),
-                child: Row(children: [
+                child: ListView(
+                  padding:  EdgeInsets.only(left: 30,top:   0),
+                  children: [
                   SizedBox(width: 60,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,6 +98,11 @@ class _MyHomePageState extends State<DrawerComp> {
                             .size
                             .width*.09,),
                         InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return const OffersPage();
+                            }));
+                          },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: Row(
@@ -129,7 +135,7 @@ class _MyHomePageState extends State<DrawerComp> {
                                 children: [
                                   Icon(FontAwesomeIcons.mapMarker,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
                                   SizedBox( width: 15,),
-                                  Text('Pathway',  style: GoogleFonts.montserrat(
+                                  Text('trips',  style: GoogleFonts.montserrat(
                                     fontSize: 20,
                                     color: const Color(0xff241332),
                                   ))
@@ -201,13 +207,18 @@ class _MyHomePageState extends State<DrawerComp> {
                             .size
                             .width*.09,),
                         InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  TabControllerPage();
+                              }));
+                            },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.fileInvoiceDollar,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  Icon(FontAwesomeIcons.assistiveListeningSystems,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
                                   SizedBox( width: 15,),
-                                  Text('Offers',  style: GoogleFonts.montserrat(
+                                  Text('Assistance',  style: GoogleFonts.montserrat(
                                     fontSize: 20,
                                     color: const Color(0xff241332),
                                   ))

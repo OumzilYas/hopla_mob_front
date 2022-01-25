@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/creat_account.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
@@ -72,7 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
               }),),),
 
               SizedBox(height:height*.055 ,),
-              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Create account",(){}),),),
+              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Create account",
+                      (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return CreatAccountPage();
+                        }));
+                      }),),),
               SizedBox(height:height*.036 ,),
               const Center(
                 child:  Text(

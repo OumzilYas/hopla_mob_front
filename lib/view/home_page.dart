@@ -33,7 +33,7 @@ class _MyHomePageState extends State<HomePage> {
     double width = SizeConfig.getWidth(context);
 
     return   Scaffold(
-      drawerScrimColor: Color(0xffff9a08).withOpacity(0.7),
+      drawerScrimColor: const Color(0xffff9a08).withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
         child: DrawerComp(),
