@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
-import 'package:hopla_front_mob/view/offersTest.dart';
 
 class DrawerComp extends StatefulWidget {
 
@@ -100,7 +99,7 @@ class _MyHomePageState extends State<DrawerComp> {
                         InkWell(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return const OffersPage();
+                              return  OfferPage();
                             }));
                           },
                             child: Container(padding: const EdgeInsets.only(top: 10),
@@ -208,9 +207,7 @@ class _MyHomePageState extends State<DrawerComp> {
                             .width*.09,),
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  TabControllerPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,

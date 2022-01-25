@@ -1,117 +1,67 @@
-
-import 'dart:math';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hopla_front_mob/component/OffersTab.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/phone_page.dart';
-import 'package:hopla_front_mob/widgets/HoplaField.dart';
-import 'package:hopla_front_mob/widgets/app_bar.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
-class OffersPage extends StatefulWidget {
-  const OffersPage({Key? key}) : super(key: key);
 
-
-
+class OfferPage extends StatefulWidget {
   @override
-  State<OffersPage> createState() => _MyHomePageState();
+  _OfferPageState createState() => _OfferPageState();
 }
 
-class _MyHomePageState extends State<OffersPage> {
-  int _current = 0;
-  List<T> map<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-
-    return result;
-  }
+class _OfferPageState extends State<OfferPage> {
+  String _stringCus = "textt";
+  set stringCus(String value) => setState(() => _stringCus = value);
+  List offers = [false,false,false,false];
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
-
-    return Scaffold(
+    return  Scaffold(
       drawerScrimColor: const Color(0xffff9a08).withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
         child: DrawerComp(),
       ),
         width: width*.8,color: Colors.white,),
-      body:Container(
-          decoration:
-          const BoxDecoration(
-            color:  Color(0xffff9a08),
-          ),
-
-
-          height:SizeConfig.getHeight(context) ,
-          width: SizeConfig.getHeight(context) ,
-          child: ListView(
-            padding:  const EdgeInsets.only(top: 7),
+      body:   ListView(
+        children: [
+          const SizedBox(height: 20,),
+          Row(
             children: [
-              AppBarH((){_scaffoldKey.currentState?.openDrawer();}),
-              Container(
-                height: height*.7,
-                width: width*.8,
-                child:CarouselSlider(
-                  items:['','',''].map((item) => Container(
-                    decoration:const  BoxDecoration(
-                      color: Colors.white,
-                      image:   DecorationImage(
-                        fit: BoxFit.fitHeight,
-                        image: AssetImage("assets/offer.png"),
-                      ),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                      ),
-                    ),
-
-                  )).toList(),
-                  options: CarouselOptions(
-                    autoPlay: false,
-                    enlargeCenterPage: true,
-                    viewportFraction: 0.8,
-                    aspectRatio: 2.0,
-                    initialPage: 1,
-                    enableInfiniteScroll: false,
-                    height: MediaQuery.of(context).size.height*0.7,
-                    onPageChanged: (index , _){
-                      setState(() {
-                        _current = index;
-                      });
-                    }
-                  ),),
+              const SizedBox(width:   30,),
+              InkWell(
+                onTap: (){Navigator.pop(context);},
+                child: const Icon(Icons.arrow_back_ios,color: Colors.deepOrangeAccent,size: 30,),
               ),
-              SizedBox(height: height*.05,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: map<Widget>(
-                  ["1","2","3"],
-                      (index, url) {
-                    return Container(
-                      width: MediaQuery.of(context).size.height*0.0095,
-                      height:MediaQuery.of(context).size.height*0.0095,
-                      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _current == index
-                              ? Colors.white
-                              : Colors.grey ),
-                    );
-                  },
-                ),
-              ),
+              const SizedBox(width: 10,),
+              Text('Chose a Plan',style: GoogleFonts.lato(
+                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
+              ),)
             ],
           ),
-        ),
+          SizedBox(height: height*.04,),
+          SizedBox(
+            height: height*.645,
+            width: width*.95,
+            child:TabControllerPage(
+              offersList: offers,
+              callback: (val) => setState(() => _stringCus = val),
+              press: (){
 
+              },
+            ),
+          ),
+          SizedBox(height: height*.04,),
+          offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){},),):const SizedBox(),
+
+
+        ],
+      ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -253,6 +253,9 @@ class _MyHomePageState extends State<PathWay> {
                                       child:
                                       Icon(lock ? Icons.lock_open :  Icons.lock ,color: Colors.green,),
                                       onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return PathWay2();
+                                        }));
                                         setState(() {
                                           lock = !lock;
                                         });
@@ -266,29 +269,6 @@ class _MyHomePageState extends State<PathWay> {
                                   color: Colors.green,),
                               ),
 
-                              Container(
-                                width: 50,
-                                height: 50,
-                                child:Center(
-                                  child: SizedBox(
-                                    height: 40,
-                                    width: 40,
-                                    child: FloatingActionButton(
-                                      backgroundColor: Colors.white,
-                                      child:
-                                      Icon(Icons.stop,color: Colors.deepOrangeAccent,),
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                                          return PathWay2();
-                                        }));
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                decoration:const  BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.deepOrangeAccent),
-                              ),
 
 
                             ],
