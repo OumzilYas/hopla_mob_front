@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/map.dart';
+import 'package:hopla_front_mob/component/stations_slider.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/details_page.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';
@@ -15,15 +16,15 @@ import 'package:hopla_front_mob/widgets/app_bar.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
 
 
-class HomePage extends StatefulWidget {
+class StationsPage extends StatefulWidget {
 
 
 
   @override
-  State<HomePage> createState() => _MyHomePageState();
+  State<StationsPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<HomePage> {
+class _MyHomePageState extends State<StationsPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
 
@@ -38,51 +39,38 @@ class _MyHomePageState extends State<HomePage> {
       drawer:  Container(child: Drawer(
         child: DrawerComp(),
       ),
-      width: width*.8,color: Colors.white,),
+        width: width*.8,color: Colors.white,),
       body:   Stack(
         children:  [
           Positioned(
             top: 0.0,
             left: 0.0,
             right: 0.0,
-              child: Container(height: height,
-                decoration:const
-                BoxDecoration(
-                  image:   DecorationImage(
-                    fit: BoxFit.fitHeight,
-                    image: AssetImage("assets/MAPS2.png"),
-                  ),
-                ),),
-            ),
+            child: Container(height: height,
+              decoration:const
+              BoxDecoration(
+                image:   DecorationImage(
+                  fit: BoxFit.fitHeight,
+                  image: AssetImage("assets/MAPS2.png"),
+                ),
+              ),),
+          ),
           Positioned(
             top: 0.0,
             left: 0.0,
             right: 0.0,
             child: AppBarH((){_scaffoldKey.currentState?.openDrawer();}),),
           const Positioned(
-            top : 480,
+            top : 670,
             left: 0.0,
             right: 0.0,
-            child: ScooterSlider(),),
+            child: StationsSlider(),),
 
-          Positioned(
-            bottom: 60.0,
-            left: width*.35,
-            right: 0.0,
-            child: Container(width: 10,height: 50,
-            child: Row(
-              children: [HoplaField('Select', 'type',() async {
-                // await BarcodeScanner.scan();
-
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return DetailsPage();
-                }));
-              })],))),
           const Positioned(
-            bottom: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: BBarH()),
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: BBarH()),
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

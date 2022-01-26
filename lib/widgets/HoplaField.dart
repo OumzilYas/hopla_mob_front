@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/home_page.dart';
+import 'package:hopla_front_mob/view/scooters_page.dart';
 
 class HoplaField extends StatelessWidget {
   final String text;

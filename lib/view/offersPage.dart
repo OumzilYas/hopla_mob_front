@@ -59,7 +59,6 @@ class _OfferPageState extends State<OfferPage> {
           SizedBox(height: height*.04,),
           offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){},),):const SizedBox(),
 
-
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
