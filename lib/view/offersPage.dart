@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/OffersTab.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/payment_page.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
 
@@ -57,7 +58,11 @@ class _OfferPageState extends State<OfferPage> {
             ),
           ),
           SizedBox(height: height*.04,),
-          offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){},),):const SizedBox(),
+          offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return  PayPage();
+            }));
+          },),):const SizedBox(),
 
         ],
       ),
