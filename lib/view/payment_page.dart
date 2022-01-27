@@ -160,7 +160,28 @@ class _PayPageState extends State<PayPage> {
                           SizedBox(width: width*.01,),
                         ],
                       )),
-                    )],
+                    ),
+                    SizedBox(height: height*.01,),
+                    Container(
+                      decoration:  BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10),),
+                      ),
+                      height: height*.06,
+                      width: width*.5,
+                      child: Center(child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(width: width*.01,),
+                          Icon(FontAwesomeIcons.plusCircle),
+                          Text('Add New Card',style: GoogleFonts.lato(
+                            textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
+                          ),),
+                          SizedBox(width: width*.01,),
+                        ],
+                      )),
+                    ),
+
+                  ],
                 ),
 
                 contentHorizontalPadding: 20,

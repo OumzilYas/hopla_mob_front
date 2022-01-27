@@ -26,26 +26,58 @@ class ScooterSlider extends StatelessWidget {
           child: ListView(
             padding:  EdgeInsets.all(10),
             children: [
-              Container(height: 100,width: 80, decoration:const
-              BoxDecoration(
-                image:   DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/shadow.png"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Container(height: 50,width: 40, decoration:const
+                BoxDecoration(
+                  image:   DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage("assets/shadow.png"),
+                  ),
                 ),
-              ),
-                child: SizedBox(child:  Container(height: 170,width: 130,
-                  decoration:const BoxDecoration(
-                    image:   DecorationImage(
-                      fit: BoxFit.contain,
-                      image: AssetImage("assets/e_scooter.png"),
+                  child: SizedBox(child:  Container(height: 170,width: 130,
+                    decoration:const BoxDecoration(
+                      image:   DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage("assets/e_scooter.png"),
+                      ),
+                    ),),),),
+                SizedBox(width: 30,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Battery Life',
+                      style: TextStyle(
+                        fontFamily: 'Product Sans',
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color:  Color(0xff707070),
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),),),),
+                    Text(
+                      '80 km',
+                      style: TextStyle(
+                        fontFamily: 'Product Sans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color:  Colors.orangeAccent,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],),
+
               SizedBox(height: 10,),
-              Row(children: [
-                const SizedBox(width: 10,),
+              Row(crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                 Container(
                   height: 2,
-                  width: 40,
+                  width: 45,
                   color: const Color(0xffff9a08),
                 ),
                 const SizedBox(width: 5,),
@@ -59,13 +91,47 @@ class ScooterSlider extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
+                const SizedBox(width: 5,),
+                Container(
+                  height: 2,
+                  width: 45,
+                  color: const Color(0xffff9a08),
+                ),
+
               ],),
               const SizedBox(height: 10,),
               Container(
                 width: 150,
                 child : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Max Speed',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color:  Color(0xff707070),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          '  30 km/h',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color:  Colors.orangeAccent,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 20,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,59 +147,7 @@ class ScooterSlider extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          '80%',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color:  Colors.orangeAccent,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Speed',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color:  Color(0xff707070),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          '  20 km/h',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color:  Colors.orangeAccent,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Wight',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color:  Color(0xff707070),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          '20Kg',
+                          '90%',
                           style: TextStyle(
                             fontFamily: 'Product Sans',
                             fontSize: 15,
@@ -160,7 +174,7 @@ class ScooterSlider extends StatelessWidget {
         aspectRatio: 2.0,
         initialPage: 1,
         enableInfiniteScroll: false,
-        height: MediaQuery.of(context).size.height*0.25,
+        height: MediaQuery.of(context).size.height*0.18,
       ),
       items: scooters,
     );

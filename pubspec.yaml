@@ -46,6 +46,8 @@ dependencies:
   material_dialogs: ^1.1.1
   accordion: ^2.1.2
   roundcheckbox: ^2.0.4+1
+  weather: ^2.0.1
+  sliding_up_panel: ^2.0.0+1
 
   #barcode_scan: ^3.0.1
 

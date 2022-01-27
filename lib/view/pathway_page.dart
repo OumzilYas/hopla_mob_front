@@ -280,54 +280,7 @@ class _MyHomePageState extends State<PathWay> {
                 ],),
             ),
           ),
-          Positioned(
-            top : 90,
-            left: 40.0,
-            right: 40.0,
-            child:Container(
-              decoration:const  BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(10),),
-              ),
-              height: height*.15,
-              width: width*.8,
-              child: Row(children: [
-                Container(
-                  child:Center(
-                    child: Container(height: height*.1,width: width*.3,
-                      decoration:const
-                      BoxDecoration(
-                        image:   DecorationImage(
-                          fit: BoxFit.contain,
-                          image: AssetImage("assets/distance38.png"),
-                        ),
-                      ),),
-                  ) ,
-                ),
-                Container(
-                  child:Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Casablanca',
-                        style:   TextStyle(
-                          fontFamily: 'Product Sans',
-                          fontSize: 17,
-                          color:  Color(0xffff9a08),
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      SizedBox(height: height*.05,),
-                      Center(child: SizedBox(child: HoplaButton(Color(0xffffffff),width*.42,height*.03, Color(0xffff9a08), "CasaPort",(){
-
-                      }),),),
-                    ],) ,
-                )
-              ],),
-            ),),
-
-          Positioned(
+          const Positioned(
               bottom: 0.0,
               left: 0.0,
               right: 0.0,

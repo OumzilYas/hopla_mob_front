@@ -61,7 +61,7 @@ class _MyHomePageState extends State<HomePage> {
             right: 0.0,
             child: AppBarH((){_scaffoldKey.currentState?.openDrawer();}),),
           const Positioned(
-            top : 530,
+            top : 590,
             left: 0.0,
             right: 0.0,
             child: ScooterSlider(),),
@@ -76,6 +76,7 @@ class _MyHomePageState extends State<HomePage> {
                 // await BarcodeScanner.scan();
                 showDialog(
                     context: context,
+                    barrierDismissible: false,
                     builder: (BuildContext context) => const DialogScooter());
               })],))),
           const Positioned(

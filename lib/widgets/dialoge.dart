@@ -170,13 +170,13 @@ class _DialogState extends State<DialogScooter> {
 
                       ),
                       SizedBox(height: height*.02,),
-                      HoplaButton(Colors.white, width, height*.06, Colors.orangeAccent, 'Unlock', (){
+                      HoplaButton(Colors.white, width, height*.06, Color(0xff00B72B) , 'Start', (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
                           return PathWay();
                         }));
                       }),
                       SizedBox(height: height*.02,),
-                      HoplaButton(Colors.white, width, height*.06, Color(0xff00B72B), 'select another', (){})
+                      HoplaButton(Colors.white, width, height*.06, Colors.orangeAccent, 'Select another', (){})
 
                     ],
                   ),

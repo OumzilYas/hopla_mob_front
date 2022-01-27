@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/creat_account.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
+import 'package:hopla_front_mob/view/test.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
+
+import 'home_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -91,7 +94,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   textAlign: TextAlign.left,
                 ),
               ),
-
+              SizedBox(height:height*.05 ,),
+               Center(
+                child:  InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                      return HomePage2();
+                    }));
+                  },
+                  child: const Text(
+                    'Skip Login',
+                    style: TextStyle(
+                      fontFamily: 'Product Sans',
+                      fontSize: 17,
+                      decoration: TextDecoration.underline,
+                      color:  Color(0x7dffffff),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
