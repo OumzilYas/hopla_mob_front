@@ -48,7 +48,8 @@ dependencies:
   roundcheckbox: ^2.0.4+1
   weather: ^2.0.1
   sliding_up_panel: ^2.0.0+1
-
+  flutter_map: ^0.14.0
+  location: ^4.3.0
   #barcode_scan: ^3.0.1
 
 dev_dependencies:
