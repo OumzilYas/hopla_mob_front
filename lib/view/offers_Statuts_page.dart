@@ -10,7 +10,6 @@ import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/home_slider.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/details_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
 import 'package:hopla_front_mob/view/test.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';

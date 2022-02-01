@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hopla_front_mob/model/scooter.dart';
-import 'package:hopla_front_mob/view/scooters_page.dart';
-import 'package:hopla_front_mob/view/stations_page.dart';
+
 
 
 

@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
+import 'package:hopla_front_mob/component/weather.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/test.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
@@ -49,91 +50,7 @@ class _MyHomePageState extends State<HomePage2> {
             top : 130,
             left: 40.0,
             right: 40.0,
-            child:Container(
-              decoration:  BoxDecoration(
-                  color:  Color(0xffDFE6EF),
-                  borderRadius: BorderRadius.all(Radius.circular(10),),
-                  border: Border.all(color:Color(0xffF9F9F9))
-
-              ),
-              height: 150,
-              width: 330,
-              child: Center(child: Container(
-                height:130,
-                width: 300,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height:120,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            image:   DecorationImage(
-                              fit: BoxFit.contain,
-                              image:const AssetImage("assets/weather.png"),
-                            ),
-                          ),
-
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('CasaBlanca',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
-                        ),),
-                        SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('23',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
-                            ),),
-                            Text('°C',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 15),
-                            ),),
-                          ],
-                        )
-
-
-                      ],
-                    ),
-                    Container(
-                      height: 100,
-                      width: 1,
-                      color: Colors.grey,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('wind',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                        ),),
-                        Text('15 km/h',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
-                        ),),
-                        SizedBox(height: 10,),
-                        Text('wind',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                        ),),
-                        Text('15 km',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
-                        ),),
-
-                      ],
-                    ),
-
-                  ],
-                ),
-              ),),
-            ),),
+            child:WeatherComp()),
           Positioned(
             top: 52.0,
             right: 20.0,
@@ -381,23 +298,26 @@ class _MyHomePageState extends State<HomePage2> {
             ),),
           Positioned(
               bottom: 80.0,
-              left: width*.01,
+              left: 0,
               right: 0.0,
-              child: Container(
-                width: 150,
-                height: 150,
-                child: Center(
-                  child: SizedBox(
-                    height: 150,
-                    width: 150,
-                    child: Center(child: Text('GO',style: GoogleFonts.lato(
-                      textStyle: const TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 30),
-                    ),),)
-                  ),
-                ),
-                decoration:const  BoxDecoration(
+              child: InkWell(
+                onTap: (){
+
+                },
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration:
+                  BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.orangeAccent),
+                    image:   DecorationImage(
+                      fit: BoxFit.contain,
+                      image:const AssetImage("assets/hopla.png"),
+
+                    ),
+                  ),
+
+                ),
               ),
           ),
           Positioned(

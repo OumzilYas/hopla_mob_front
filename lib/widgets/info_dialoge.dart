@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/pathway_page.dart';
 import 'package:hopla_front_mob/view/tripEndPage.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 typedef void StringCallback(String val);
