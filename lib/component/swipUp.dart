@@ -1,44 +1,32 @@
 
 import 'dart:ui';
 
-//import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/tripEndPage.dart';
+import 'package:hopla_front_mob/widgets/dialoge.dart';
 import 'package:hopla_front_mob/widgets/info_dialoge.dart';
 import 'package:hopla_front_mob/widgets/scooter_container.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
 
+import 'mapDirictions.dart';
 
 
-class SlidingUpPanelExample extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.grey[200],
-      systemNavigationBarIconBrightness: Brightness.dark,
-      systemNavigationBarDividerColor: Colors.black,
-    ));
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SlidingUpPanel Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
-    );
-  }
-}
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.inProgress,required this.dirictions}) : super(key: key);
+
+  final bool inProgress ;
+  final bool dirictions ;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -86,9 +74,20 @@ class _HomePageState extends State<HomePage> {
     double width = SizeConfig.getWidth(context);
     _panelHeightClosed =  height*.37;
     _panelHeightOpen = height*.37;
-
-    return Material(
-      child: Stack(
+    var  points = <LatLng>[
+      LatLng(33.6022700934326, -7.64625571821334),
+      LatLng(33.60287416213128, -7.646169978937471),
+      LatLng(33.603006854527365, -7.646754134266143),
+      LatLng(33.60423898843145, -7.646215497535123),
+      LatLng(33.60410629793479, -7.645479613535697),
+    ];
+    return Scaffold(
+     drawerScrimColor: Colors.green.withOpacity(0.7),
+     key: _scaffoldKey,
+     drawer:  Container(child: Drawer(
+        child: DrawerComp(),),
+       width: width*.8,color: Colors.white,),
+      body: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
           Positioned(
@@ -96,11 +95,33 @@ class _HomePageState extends State<HomePage> {
             left: 0.0,
             right: 0.0,
             child: Container(height: height,
-              child: MapPage(press: (){setState(() {
-                station = false;
-              });},),),
+              child:!widget.dirictions? MapPage(press:() async {
+                // await BarcodeScanner.scan();
+                showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (BuildContext context) =>  DialogScooter(
+                      press:  () {
+                        setState(() {
+                          inProgress =true;
+                        });
+                      },
+                    ));
+              } ,):MapDPage(press:() async {
+                // await BarcodeScanner.scan();
+                showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (BuildContext context) =>  DialogScooter(
+                      press:  () {
+                        setState(() {
+                          inProgress =true;
+                        });
+                      },
+                    ));
+              } ,),),
           ),
-          station ?
+          !widget.inProgress ?
           Positioned(
             bottom : 40,
             left: 0.0,
@@ -124,11 +145,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     child: InkWell(
-                      onTap: (){
-                        setState(() {
-                          station = false;
-                        });
-                      },
+                      onTap: () async {
+                          // await BarcodeScanner.scan();
+                        showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) =>  DialogScooter(
+                              press:  () {
+                                setState(() {
+                                  inProgress =true;
+                                });
+                              },
+                            ));
+                          },
                       child: Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -144,13 +173,11 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Chfinja',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 14),
-                                ),),
+                                Text('Chfinja',style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 14),
+                                ),
                                 SizedBox(height: height*.01,),
-                                Text('064646556',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-                                ),),
+                                Text('064646556',style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+                                ),
 
                               ],
                             ),
@@ -165,8 +192,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Icon(Icons.pin_drop,color: Colors.white,size: 20,),
                                       SizedBox(width: 7,),
-                                      Text('3.5 KM',style: GoogleFonts.lato(
-                                        textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w500),
+                                      Text('3.5 KM',style:TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w500,fontFamily: 'Product Sans',
                                       ),),                            ],
                                   ),),
                                   decoration:const  BoxDecoration(
@@ -189,7 +215,7 @@ class _HomePageState extends State<HomePage> {
           :
           SlidingUpPanel(
             maxHeight:_panelHeightOpen ,
-            minHeight: inProgress ? height*.08 :_panelHeightClosed,
+            minHeight: height*.08 ,
             parallaxEnabled: true,
             parallaxOffset: .5,
             panelBuilder: (sc) => _panel(sc),
@@ -197,18 +223,10 @@ class _HomePageState extends State<HomePage> {
                 topLeft: Radius.circular(18.0),
                 topRight: Radius.circular(18.0)),
             onPanelSlide: (double pos) => () {
-              if (!inProgress) {
-                print("ppp");
-                setState(() {
-                  station = true;
-                });
-              } else {
                 setState(() {
                   _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
                       _initFabHeight;
                 });
-
-              }
             }
           ),
           // the fab
@@ -233,7 +251,9 @@ class _HomePageState extends State<HomePage> {
           Positioned(
             top: 52.0,
             left: 20.0,
-            child: Container(
+            child:InkWell(
+              onTap: (){_scaffoldKey.currentState?.openDrawer();},
+              child : Container(
               height: 50,
               width: 50,
               decoration: BoxDecoration(
@@ -246,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                 size: 28,
               ),
 
-            ),
+            ),)
           ),
 
           Positioned(
@@ -273,193 +293,14 @@ class _HomePageState extends State<HomePage> {
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child:!inProgress? ListView(
-          controller: sc,
-          children: <Widget>[
-            const SizedBox(
-              height: 12.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 30,
-                  height: 5,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: const BorderRadius.all(Radius.circular(12.0))),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 18.0,
-            ),
-            InkWell(
-              onTap: (){
-                setState(() {
-                  station = true;
-                });
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Chfinja Station",
-                    style: GoogleFonts.lato(
-                      textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 24),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height*.03,
-            ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
-                    Text(
-                      "Xiomi 1",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
-                        Text(
-                          "80%",
-                          style: GoogleFonts.lato(
-                            textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "90 Km",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
-                    Text(
-                      "Xiomi 1",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
-                        Text(
-                          "80%",
-                          style: GoogleFonts.lato(
-                            textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "90 Km",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
-                    Text(
-                      "Xiomi 1",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
-                        Text(
-                          "80%",
-                          style: GoogleFonts.lato(
-                            textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "90 Km",
-                      style: GoogleFonts.lato(
-                        textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
-
-              ],
-            ),
-              SizedBox(
-              height: height*.03,
-            ),
-            InkWell(
-              onTap: ()async {
-                /*
-                var result = await BarcodeScanner.scan();
-
-                print(result.type); // The result type (barcode, cancelled, failed)
-                print(result.rawContent); // The barcode content
-                print(result.format); // The barcode format (as enum)
-                print(result.formatNote);
-
-                 */
-                setState(() {
-
-                  inProgress =true;
-                });
-              },
-                child:  Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Container(
-                    height: height*.06,
-                      width: width*.6,
-                      decoration:  BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10),),
-                          border: Border.all(color: Colors.lightGreen)
-                      ),
-                      child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(width: width*.01,),
-                      Icon(FontAwesomeIcons.qrcode,color: Colors.lightGreen,),
-                      Text('Scan Qr Code',style: GoogleFonts.lato(
-                        textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
-                      ),),
-                      SizedBox(width: width*.01,),
-                    ],
-                  )),
-
-                ],)
-            )
-          ],
-        ):
+        child:
         ListView(
           controller: sc,
           children: <Widget>[
             Container(
-              decoration:const  BoxDecoration(
-                color:  Color(0xff00B72B),
-                borderRadius:  BorderRadius.only(
+              decoration:  BoxDecoration(
+                color: isRunning? Color(0xff00B72B) :Colors.orangeAccent,
+                borderRadius: const  BorderRadius.only(
                     topLeft: Radius.circular(18.0),
                     topRight: Radius.circular(18.0)),
               ),
@@ -497,34 +338,55 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                           size: 32,
                         ),
-                        Text(isRunning?'Pause':'Play',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 25),
-                        ),),
+                        Text(isRunning?'Pause':'Play',
+                          style: TextStyle(fontFamily: 'Product Sans', color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 25),
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(width:width*.05,),
-                  Countdown(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('   Duration : ',style:  TextStyle(
+                        fontFamily: 'Product Sans',
+                        fontSize: 14,
+                        color:  Colors.white,
+                      ),),
+                      Countdown(
                           countdownController: countdownController1 ,
                           builder: (_, Duration time) {
                             return Text(
                               ' ${time.inHours}: ${time.inMinutes % 60} : ${time.inSeconds % 60}',
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
-                            ),
+                              style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
+
                             );
                           }),
+                    ],
+                  ),
+
                   SizedBox(width:width*.1,),
-                  Countdown(
-                      countdownController: countdownController2 ,
-                      builder: (_, Duration time) {
-                        return Text(
-                          '${time.inMinutes % 60} : ${time.inSeconds % 60}',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w300,fontSize: 12),
-                          ),
-                        );
-                      }),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Délai',style:  TextStyle(
+                        fontFamily: 'Product Sans',
+                        fontSize: 14,
+                        color:  Colors.white,
+                      ),),
+                      SizedBox(height: height*.012,),
+                      Countdown(
+                          countdownController: countdownController2 ,
+                          builder: (_, Duration time) {
+                            return Text(
+                              '${time.inMinutes % 60} : ${time.inSeconds % 60}',
+                              style:const  TextStyle(color: Colors.white, fontFamily: 'Product Sans',
+                                  letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 15),
+
+                            );
+                          }),
+                    ],
+                  ),
                   SizedBox(width:width*.05,),
 
                 ],
@@ -557,17 +419,14 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Trip in Progress ',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 20),
-                          ),
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 20),
+
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(width: width*.03,),
                         Text(
                           '312 -wgt ',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                          ),
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -580,17 +439,16 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Distance ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '353 m',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:
+                              TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -600,17 +458,15 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Life ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '90 KM',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -620,17 +476,14 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Power ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '71 %',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -672,7 +525,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         } else {
                           countdownController1.stop();
-                          //countdownController2.start();
+                          countdownController2.start();
 
                           setState(() {
                             isRunning = false;
@@ -686,9 +539,8 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SizedBox(width: width*.01,),
                           Icon(isLocked?FontAwesomeIcons.unlock:FontAwesomeIcons.lock,color: Colors.lightGreen,size: 20,),
-                          Text(isLocked?'Unlock Scooter':'lock Scooter',style: GoogleFonts.lato(
-                            textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
-                          ),),
+                          Text(isLocked?'Unlock Scooter':'lock Scooter',style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
                           SizedBox(width: width*.01,),
                         ],
                       ),
@@ -715,9 +567,8 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SizedBox(width: width*.01,),
                           Icon(FontAwesomeIcons.stopwatch,color: Colors.white,),
-                          Text('End trip',style: GoogleFonts.lato(
-                            textStyle: const TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
-                          ),),
+                          Text('End trip',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
                           SizedBox(width: width*.01,),
                         ],
                       ),

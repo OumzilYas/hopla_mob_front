@@ -15,7 +15,7 @@ import 'home_page.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  final bool title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -48,7 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
           width: SizeConfig.getHeight(context) ,
           child: ListView(
             children: [
-               SizedBox(height:height*.141 ,),
+               SizedBox(height:height*.05 ,),
+              const Center(
+                child:Text(
+                  'Welcome !',
+                  style: TextStyle(
+                    fontFamily: 'Product Sans',
+                    fontSize: 37,
+                    color:  Color(0x9cffffff),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
                Center(
                 child:  SizedBox(
                   height: height*.1157,
@@ -56,18 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child:Center(child: Image.asset("assets/icon.png",height: 200,width: width*.5,),),
                 ),
               ),
-              const Center(
-               child:Text(
-                 'Welcome !',
-                 style: TextStyle(
-                   fontFamily: 'Product Sans',
-                   fontSize: 37,
-                   color:  Color(0x9cffffff),
-                 ),
-                 textAlign: TextAlign.left,
-               ),
-             ),
-              SizedBox(height:height*.047 ,),
+              SizedBox(height:height*.4 ,),
               Center(child: SizedBox(child: HoplaButton(Color(0xffffffff),width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return PhonePage();
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               }),),),
 
-              SizedBox(height:height*.055 ,),
+              SizedBox(height:height*.035 ,),
               Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Create account",
                       (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -83,18 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         }));
                       }),),),
               SizedBox(height:height*.036 ,),
-              const Center(
-                child:  Text(
-                  'Or login using social media ? ',
-                  style: TextStyle(
-                    fontFamily: 'Product Sans',
-                    fontSize: 11,
-                    color:  Color(0x7dffffff),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              SizedBox(height:height*.05 ,),
                Center(
                 child:  InkWell(
                   onTap: (){

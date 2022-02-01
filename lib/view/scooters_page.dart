@@ -60,12 +60,6 @@ class _MyHomePageState extends State<HomePage> {
             left: 0.0,
             right: 0.0,
             child: AppBarH((){_scaffoldKey.currentState?.openDrawer();}),),
-          const Positioned(
-            top : 590,
-            left: 0.0,
-            right: 0.0,
-            child: ScooterSlider(),),
-
           Positioned(
             bottom: 60.0,
             left: width*.35,
@@ -74,10 +68,6 @@ class _MyHomePageState extends State<HomePage> {
             child: Row(
               children: [HoplaField('Select', 'type',() async {
                 // await BarcodeScanner.scan();
-                showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) => const DialogScooter());
               })],))),
           const Positioned(
             bottom: 0.0,

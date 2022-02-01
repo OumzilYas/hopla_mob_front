@@ -7,15 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
-import 'package:hopla_front_mob/component/home_slider.dart';
-import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/details_page.dart';
 import 'package:hopla_front_mob/view/test.dart';
-import 'package:hopla_front_mob/widgets/HoplaField.dart';
-import 'package:hopla_front_mob/widgets/app_bar.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
-import 'package:hopla_front_mob/widgets/dialoge.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
 
@@ -52,123 +46,180 @@ class _MyHomePageState extends State<HomePage2> {
             child: Container(height: height,),
           ),
           Positioned(
-            top: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: Container(
-              height: height*.20,
-              decoration:  BoxDecoration(
-                color:   Colors.grey.withOpacity(0.65),
-                borderRadius:const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)
-                ),
-
-              ),
-              child: Center(
-                  child:Container(
-                    child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(width: width*.05,),
-                        Container(
-                          width: width*.12,
-                          height: width*.12,
-                          decoration: const  BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: InkWell(
-                              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                              child:const FaIcon(FontAwesomeIcons.bars,color: Colors.grey,size: 25,),
-                              onTap: (){_scaffoldKey.currentState?.openDrawer();},
-                            ),),                      ),
-                        SizedBox(width: width*.05,),
-                        SizedBox(
-                          width: width*.54,
-                          height: height*.055,
-                          child: Container(
-                              decoration:const  BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)
-                                ),
-
-                              ),
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                                      icon:const FaIcon(FontAwesomeIcons.search,color: Colors.grey,size: 18,),
-                                      onPressed: () { }
-                                  ),
-                                  Container(
-                                    width: width*.4,
-                                    height: height*.045,
-                                    child:  TextField(
-                                      decoration:  InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Search locations',
-                                        hintStyle: GoogleFonts.montserrat(
-                                          textStyle: const TextStyle(color: Colors.grey,fontSize: 16),
-                                        ),
-                                      ),
-
-                                    ),
-                                  )
-                                ],
-                              )
-                          ),
-                        ),
-                        SizedBox(width: width*.02,),
-                        SizedBox(
-                          width: width*.15,
-                          child: Center(
-                            child: IconButton(
-                              // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                                icon:const FaIcon(FontAwesomeIcons.slidersH,color: Colors.white,size: 35,),
-                                onPressed: () { print("Pressed"); }
-                            ),),
-                        ),
-                        SizedBox(width: width*.05,)
-
-                      ],
-                    ),
-                  )
-              ),
-            ),),
-          Positioned(
             top : 130,
             left: 40.0,
             right: 40.0,
             child:Container(
-              decoration:const  BoxDecoration(
-                color: Colors.deepPurple,
-                borderRadius: BorderRadius.all(Radius.circular(10),),
+              decoration:  BoxDecoration(
+                  color:  Color(0xffDFE6EF),
+                  borderRadius: BorderRadius.all(Radius.circular(10),),
+                  border: Border.all(color:Color(0xffF9F9F9))
+
               ),
-              height: height*.15,
-              width: width*.8,
+              height: 150,
+              width: 330,
+              child: Center(child: Container(
+                height:130,
+                width: 300,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height:120,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            image:   DecorationImage(
+                              fit: BoxFit.contain,
+                              image:const AssetImage("assets/weather.png"),
+                            ),
+                          ),
+
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('CasaBlanca',style: GoogleFonts.lato(
+                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
+                        ),),
+                        SizedBox(height: 10,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('23',style: GoogleFonts.lato(
+                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
+                            ),),
+                            Text('°C',style: GoogleFonts.lato(
+                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 15),
+                            ),),
+                          ],
+                        )
+
+
+                      ],
+                    ),
+                    Container(
+                      height: 100,
+                      width: 1,
+                      color: Colors.grey,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('wind',style: GoogleFonts.lato(
+                          textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                        ),),
+                        Text('15 km/h',style: GoogleFonts.lato(
+                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
+                        ),),
+                        SizedBox(height: 10,),
+                        Text('wind',style: GoogleFonts.lato(
+                          textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                        ),),
+                        Text('15 km',style: GoogleFonts.lato(
+                          textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
+                        ),),
+
+                      ],
+                    ),
+
+                  ],
+                ),
+              ),),
             ),),
-           Positioned(
+          Positioned(
+            top: 52.0,
+            right: 20.0,
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color:  Color(0xffDFE6EF),
+                borderRadius: BorderRadius.circular(50.0),
+                boxShadow:const  [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: const Offset(
+                      5.0,
+                      5.0,
+                    ),
+                    blurRadius: 10.0,
+                    spreadRadius: 2.0,
+                  ), //BoxShadow
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: const Offset(0.0, 0.0),
+                    blurRadius: 0.0,
+                    spreadRadius: 0.0,
+                  ), //BoxShadow
+                ],
+              ),
+              child: const Icon(
+                Icons.settings,
+                color: Colors.black,
+                size: 28,
+              ),
+
+            ),
+          ),
+          Positioned(
+              top: 52.0,
+              left: 20.0,
+              child:InkWell(
+                onTap: (){_scaffoldKey.currentState?.openDrawer();},
+                child : Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color:  Color(0xffDFE6EF),
+                    borderRadius: BorderRadius.circular(50.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: const Offset(
+                          5.0,
+                          5.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.0,
+                      ), //BoxShadow
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ), //BoxShadow
+                    ],
+                  ),
+                  child:const Icon(
+                    Icons.menu,
+                    color: Colors.black87,
+                    size: 28,
+                  ),
+
+                ),)
+          ),
+          Positioned(
             top : 300,
-            left: 0.0,
-            right: 0.0,
+            left:15.0,
+            right: 15.0,
             child: Container(
               height: 150,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (BuildContext context, int index) => Card(
-                  color: Colors.transparent,
-                  child: Container(
+              width: width*.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
                     width: 110,
                     decoration:  BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.green,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
@@ -189,12 +240,12 @@ class _MyHomePageState extends State<HomePage2> {
                               height: 70,
                               child:Center(
                                 child: SizedBox(
-                                  height: 60,
-                                  width: 60,
+                                  height: 65,
+                                  width: 65,
                                   child: FloatingActionButton(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: Colors.green,
                                     child:
-                                    Icon(FontAwesomeIcons.hardHat,color: Colors.deepOrangeAccent,size: 25,),
+                                    Icon(FontAwesomeIcons.fileInvoiceDollar,color: Colors.white,size: 25,),
                                     onPressed: () {
 
                                     },
@@ -203,12 +254,12 @@ class _MyHomePageState extends State<HomePage2> {
                               ),
                               decoration:const  BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.deepOrangeAccent),
+                                  color: Colors.white),
                             ),
                             SizedBox(height: 10,),
                             Center(
-                              child: Text('Rules',style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.orange, letterSpacing: .5,fontWeight: FontWeight.w800),
+                              child: Text('Offers',style: GoogleFonts.lato(
+                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
                               ),),
                             )
                           ],
@@ -218,8 +269,115 @@ class _MyHomePageState extends State<HomePage2> {
                     ),
 
                   ),
-                ),
-              ),
+                  Container(
+                    width: 110,
+                    decoration:  BoxDecoration(
+                      color:  Color(0xff002AD4),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 70,
+                              height: 70,
+                              child:Center(
+                                child: SizedBox(
+                                  height: 65,
+                                  width: 65,
+                                  child: FloatingActionButton(
+                                    backgroundColor: Color(0xff002AD4),
+                                    child:
+                                    Icon(FontAwesomeIcons.fileContract,color: Colors.white,size: 25,),
+                                    onPressed: () {
+
+                                    },
+                                  ),
+                                ),
+                              ),
+                              decoration:const  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(height: 10,),
+                            Center(
+                              child: Text('Rules',style: GoogleFonts.lato(
+                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
+                              ),),
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
+
+                  ),
+                  Container(
+                    width: 110,
+                    decoration:  BoxDecoration(
+                      color: Color(0xffFF9A08),
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                      },
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 70,
+                              height: 70,
+                              child:Center(
+                                child: SizedBox(
+                                  height: 65,
+                                  width: 65,
+                                  child: FloatingActionButton(
+                                    backgroundColor: Color(0xffFF9A08),
+                                    child:
+                                    Icon(FontAwesomeIcons.star,color: Colors.white,size: 25,),
+                                    onPressed: () {
+
+                                    },
+                                  ),
+                                ),
+                              ),
+                              decoration:const  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(height: 10,),
+                            Center(
+                              child: Text('Recommendation',style: GoogleFonts.lato(
+                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 12),
+                              ),),
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
+
+                  ),
+
+                ],
+              )
             ),),
           Positioned(
               bottom: 80.0,
@@ -243,19 +401,28 @@ class _MyHomePageState extends State<HomePage2> {
               ),
           ),
           Positioned(
+              top: 580.0,
+              left: width*.45,
+              right: width*.07,
+              child: Container(width: 10,height: 50,
+                  child: Text('Ready ?',style: GoogleFonts.lato(
+                    textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
+                  ),),)),
+
+
+          Positioned(
               top: 500.0,
               left: width*.07,
               right: width*.07,
               child: Container(width: 10,height: 50,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      HoplaButton(Colors.white, width*.4, height*.1, Colors.orangeAccent, 'Inscription', (){
+                      HoplaButton(Colors.orangeAccent, width*.5, height*.05,Color(0xffDFE6EF), 'Join Us', (){
                         Navigator.push(context, MaterialPageRoute(builder: (context){
                           return HomeSPage();
                         }));
                       }),
-                      HoplaButton(Colors.white, width*.4, height*.1, Colors.grey, 'Community', (){}),
 
                     ],))),
 

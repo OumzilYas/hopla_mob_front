@@ -18,25 +18,19 @@ class ScooterContainer extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow:const  [
-                  BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, .25), blurRadius: 16.0)
-                ],
+                image:   DecorationImage(
+                  fit: BoxFit.contain,
+                  image:const AssetImage("assets/scooterP2.png"),
+                ),
               ),
-              child:const Icon(
-                Icons.electric_scooter,
-                color: Colors.black,
-                size: 28,
-              ),
+
             )),
         Positioned(
           right: 0,
           child:  Container(
             padding: const EdgeInsets.all(1),
             decoration:  BoxDecoration(
-              color: Colors.lightGreen,
+              color: Colors.redAccent,
               borderRadius: BorderRadius.circular(10),
             ),
             constraints:const  BoxConstraints(

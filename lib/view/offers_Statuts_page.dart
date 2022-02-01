@@ -1,30 +1,44 @@
+
+
+//import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hopla_front_mob/component/OffersTab.dart';
+import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
+import 'package:hopla_front_mob/component/home_slider.dart';
+import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/payment_page.dart';
+import 'package:hopla_front_mob/view/details_page.dart';
+import 'package:hopla_front_mob/view/offersPage.dart';
+import 'package:hopla_front_mob/view/test.dart';
+import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/app_bar.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
+import 'package:hopla_front_mob/widgets/dialoge.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
 
-class OfferPage extends StatefulWidget {
+class OffersStatus2 extends StatefulWidget {
+
+
+
   @override
-  _OfferPageState createState() => _OfferPageState();
+  State<OffersStatus2> createState() => _MyHomePageState();
 }
 
-class _OfferPageState extends State<OfferPage> {
+class _MyHomePageState extends State<OffersStatus2> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   String _stringCus = "textt";
   set stringCus(String value) => setState(() => _stringCus = value);
-  List offers = [false,false,false,false];
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
-    return  Scaffold(
+
+    return   Scaffold(
       drawerScrimColor: const Color(0xffff9a08).withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
@@ -32,7 +46,13 @@ class _OfferPageState extends State<OfferPage> {
       ),
         width: width*.8,color: Colors.white,),
       body:   Stack(
-        children: [
+        children:  [
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: Container(height: height,),
+          ),
           Positioned(
             top: 52.0,
             right: 20.0,
@@ -111,33 +131,36 @@ class _OfferPageState extends State<OfferPage> {
             right: 0.0,
             child:Row(
               children:const  [
-                Text('Chose Plane : ',style: const TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
+                Text('Chose Status : ',style: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
                 ),
               ],
             ),
-          ),
+              ),
           Positioned(
-            top: 130.0,
-            child: SizedBox(
-              height: height*.68,
-              width: width,
-              child:TabControllerPage(
-                offersList: offers,
+            top : 160,
+            left: 0.0,
+            right: 0.0,
+            child: Container(
+              height: height*.6,
+              child:  StatusSlider(
                 callback: (val) => setState(() => _stringCus = val),
-                press: (){
-
-                },
               ),
             ),),
           Positioned(
-             bottom: 70.0,
-             left: 50,
-              child: offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return  PayPage();
-                }));
-              },),):const SizedBox(),),
+              bottom: 110.0,
+              left: width*.07,
+              right: width*.07,
+              child: _stringCus =="Selected"?Container(width: 10,height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      HoplaButton(Colors.white, width*.7, height*.1, Colors.green, 'Next', (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return  OfferPage();
+                        }));
+                      }),
 
+                    ],)):SizedBox()),
           const Positioned(
               bottom: 0.0,
               left: 0.0,

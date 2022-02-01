@@ -30,17 +30,15 @@ class _DialogState extends State<InfoDialoge> {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
     Widget cancelButton = TextButton(
-      child: Text("NO",style: GoogleFonts.lato(
-        textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-      )),
+      child: Text("NO",style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+      ),
       onPressed:  () {
         Navigator.pop(context);
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Yes",style: GoogleFonts.lato(
-        textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-      )),
+      child: Text("Yes",style: TextStyle(color: Colors.black, fontFamily: 'Product Sans',letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+      ),
       onPressed:  () {
         Navigator.push(context, MaterialPageRoute(builder: (context){
           return TripEndPage();
@@ -51,12 +49,10 @@ class _DialogState extends State<InfoDialoge> {
     return Form(
         child:  Builder(builder: (BuildContext context) {return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            title: Text("Notice",style: GoogleFonts.lato(
-              textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-            )),
-            content: Text("Do you want really to end the trip",style: GoogleFonts.lato(
-              textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-            )),
+            title: Text("Notice",style : TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+            ),
+            content: Text("Do you want really to end the trip",style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+            ),
             actions: [
               cancelButton,
               continueButton,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
+import 'package:hopla_front_mob/view/offers_Statuts_page.dart';
 
 class DrawerComp extends StatefulWidget {
 
@@ -27,89 +28,96 @@ class _MyHomePageState extends State<DrawerComp> {
                 height: MediaQuery
                     .of(context)
                     .size
-                    .height*.3,
-                width: 300,
-                decoration: const BoxDecoration(
-                    color: Color(0xffff9a08),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(80.0),
-                      //topRight: Radius.circular(80.0),
-                    )),
+                    .height,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width*.6,
                 child: ListView(
-                  padding:  EdgeInsets.only(left: 30,top:   0),
+                  padding:  EdgeInsets.only(left: 15,top:   40),
                   children: [
-                  SizedBox(width: 60,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(  height: MediaQuery
+                    Container(
+                      width: MediaQuery
                           .of(context)
                           .size
-                          .height*.08,),
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage:  AssetImage("assets/profile.jpeg"),
+                          .width*.6,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width*.15,
+                            child:CircleAvatar(
+                              radius: 40,
+                              backgroundImage:  AssetImage("assets/profile.jpeg"),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Yassin Oum',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 24,
+                                  color:  Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                ),),
+
+                              InkWell(
+                                  onTap: (){
+
+                                  },
+                                  child: Container(padding: const EdgeInsets.only(top: 10),
+                                    width: 220,
+                                    child: InkWell(
+
+                                        child: Container(padding: const EdgeInsets.only(top: 10),
+                                          width: 220,
+                                          child: Row(
+                                            children: [
+                                              Icon(FontAwesomeIcons.crown,color: Colors.green,size: 20,),
+                                              SizedBox( width: 10,),
+                                              Text('Exprience',  style: GoogleFonts.montserrat(
+                                                fontSize: 18,
+                                                color:  Colors.black,
+                                              ))
+                                            ],
+                                          ),
+                                        )),
+                                  )),
+                            ],
+                          )
+                        ],
                       ),
-
-                      SizedBox(height: 5,),
-                      Text('Yassin Oum',
-                        style: GoogleFonts.montserrat(
-                          fontSize: 24,
-                          color: const Color(0xffffffff),
-                          fontWeight: FontWeight.w700,
-                        ),),
-                      InkWell(
-                          onTap: (){
-
-                          },
-                          child: Container(padding: const EdgeInsets.only(top: 10),
-                            width: 220,
-                            child: InkWell(
-
-                                child: Container(padding: const EdgeInsets.only(top: 10),
-                                  width: 220,
-                                  child: Row(
-                                    children: [
-                                      Icon(FontAwesomeIcons.crown,color: Colors.deepOrange,size: 20,),
-                                      SizedBox( width: 10,),
-                                      Text('Exprience',  style: GoogleFonts.montserrat(
-                                        fontSize: 18,
-                                        color:  Colors.white,
-                                      ))
-                                    ],
-                                  ),
-                                )),
-                          )),
-                    ],
-                  )
-                ],),
-              ),
-              Container(
-                padding: const EdgeInsets.only(top: 10),
-                height:  MediaQuery.of(context).size.height*.7,
-                width: 300  ,
-                child: ListView(
-                  children: [
+                    ),
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.055,),
                     Row(
                       children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
                         InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return  OfferPage();
-                            }));
-                          },
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OffersStatus2();
+                              }));
+                            },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.fileInvoiceDollar,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.fileInvoiceDollar,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
-                                  Text('Offers',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
+                                  Text('Offers',  style: TextStyle(
+                                     fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -123,88 +131,6 @@ class _MyHomePageState extends State<DrawerComp> {
                         .height*.025,),
                     Row(
                       children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
-                        InkWell(
-                            child: Container(padding: const EdgeInsets.only(top: 10),
-                              width: 220,
-                              child: Row(
-                                children: [
-                                  Icon(FontAwesomeIcons.mapMarker,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
-                                  SizedBox( width: 15,),
-                                  Text('trips',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
-                                    color: const Color(0xff241332),
-                                  ))
-                                ],
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(  height: MediaQuery
-                        .of(context)
-                        .size
-                        .height*.025,),
-                    Row(
-                      children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
-                        InkWell(
-                            child: Container(padding: const EdgeInsets.only(top: 10),
-                              width: 220,
-                              child: Row(
-                                children: [
-                                  Icon(FontAwesomeIcons.wallet,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
-                                  SizedBox( width: 15,),
-                                  Text('Wallet',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
-                                    color: const Color(0xff241332),
-                                  ))
-                                ],
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(  height: MediaQuery
-                        .of(context)
-                        .size
-                        .height*.025,),
-                    Row(
-                      children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
-                        InkWell(
-                            child: Container(padding: const EdgeInsets.only(top: 10),
-                              width: 220,
-                              child: Row(
-                                children: [
-                                  Icon(FontAwesomeIcons.shoppingBag,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
-                                  SizedBox( width: 15,),
-                                  Text('Achat',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
-                                    color: const Color(0xff241332),
-                                  ))
-                                ],
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(  height: MediaQuery
-                        .of(context)
-                        .size
-                        .height*.025,),
-                    Row(
-                      children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
                         InkWell(
                             onTap: (){
 
@@ -213,10 +139,16 @@ class _MyHomePageState extends State<DrawerComp> {
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.assistiveListeningSystems,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.mapMarkedAlt,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
-                                  Text('Assistance',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
+                                  Text('trip',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -230,19 +162,26 @@ class _MyHomePageState extends State<DrawerComp> {
                         .height*.025,),
                     Row(
                       children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
                         InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OfferPage();
+                              }));
+                            },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.angleDoubleUp,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.wallet,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
-                                  Text('Activity',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
+                                  Text('Wallet',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -256,19 +195,125 @@ class _MyHomePageState extends State<DrawerComp> {
                         .height*.025,),
                     Row(
                       children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width*.09,),
                         InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OfferPage();
+                              }));
+                            },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: Row(
                                 children: [
-                                  Icon(FontAwesomeIcons.percent,color:const Color(0xffff9a08).withOpacity(0.5),size: 20,),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.shoppingCart,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
-                                  Text('PromoCode',  style: GoogleFonts.montserrat(
-                                    fontSize: 20,
+                                  Text('Purchase',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                    color: const Color(0xff241332),
+                                  ))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.025,),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OfferPage();
+                              }));
+                            },
+                            child: Container(padding: const EdgeInsets.only(top: 10),
+                              width: 220,
+                              child: Row(
+                                children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.assistiveListeningSystems,color: Colors.black,size: 25,),
+                                  SizedBox( width: 15,),
+                                  Text('Assitance',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                    color: const Color(0xff241332),
+                                  ))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.025,),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OfferPage();
+                              }));
+                            },
+                            child: Container(padding: const EdgeInsets.only(top: 10),
+                              width: 220,
+                              child: Row(
+                                children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.biking,color: Colors.black,size: 25,),
+                                  SizedBox( width: 15,),
+                                  Text('Actvity',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                    color: const Color(0xff241332),
+                                  ))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.025,),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  OfferPage();
+                              }));
+                            },
+                            child: Container(padding: const EdgeInsets.only(top: 10),
+                              width: 220,
+                              child: Row(
+                                children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.percent,color: Colors.black,size: 25,),
+                                  SizedBox( width: 15,),
+                                  Text('PromoCode',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -295,11 +340,13 @@ class _MyHomePageState extends State<DrawerComp> {
                                     width: 220,
                                     child: Row(
                                       children: [
-                                        Icon(FontAwesomeIcons.signOutAlt,color:const Color(0xffff9a08),size: 20,),
+                                        Icon(FontAwesomeIcons.signOutAlt,color: Colors.green,size: 20,),
                                         SizedBox( width: 15,),
-                                        Text('Log Out',  style: GoogleFonts.montserrat(
-                                          fontSize: 18,
-                                          color: const Color(0xffff9a08),
+                                        Text('Log Out',  style: TextStyle(
+                                          fontFamily: 'Product Sans',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w300,
+                                          color:  Colors.green,
                                         ))
                                       ],
                                     ),
@@ -307,8 +354,7 @@ class _MyHomePageState extends State<DrawerComp> {
                             )),
                       ],
                     ),
-                  ],
-                ),
+                ],),
               ),
 
 

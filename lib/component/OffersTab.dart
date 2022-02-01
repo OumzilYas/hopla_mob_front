@@ -23,7 +23,7 @@ class _TabControllerPageState extends State<TabControllerPage> {
   set stringCus(String value) => setState(() => _stringCus = value);
   @override
   Widget build(BuildContext context) {
-    List temp = ["Pass","Experience","Recharge"];
+    List temp = ["Experience","Recharge"];
 
       final List<Widget> _views =  [
         ListView.builder(
@@ -209,17 +209,15 @@ class _TabControllerPageState extends State<TabControllerPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('• 5 minutes on a trip',style: GoogleFonts.lato(
+                            Text('• expire in 30 Days',style: GoogleFonts.lato(
                               textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                             ),),
                             SizedBox(height: 10,),
-                            Text('• 2 minutes added to rest',style: GoogleFonts.lato(
+                            Text('• 3 minute added',style: GoogleFonts.lato(
                               textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                             ),),
                             SizedBox(height: 10,),
-                            Text('• lock option on the trip',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                            ),),
+
 
                           ],
                         )
@@ -232,110 +230,8 @@ class _TabControllerPageState extends State<TabControllerPage> {
           },
           itemCount: 4,
         ),
-        ListView.builder(
-          padding: const EdgeInsets.all(15),
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: InkWell(
-                onTap: (){
-                  setState(() {
-                    for (var i = 0; i < widget.offersList.length; i++) {
-                      widget.offersList[i] = false;
-                    }
-                    widget.offersList[index] = true;
 
-                  });
-                  widget.callback('Selected');
-                },
-                child: Container(
-                  decoration:  BoxDecoration(
-                      color:   Colors.orangeAccent.withOpacity(0.2),
-                      borderRadius: BorderRadius.all(Radius.circular(10),),
-                      border: Border.all(color:widget.offersList[index]? Color(0xffFFA400): Colors.transparent)
-
-                  ),
-                  height: 150,
-                  width: 330,
-                  child: Center(child: Container(
-                    height:130,
-                    width: 300,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 60,
-                                  width: 60,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.white,
-                                    child:
-                                    Icon(Icons.electric_scooter_outlined,color: Colors.deepOrangeAccent,size: 25,),
-                                    onPressed: () {
-
-                                    },
-                                  ),
-                                ),
-                              ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.deepOrangeAccent),
-                            ),
-                            SizedBox(height: 10,),
-                            Row(
-                              children: [
-                                Text('Mad',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.orange, letterSpacing: .5,fontWeight: FontWeight.w800),
-                                ),),
-                                Text('20/',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                                ),),
-                                Text('heur',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w300),
-                                ),),
-                              ],
-                            )
-                          ],
-                        ),
-                        Container(
-                          height: 100,
-                          width: 1,
-                          color: Colors.grey,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('• 5 minutes on a trip',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                            ),),
-                            SizedBox(height: 10,),
-                            Text('• 2 minutes added to rest',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                            ),),
-                            SizedBox(height: 10,),
-                            Text('• lock option on the trip',style: GoogleFonts.lato(
-                              textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
-                            ),),
-
-                          ],
-                        )
-                      ],
-                    ),
-                  ),),
-                ),
-              ),
-            );
-          },
-          itemCount: 4,
-        ),
-    ];
+      ];
     return Container(
         height:  MediaQuery.of(context).size.height-(MediaQuery.of(context).size.height/2.25),
         width:  MediaQuery.of(context).size.width,

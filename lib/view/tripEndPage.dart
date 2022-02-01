@@ -1,15 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hopla_front_mob/component/googleMap.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-
-
 
 class TripEndPage extends StatefulWidget {
   @override
@@ -90,6 +88,7 @@ class _HomePageState extends State<TripEndPage> {
                 Text(
                   "The Trip Ended",
                   style: TextStyle(
+                    fontFamily: 'Product Sans',
                     fontWeight: FontWeight.normal,
                     fontSize: 24.0,
                   ),
@@ -99,11 +98,17 @@ class _HomePageState extends State<TripEndPage> {
             SizedBox(
               height: height*.01,
             ),
-            Container(
-              height: 250,
-              width: 300,
-              color: Colors.black,
-              child:MapSample(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: height*.3,
+                  width: width*.7,
+                  color: Colors.black,
+
+                  child:MapSample(),
+                ),
+              ],
             ),
             SizedBox(
               height: height*.01,
@@ -132,9 +137,8 @@ class _HomePageState extends State<TripEndPage> {
                                 Icon(FontAwesomeIcons.stopwatch,color: Colors.blueGrey,),
 
                                 SizedBox(width: width*.01,),
-                                Text('31 min',style: GoogleFonts.lato(
-                                  textStyle: const TextStyle(color: Colors.blueGrey, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
-                                ),),
+                                Text('31 min',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
+                                ),
                                 SizedBox(width: width*.01,),
                               ],
                             ),
@@ -144,9 +148,8 @@ class _HomePageState extends State<TripEndPage> {
                               children: [
                                 Icon(FontAwesomeIcons.locationArrow,color: Colors.blueGrey,),
                                 SizedBox(width: width*.01,),
-                                Text('3 Km',style: GoogleFonts.lato(
-                                  textStyle: const TextStyle(color: Colors.blueGrey, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
-                                ),),
+                                Text('3 Km',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
+                                ),
                                 SizedBox(width: width*.01,),
                               ],
                             ),
@@ -177,12 +180,10 @@ class _HomePageState extends State<TripEndPage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('Chfinja',style: GoogleFonts.lato(
-                                        textStyle: const TextStyle(color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
-                                      ),),
-                                      Text('16:10',style: GoogleFonts.lato(
-                                        textStyle: const TextStyle(color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
-                                      ),),
+                                      Text('Chfinja',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
+                                      ),
+                                      Text('16:10',style:TextStyle(fontFamily: 'Product Sans',color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(width: width*.01,),
@@ -204,12 +205,10 @@ class _HomePageState extends State<TripEndPage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('Marina',style: GoogleFonts.lato(
-                                        textStyle: const TextStyle(color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
-                                      ),),
-                                      Text('16:41',style: GoogleFonts.lato(
-                                        textStyle: const TextStyle(color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
-                                      ),),
+                                      Text('Marina',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
+                                      ),
+                                      Text('16:41',style:  TextStyle(fontFamily: 'Product Sans',color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(width: width*.01,),
@@ -245,17 +244,19 @@ class _HomePageState extends State<TripEndPage> {
                     height: height*.06,
                     width: width*.7,
                     decoration:  const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10),),
+                        borderRadius: BorderRadius.all(Radius.circular(25),),
                         color: Colors.green,
                     ),
                     child:InkWell(
                       onTap: ()async{
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return HomePage2();
+                        }));
                       },
                       child: Center(
                         child:
-                        Text('Great',style: GoogleFonts.lato(
-                          textStyle: const TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
-                        ),),
+                        Text('Great',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                        ),
                       ),
                     )),
 
@@ -285,7 +286,7 @@ class _HomePageState extends State<TripEndPage> {
         SizedBox(
           height: 12.0,
         ),
-        Text(label),
+        Text(label,style: TextStyle(fontFamily: 'Product Sans',),),
       ],
     );
   }

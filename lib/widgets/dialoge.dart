@@ -2,15 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/pathway_page.dart';
+import 'package:hopla_front_mob/view/tripEndPage.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 typedef void StringCallback(String val);
 
 class DialogScooter extends StatefulWidget {
 
+  final Function  press;
 
-  const DialogScooter ({ Key ?key}): super(key: key);
+  const DialogScooter ({ Key ?key,required this.press}): super(key: key);
   @override
   _DialogState createState() => _DialogState();
 }
@@ -23,6 +27,8 @@ class _DialogState extends State<DialogScooter> {
     super.initState();
 
   }
+  var  points = <LatLng>[];
+
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
@@ -30,154 +36,177 @@ class _DialogState extends State<DialogScooter> {
     return Form(
         child:  Builder(builder: (BuildContext context) {return StatefulBuilder(builder: (context, setState) {
           return  AlertDialog(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             contentPadding: EdgeInsets.all(0.0),
             content: Container(
-                height: height*.54,
+                height: height*.35,
                 width:  MediaQuery.of(context).size.width,
                 child: Center(
-                  child: Column(
-                    children: [
+                  child: ListView(
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 12.0,
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Icon(FontAwesomeIcons.timesCircle,color: Colors.white,size: 20,),
-                          )
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 30,
+                            height: 5,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: const BorderRadius.all(Radius.circular(12.0))),
+                          ),
                         ],
                       ),
-                      SizedBox(height: height*.02,),
-                      Container(
-                        height: height*.3,
-                        decoration:const  BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)
-                          ),
-                        ),
-                        child: InkWell(
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  height: height*.25,
-                                  width: width*.33,
-                                  decoration:const  BoxDecoration(
-                                    image:   DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image: AssetImage("assets/e_scooter.png"),
-                                    ),//DecprationImage
-                                    //Border.all
-
-                                    borderRadius:  BorderRadius.all(Radius.circular(10.0),),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 10.0,
-                                        spreadRadius: 2.0,
-                                      ), //BoxShadow
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
-                                      ), //BoxShadow
-                                    ],
-                                  ), //BoxDecoration
-                                ), //Conta                      SizedBox(height: height*.02,),
-
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('Xiomi S1',style: GoogleFonts.lato(
-                                      textStyle: TextStyle(color: Colors.orangeAccent, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 20),
-                                    ),),
-                                    Text('Xiomi Elctric Scooter Pro2',style: GoogleFonts.lato(
-                                      textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 10),
-                                    ),),
-                                    SizedBox(height: 20,),
-                                    Container(
-                                      height: height*.2,
-                                      width: width*.35,
-                                      decoration:const  BoxDecoration(//Border.all
-                                        borderRadius:  BorderRadius.all(Radius.circular(10.0),),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 10.0,
-                                            spreadRadius: 2.0,
-                                          ), //BoxShadow
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ), //BoxShadow
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: Column(
-                                          children: [
-                                            Text('Battery',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 18),
-                                            ),),
-                                            Text('120w',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Color(0xff00B72B), letterSpacing: .5,fontWeight: FontWeight.w300,fontSize: 16),
-                                            ),),
-                                            SizedBox(height:height*.02,),
-                                            Text('Speed',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 18),
-                                            ),),
-                                            Text('30 km/h',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Color(0xff00B72B), letterSpacing: .5,fontWeight: FontWeight.w300,fontSize: 16),
-                                            ),),
-                                            SizedBox(height:height*.02,),
-                                            Text('Weight',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 18),
-                                            ),),
-                                            Text('13 Kg',style: GoogleFonts.lato(
-                                              textStyle: TextStyle(color: Color(0xff00B72B), letterSpacing: .5,fontWeight: FontWeight.w300,fontSize: 16),
-                                            ),),
-
-                                          ],
-                                        ),
-                                      ),//BoxDecoration
-                                    ), //Conta                      SizedBox(height: height*.02,),
-
-                                  ],
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ),
-
+                      const SizedBox(
+                        height: 18.0,
                       ),
-                      SizedBox(height: height*.02,),
-                      HoplaButton(Colors.white, width, height*.06, Color(0xff00B72B) , 'Start', (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return PathWay();
-                        }));
-                      }),
-                      SizedBox(height: height*.02,),
-                      HoplaButton(Colors.white, width, height*.06, Colors.orangeAccent, 'Select another', (){})
+                      InkWell(
+                        onTap: (){
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Chfinja Station",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 24),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: height*.03,
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                              Text(
+                                "Xiomi 1",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                  Text(
+                                    "80%",
+                                    style: GoogleFonts.lato(
+                                      textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "90 Km",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                              Text(
+                                "Xiomi 1",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                  Text(
+                                    "80%",
+                                    style: GoogleFonts.lato(
+                                      textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "90 Km",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                              Text(
+                                "Xiomi 1",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                  Text(
+                                    "80%",
+                                    style: GoogleFonts.lato(
+                                      textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "90 Km",
+                                style: GoogleFonts.lato(
+                                  textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
 
+                        ],
+                      ),
+                      SizedBox(
+                        height: height*.03,
+                      ),
+                      InkWell(
+                          onTap:(){
+                            print('ttt');
+                            widget.press;
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return HomePage(inProgress: true,dirictions: false,);
+                            }));                          },
+                          child:  Row(mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  height: height*.06,
+                                  width: width*.6,
+                                  decoration:  BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(10),),
+                                      border: Border.all(color: Colors.lightGreen)
+                                  ),
+                                  child:Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(width: width*.01,),
+                                      Icon(FontAwesomeIcons.qrcode,color: Colors.lightGreen,),
+                                      Text('Scan Qr Code',style: GoogleFonts.lato(
+                                        textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
+                                      ),),
+                                      SizedBox(width: width*.01,),
+                                    ],
+                                  )),
+
+                            ],)
+                      )
                     ],
                   ),
                 )),
