@@ -196,8 +196,16 @@ class _DialogState extends State<DialogScooter> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(width: width*.01,),
-                                      Icon(FontAwesomeIcons.qrcode,color: Colors.lightGreen,),
-                                      Text('Scan Qr Code',style: GoogleFonts.lato(
+                                      Container(
+                                        width: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .width*.1,
+                                        child:CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage:  AssetImage("assets/scan.png"),
+                                        ),
+                                      ),                                      Text('Scan Qr Code',style: GoogleFonts.lato(
                                         textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
                                       ),),
                                       SizedBox(width: width*.01,),

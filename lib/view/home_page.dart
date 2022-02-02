@@ -7,9 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
+import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/component/weather.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
-import 'package:hopla_front_mob/view/test.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 
@@ -51,41 +51,6 @@ class _MyHomePageState extends State<HomePage2> {
             left: 40.0,
             right: 40.0,
             child:WeatherComp()),
-          Positioned(
-            top: 52.0,
-            right: 20.0,
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color:  Color(0xffDFE6EF),
-                borderRadius: BorderRadius.circular(50.0),
-                boxShadow:const  [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  ), //BoxShadow
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: const Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ), //BoxShadow
-                ],
-              ),
-              child: const Icon(
-                Icons.settings,
-                color: Colors.black,
-                size: 28,
-              ),
-
-            ),
-          ),
           Positioned(
               top: 52.0,
               left: 20.0,
@@ -302,7 +267,9 @@ class _MyHomePageState extends State<HomePage2> {
               right: 0.0,
               child: InkWell(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return HomePage(inProgress: false,dirictions: false,);
+                  }));
                 },
                 child: Container(
                   width: 150,
@@ -339,9 +306,7 @@ class _MyHomePageState extends State<HomePage2> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       HoplaButton(Colors.orangeAccent, width*.5, height*.05,Color(0xffDFE6EF), 'Join Us', (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return HomeSPage();
-                        }));
+
                       }),
 
                     ],))),

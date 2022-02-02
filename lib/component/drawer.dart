@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hopla_front_mob/view/home_page.dart';
+import 'package:hopla_front_mob/view/login_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
 import 'package:hopla_front_mob/view/offers_Statuts_page.dart';
 
@@ -95,7 +97,41 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.055,),
+                        .height*.025,),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  HomePage2();
+                              }));
+                            },
+                            child: Container(padding: const EdgeInsets.only(top: 10),
+                              width: 220,
+                              child: Row(
+                                children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width*.02,),
+                                  Icon(FontAwesomeIcons.home,color: Colors.black,size: 25,),
+                                  SizedBox( width: 15,),
+                                  Text('Home',  style: TextStyle(
+                                    fontFamily: 'Product Sans',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                    color: const Color(0xff241332),
+                                  ))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+
+                    SizedBox(  height: MediaQuery
+                        .of(context)
+                        .size
+                        .height*.025,),
                     Row(
                       children: [
                         InkWell(
@@ -115,7 +151,7 @@ class _MyHomePageState extends State<DrawerComp> {
                                   Icon(FontAwesomeIcons.fileInvoiceDollar,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
                                   Text('Offers',  style: TextStyle(
-                                     fontFamily: 'Product Sans',
+                                    fontFamily: 'Product Sans',
                                     fontSize: 25,
                                     fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
@@ -164,9 +200,7 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  OfferPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
@@ -197,9 +231,7 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  OfferPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
@@ -230,9 +262,7 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  OfferPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
@@ -263,9 +293,7 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  OfferPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
@@ -296,9 +324,7 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return  OfferPage();
-                              }));
+
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
@@ -335,7 +361,11 @@ class _MyHomePageState extends State<DrawerComp> {
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,
                               child: InkWell(
-
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return  MyHomePage(title: false);
+                                  }));
+                                },
                                   child: Container(padding: const EdgeInsets.only(top: 10),
                                     width: 220,
                                     child: Row(

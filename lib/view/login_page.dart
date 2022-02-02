@@ -1,8 +1,8 @@
 
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hopla_front_mob/component/google_sign_in.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/creat_account.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
@@ -68,13 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height:height*.4 ,),
-              Center(child: SizedBox(child: HoplaButton(Color(0xffffffff),width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return PhonePage();
-                }));
-
-              }),),),
-
+              Sign(),
               SizedBox(height:height*.035 ,),
               Center(child: SizedBox(child: HoplaButton(Color(0xffffffff), width*.85,height*.07, const  Color(0xffff9a08), "Create account",
                       (){

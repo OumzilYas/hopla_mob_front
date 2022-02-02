@@ -12,15 +12,17 @@ class ScooterContainer extends StatelessWidget {
     return  Stack(
       children: <Widget>[
         Positioned(
-            right: 3,
+            right: 5,
             top: 3,
             child: Container(
               height: 40,
               width: 40,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Color(0xff00B72B),
                 image:   DecorationImage(
                   fit: BoxFit.contain,
-                  image:const AssetImage("assets/scooterP2.png"),
+                  image:const AssetImage("assets/scooterP3.png"),
                 ),
               ),
 

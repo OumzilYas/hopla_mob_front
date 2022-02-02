@@ -181,7 +181,7 @@ class _MyHomePageState extends State<MapDPage> {
                         onTap: (){
                           print("ppD");
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                            return HomePage(inProgress: true,dirictions: true,);
+                            return HomePage(inProgress:true,dirictions: true,);
                           }));
 
                         },

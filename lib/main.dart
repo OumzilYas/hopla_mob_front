@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:hopla_front_mob/view/login_page.dart';
+import 'package:hopla_front_mob/view/test.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: true,),// HomePage(inProgress: false,dirictions: false,),
+      home: const  MyHomePage(title: false,),// HomePage(inProgress: false,dirictions: false,),
     );
   }
 }
+

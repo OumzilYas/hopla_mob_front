@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
 
 class BBarH extends StatelessWidget {
@@ -19,7 +20,11 @@ class BBarH extends StatelessWidget {
         children: [
           SizedBox(width: width*.07,),
           InkWell(
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return HomePage2();
+              }));
+            },
             child: Container(
               height: width*.07,
               width: width*.07,

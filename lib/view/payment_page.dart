@@ -35,37 +35,7 @@ class _PayPageState extends State<PayPage> {
           Positioned(
             top: 52.0,
             right: 20.0,
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color:  Color(0xffDFE6EF),
-                borderRadius: BorderRadius.circular(50.0),
-                boxShadow:const  [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  ), //BoxShadow
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: const Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ), //BoxShadow
-                ],
-              ),
-              child: const Icon(
-                Icons.settings,
-                color: Colors.black,
-                size: 28,
-              ),
-
-            ),
+            child: SizedBox(),
           ),
           Positioned(
               top: 52.0,
@@ -122,7 +92,7 @@ class _PayPageState extends State<PayPage> {
               height: height*.68,
               width: width*.95,
               child:Accordion(
-                maxOpenSections: 3,
+                maxOpenSections: 1,
                 headerBackgroundColor: Colors.orangeAccent.withOpacity(0.7),
                 flipRightIconIfOpen: true,
                 rightIcon: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 20,),

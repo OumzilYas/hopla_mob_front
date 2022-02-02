@@ -53,41 +53,6 @@ class _MyHomePageState extends State<OffersStatus2> {
             child: Container(height: height,),
           ),
           Positioned(
-            top: 52.0,
-            right: 20.0,
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color:  Color(0xffDFE6EF),
-                borderRadius: BorderRadius.circular(50.0),
-                boxShadow:const  [
-                  BoxShadow(
-                    color: Colors.black12,
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  ), //BoxShadow
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: const Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ), //BoxShadow
-                ],
-              ),
-              child: const Icon(
-                Icons.settings,
-                color: Colors.black,
-                size: 28,
-              ),
-
-            ),
-          ),
-          Positioned(
               top: 52.0,
               left: 20.0,
               child:InkWell(
