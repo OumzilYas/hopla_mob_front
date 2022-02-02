@@ -449,76 +449,118 @@ class _HomePageState extends State<HomePage> {
           controller: sc,
           children: <Widget>[
             Container(
-              decoration:const  BoxDecoration(
-                color:  Color(0xff00B72B),
-                borderRadius:  BorderRadius.only(
+              decoration:  BoxDecoration(
+                color: isRunning? Color(0xff00B72B) :Colors.orangeAccent,
+                borderRadius: const  BorderRadius.only(
                     topLeft: Radius.circular(18.0),
                     topRight: Radius.circular(18.0)),
               ),
               height: height*.08,
               width: width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  SizedBox(width:width*.05,),
-                  InkWell(
-                    onTap: (){
-                      if(!isLocked){
-                        if (!countdownController1.isRunning) {
-                          countdownController1.start();
-                          countdownController2.stop();
-
-                          setState(() {
-                            isRunning = true;
-                          });
-                        }
-                        else {
-                          countdownController1.stop();
-                          countdownController2.start();
-
-                          setState(() {
-                            isRunning = false;
-                          });
-                        }
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          isRunning ? Icons.pause : Icons.play_arrow,
-                          color: Colors.white,
-                          size: 32,
-                        ),
-                        Text(isRunning?'Pause':'Play',style: GoogleFonts.lato(
-                          textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 25),
-                        ),),
-                      ],
-                    ),
+                  SizedBox(
+                    height: height*.005,
                   ),
-                  SizedBox(width:width*.05,),
-                  Countdown(
-                      countdownController: countdownController1 ,
-                      builder: (_, Duration time) {
-                        return Text(
-                          ' ${time.inHours}: ${time.inMinutes % 60} : ${time.inSeconds % 60}',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
-                          ),
-                        );
-                      }),
-                  SizedBox(width:width*.1,),
-                  Countdown(
-                      countdownController: countdownController2 ,
-                      builder: (_, Duration time) {
-                        return Text(
-                          '${time.inMinutes % 60} : ${time.inSeconds % 60}',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w300,fontSize: 12),
-                          ),
-                        );
-                      }),
-                  SizedBox(width:width*.05,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 30,
+                        height: 5,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: const BorderRadius.all(Radius.circular(12.0))),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: height*.005,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width:width*.05,),
+                      InkWell(
+                        onTap: (){
+                          if(!isLocked){
+                            if (!countdownController1.isRunning) {
+                              countdownController1.start();
+                              countdownController2.stop();
 
+                              setState(() {
+                                isRunning = true;
+                              });
+                            }
+                            else {
+                              countdownController1.stop();
+                              countdownController2.start();
+
+                              setState(() {
+                                isRunning = false;
+                              });
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              isRunning ? Icons.pause : Icons.play_arrow,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                            Text(isRunning?'Pause':'Play',
+                              style: TextStyle(fontFamily: 'Product Sans', color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width:width*.05,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('   Duration : ',style:  TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 14,
+                            color:  Colors.white,
+                          ),),
+                          Countdown(
+                              countdownController: countdownController1 ,
+                              builder: (_, Duration time) {
+                                return Text(
+                                  ' ${time.inHours}: ${time.inMinutes % 60} : ${time.inSeconds % 60}',
+                                  style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
+
+                                );
+                              }),
+                        ],
+                      ),
+                      SizedBox(width:width*.1,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Délai',style:  TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 14,
+                            color:  Colors.white,
+                          ),),
+                          SizedBox(height: height*.012,),
+                          Countdown(
+                              countdownController: countdownController2 ,
+                              builder: (_, Duration time) {
+                                return Text(
+                                  '${time.inMinutes % 60} : ${time.inSeconds % 60}',
+                                  style:const  TextStyle(color: Colors.white, fontFamily: 'Product Sans',
+                                      letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 15),
+
+                                );
+                              }),
+                        ],
+                      ),
+                      SizedBox(width:width*.05,),
+
+                    ],
+                  )
                 ],
               ),
             ),
@@ -549,17 +591,14 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           'Trip in Progress ',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 20),
-                          ),
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 20),
+
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(width: width*.03,),
                         Text(
                           '312 -wgt ',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                          ),
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -572,17 +611,16 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Distance ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '353 m',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:
+                              TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -592,17 +630,15 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Life ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '90 KM',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -612,17 +648,14 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               'Power ',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
-                              ),
+                              style:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: height*.01,),
                             Text(
                               '71 %',
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
-                              ),
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -641,8 +674,9 @@ class _HomePageState extends State<HomePage> {
                     height: height*.06,
                     width: width*.43,
                     decoration:  BoxDecoration(
+                        color: Colors.black,
                         borderRadius: BorderRadius.all(Radius.circular(10),),
-                        border: Border.all(color: Colors.lightGreen)
+                        border: Border.all(color: Colors.black)
                     ),
                     child:InkWell(
                       onTap: (){
@@ -664,7 +698,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         } else {
                           countdownController1.stop();
-                          //countdownController2.start();
+                          countdownController2.start();
 
                           setState(() {
                             isRunning = false;
@@ -677,10 +711,9 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(width: width*.01,),
-                          Icon(isLocked?FontAwesomeIcons.unlock:FontAwesomeIcons.lock,color: Colors.lightGreen,size: 20,),
-                          Text(isLocked?'Unlock Scooter':'lock Scooter',style: GoogleFonts.lato(
-                            textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
-                          ),),
+                          Icon(isLocked?FontAwesomeIcons.unlock:FontAwesomeIcons.lock,color: Colors.white,size: 20,),
+                          Text(isLocked?'Unlock Scooter':'lock Scooter',style:TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
                           SizedBox(width: width*.01,),
                         ],
                       ),
@@ -691,8 +724,8 @@ class _HomePageState extends State<HomePage> {
                     width: width*.43,
                     decoration:  BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10),),
-                        color: Colors.blueGrey,
-                        border: Border.all(color: Colors.blueGrey)
+                        color: Color(0xffFF0000),
+                        border: Border.all(color:Color(0xffFF0000))
                     ),
                     child:InkWell(
                       onTap: (){
@@ -706,10 +739,9 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(width: width*.01,),
-                          Icon(FontAwesomeIcons.stopwatch,color: Colors.white,),
-                          Text('End trip',style: GoogleFonts.lato(
-                            textStyle: const TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
-                          ),),
+                          Icon(FontAwesomeIcons.flag,color: Colors.white,),
+                          Text('End trip',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
                           SizedBox(width: width*.01,),
                         ],
                       ),

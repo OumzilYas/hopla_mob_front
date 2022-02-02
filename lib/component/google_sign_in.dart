@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
@@ -29,7 +30,8 @@ class _HomePageState extends State<Sign> {
       child: _isLoggedIn
           ?
       Center(child: SizedBox(
-        width:width*.85,height:height*.07,
+        height: height*.06,
+        width: width*.75,
         child:  ElevatedButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all( Colors.white.withOpacity(0.5),),
@@ -44,7 +46,8 @@ class _HomePageState extends State<Sign> {
             ),
           ),
           child: Container(
-            width:width*.8,height:height*.065,
+            height: height*.06,
+            width: width*.75,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -52,7 +55,7 @@ class _HomePageState extends State<Sign> {
                   width: MediaQuery
                       .of(context)
                       .size
-                      .width*.15,
+                      .width*.1,
                   child:CircleAvatar(
                     radius: 25,
                     backgroundImage:  NetworkImage(_userObj!.photoUrl.toString()),
@@ -69,7 +72,7 @@ class _HomePageState extends State<Sign> {
                     ),),
                     Text(_userObj!.email,style: const  TextStyle(
                       fontFamily: 'Product Sans',
-                      fontSize: 14,
+                      fontSize: 12,
                       color:  Colors.white,
                     ),),
                   ],
@@ -95,28 +98,45 @@ class _HomePageState extends State<Sign> {
         ),
       ),)
 
-          : Center(child: SizedBox(child: HoplaButton(Color(0xffffffff),width*.85,height*.07, Colors.white.withOpacity(0.5), "Login",(){
-        _googleSignIn.signIn().then((userData) {
-          setState(() {
-            if(userData!=null){
-              _isLoggedIn = true;
-              _userObj = userData;
-            }
-            else {
-              _isLoggedIn = false;
+       :Center(child: SizedBox(child: Container(
+        height: height*.06,
+        width: width*.75,
+        child: FlatButton(
+          onPressed: ()async{
+            _googleSignIn.signIn().then((userData) {
+              setState(() {
+                if(userData!=null){
+                  _isLoggedIn = true;
+                  _userObj = userData;
+                }
+                else {
+                  _isLoggedIn = false;
 
-            }
-            print(userData);
+                }
+                print(userData);
 
 
-          });
-        }).catchError((e) {
-          print(e);
-        });
-
-      }),),)
-      ,
-    );
+              });
+            }).catchError((e) {
+              print(e);
+            });
+          },
+          color: Colors.grey.shade50,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset("assets/Google.png",height: 18,width: 18,),
+              SizedBox(width: 10,),
+              Text("Connect with Google",style: GoogleFonts.montserrat(
+                textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontSize: 14),
+              ),),
+            ],
+          ),
+        ),
+      ),)));
   }
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
