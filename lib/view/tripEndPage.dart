@@ -292,6 +292,6 @@ class _HomePageState extends State<TripEndPage> {
   }
 
   Widget _body() {
-    return MapPage(press: (){},);
+    return MapPage(press: (){},progress: false,);
   }
 }

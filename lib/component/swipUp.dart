@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   double _fabHeight = 0;
   double _panelHeightOpen = 0;
   double _panelHeightClosed = 95.0;
-  bool inProgress = false ;
+  bool ?inProgress  ;
   bool isRunning = false;
   bool isLocked = false;
 
@@ -63,6 +63,8 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   void initState() {
+    inProgress = widget.inProgress;
+    print("----------------------------------------"+inProgress.toString());
     super.initState();
     asyncMethod();
 
@@ -97,15 +99,13 @@ class _HomePageState extends State<HomePage> {
             left: 0.0,
             right: 0.0,
             child: Container(height: height,
-              child: !widget.dirictions?MapPage(press: (){setState(() {
+              child: !widget.dirictions?MapPage(progress : inProgress!,press: (){setState(() {
                 station = false;
-                inProgress = true;
-              });},):MapDPage(press: (){setState(() {
+              });},):MapDPage(progress : inProgress!,press: (){setState(() {
                 station = false;
-                inProgress = true;
               });},)),
           ),
-          station ?
+          station && !inProgress! ?
           Positioned(
             bottom : 40,
             left: 0.0,
@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
               :
           SlidingUpPanel(
               maxHeight:_panelHeightOpen ,
-              minHeight: inProgress ? height*.08 :_panelHeightClosed,
+              minHeight: inProgress! ? height*.08 :_panelHeightClosed,
               parallaxEnabled: true,
               parallaxOffset: .5,
               panelBuilder: (sc) => _panel(sc),
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                   topLeft: Radius.circular(18.0),
                   topRight: Radius.circular(18.0)),
               onPanelSlide: (double pos) => () {
-                if (!inProgress) {
+                if (!inProgress!) {
                   print("ppp");
                   setState(() {
                     station = true;
@@ -270,7 +270,7 @@ class _HomePageState extends State<HomePage> {
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child:!inProgress? ListView(
+        child:!inProgress!? ListView(
           controller: sc,
           children: <Widget>[
             const SizedBox(

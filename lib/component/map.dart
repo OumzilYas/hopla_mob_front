@@ -6,9 +6,10 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key, required this.press}) : super(key: key);
+  const MapPage({Key? key, required this.press,required this.progress}) : super(key: key);
 
   final  press;
+  final  bool progress;
 
   @override
   State<MapPage> createState() => _MyHomePageState();
@@ -60,6 +61,7 @@ class _MyHomePageState extends State<MapPage> {
   @override
   void initState() {
     local();
+
 
     // TODO: implement initState
     super.initState();
@@ -156,7 +158,7 @@ class _MyHomePageState extends State<MapPage> {
                         ),
                         onTap:(){local();
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                          return HomePage(inProgress: true,dirictions: false,);
+                          return HomePage(inProgress: widget.progress,dirictions: false,);
                         }));}
                       ),
 
@@ -170,7 +172,7 @@ class _MyHomePageState extends State<MapPage> {
                           print("pp");
                           local();
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                            return HomePage(inProgress: true,dirictions: true,);
+                            return HomePage(inProgress: widget.progress,dirictions: true,);
                           }));
 
                         },
