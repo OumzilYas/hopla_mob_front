@@ -212,7 +212,7 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .width*.02,),
                                   Icon(FontAwesomeIcons.wallet,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
-                                  Text('Wallet',  style: TextStyle(
+                                  const Text('Payment',  style: TextStyle(
                                     fontFamily: 'Product Sans',
                                     fontSize: 25,
                                     fontWeight: FontWeight.w300,

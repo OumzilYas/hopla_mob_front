@@ -38,6 +38,8 @@ class _HomePageState extends State<HomePage> {
   double _fabHeight = 0;
   double _panelHeightOpen = 0;
   double _panelHeightClosed = 95.0;
+  double _panelHeightClosed2 = 300;
+
   bool ?inProgress  ;
   bool isRunning = false;
   bool isLocked = false;
@@ -194,8 +196,21 @@ class _HomePageState extends State<HomePage> {
               :
           SlidingUpPanel(
               maxHeight:_panelHeightOpen ,
-              minHeight: inProgress! ? height*.08 :_panelHeightClosed,
-              parallaxEnabled: true,
+              minHeight: inProgress! ?_panelHeightClosed2:_panelHeightClosed,
+              parallaxEnabled: false,
+              onPanelClosed: (){
+                setState(() {
+                  if(inProgress!){
+                    //_panelHeightClosed2 = height*.08;
+                  }
+
+                });
+              },
+              onPanelOpened: (){
+                if(inProgress!){
+                  _panelHeightClosed2 = height*.08;
+                }
+              },
               parallaxOffset: .5,
               panelBuilder: (sc) => _panel(sc),
               borderRadius:const  BorderRadius.only(
@@ -203,11 +218,12 @@ class _HomePageState extends State<HomePage> {
                   topRight: Radius.circular(18.0)),
               onPanelSlide: (double pos) => () {
                 if (!inProgress!) {
-                  print("ppp");
                   setState(() {
                     station = true;
                   });
                 } else {
+                  print("ppp");
+
                   setState(() {
                     _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
                         _initFabHeight;

@@ -110,6 +110,7 @@ class _MyHomePageState extends State<MapPage> {
                 child: Icon(
                   Icons.location_on,
                   color: Colors.green,
+                  size: 50,
                 ),
             )),
       ),

@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/google_sign_in.dart';
+import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/creat_account.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
-import 'package:hopla_front_mob/view/test.dart';
-import 'package:hopla_front_mob/widgets/HoplaField.dart';
-import 'package:hopla_front_mob/widgets/hopla_button.dart';
+
 
 import 'home_page.dart';
 
@@ -120,8 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
             height: height*.06,
             width: width*.75,
             child: FlatButton(
-              onPressed: (){
+              onPressed: ()async{
+               // await Share.share("text");
 
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return const HomePage(inProgress: false,dirictions: false,);
+                }
+                )
+                );
               },
               padding: EdgeInsets.all(0),
               child: Ink(

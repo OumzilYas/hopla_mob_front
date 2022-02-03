@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/component/googleMap.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/home_page.dart';
+import 'package:share/share.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class TripEndPage extends StatefulWidget {
@@ -267,27 +268,32 @@ class _HomePageState extends State<TripEndPage> {
   }
 
   Widget _button(String label, IconData icon, Color color) {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Icon(
-            icon,
-            color: Colors.white,
+    return InkWell(
+      onTap: ()async{
+      await Share.share("text");
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Icon(
+              icon,
+              color: Colors.white,
+            ),
+            decoration:
+            BoxDecoration(color: color, shape: BoxShape.circle, boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.15),
+                blurRadius: 8.0,
+              )
+            ]),
           ),
-          decoration:
-          BoxDecoration(color: color, shape: BoxShape.circle, boxShadow: [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.15),
-              blurRadius: 8.0,
-            )
-          ]),
-        ),
-        SizedBox(
-          height: 12.0,
-        ),
-        Text(label,style: TextStyle(fontFamily: 'Product Sans',),),
-      ],
+          SizedBox(
+            height: 12.0,
+          ),
+          Text(label,style: TextStyle(fontFamily: 'Product Sans',),),
+        ],
+      ),
     );
   }
 

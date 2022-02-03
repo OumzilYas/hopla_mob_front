@@ -19,10 +19,10 @@ class ScooterContainer extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Color(0xff00B72B),
+                color: Colors.white,
                 image:   DecorationImage(
                   fit: BoxFit.contain,
-                  image:const AssetImage("assets/scooterP3.png"),
+                  image:const AssetImage("assets/stations/4.png"),
                 ),
               ),
 
