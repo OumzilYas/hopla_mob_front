@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hopla_front_mob/view/edit_profile_page.dart';
 import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/login_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
@@ -38,66 +39,63 @@ class _MyHomePageState extends State<DrawerComp> {
                 child: ListView(
                   padding:  EdgeInsets.only(left: 15,top:   40),
                   children: [
-                    Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width*.6,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width*.15,
-                            child:CircleAvatar(
-                              radius: 40,
-                              backgroundImage:  AssetImage("assets/profile.jpeg"),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return  EditProfilePage();
+                        }));
+                      },
+                      child:Container(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width*.6,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width*.15,
+                              child:CircleAvatar(
+                                radius: 40,
+                                backgroundImage:  AssetImage("assets/profile.jpeg"),
+                              ),
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Yassin Oum',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 24,
-                                  color:  Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                ),),
+                            SizedBox(width: 20,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Yassin Oum',
+                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 24,fontWeight: FontWeight.w800),
+                                ),
+                                Text('tassin@gmail.com',
+                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w800),
+                                ),
+                                Container(
+                                  width: 220,
+                                  child: Row(
+                                    children: [
+                                      Icon(FontAwesomeIcons.crown,color: Colors.green,size: 20,),
+                                      SizedBox( width: 10,),
+                                      Text('Exprience',style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w800),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
 
-                              InkWell(
-                                  onTap: (){
-
-                                  },
-                                  child: Container(padding: const EdgeInsets.only(top: 10),
-                                    width: 220,
-                                    child: InkWell(
-
-                                        child: Container(padding: const EdgeInsets.only(top: 10),
-                                          width: 220,
-                                          child: Row(
-                                            children: [
-                                              Icon(FontAwesomeIcons.crown,color: Colors.green,size: 20,),
-                                              SizedBox( width: 10,),
-                                              Text('Exprience',  style: GoogleFonts.montserrat(
-                                                fontSize: 18,
-                                                color:  Colors.black,
-                                              ))
-                                            ],
-                                          ),
-                                        )),
-                                  )),
-                            ],
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.027,),
                     Row(
                       children: [
                         InkWell(

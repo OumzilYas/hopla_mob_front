@@ -95,7 +95,7 @@ class _MyHomePageState extends State<OffersStatus2> {
             right: 0.0,
             child:Row(
               children:const  [
-                Text('Chose Status : ',style: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
+                Text('Chose Status : ',style: const TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
                 ),
               ],
             ),

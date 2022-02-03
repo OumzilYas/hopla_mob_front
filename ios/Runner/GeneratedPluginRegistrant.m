@@ -30,6 +30,12 @@
 @import google_sign_in;
 #endif
 
+#if __has_include(<image_picker/FLTImagePickerPlugin.h>)
+#import <image_picker/FLTImagePickerPlugin.h>
+#else
+@import image_picker;
+#endif
+
 #if __has_include(<libphonenumber/LibphonenumberPlugin.h>)
 #import <libphonenumber/LibphonenumberPlugin.h>
 #else
@@ -73,6 +79,7 @@
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
+  [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [LibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"LibphonenumberPlugin"]];
   [FLTLibphonenumberPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTLibphonenumberPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
