@@ -291,7 +291,7 @@ class _MyHomePageState extends State<PathWay2> {
               bottom: 0.0,
               left: 0.0,
               right: 0.0,
-              child: BBarH()),
+              child: BBarH(page: 'p',)),
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

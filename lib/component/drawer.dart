@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/login_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
 import 'package:hopla_front_mob/view/offers_Statuts_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerComp extends StatefulWidget {
 
@@ -15,8 +16,30 @@ class DrawerComp extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<DrawerComp> {
-  int _selectedDestination = 0;
 
+   String name ='';
+   String email ='';
+   String pic ='';
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counter;
+
+  Future<void> getProfile() async {
+    final SharedPreferences prefs = await _prefs;
+    setState(() {
+      name = (prefs.getString('name') ?? "") ;
+      email = (prefs.getString('email') ?? "") ;
+      pic = (prefs.getString('pic') ?? "") ;
+      print(name+email+pic);
+    });
+
+  }
+  @override
+  void initState() {
+    getProfile();
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -61,17 +84,17 @@ class _MyHomePageState extends State<DrawerComp> {
                                   .width*.15,
                               child:CircleAvatar(
                                 radius: 40,
-                                backgroundImage:  AssetImage("assets/profile.jpeg"),
+                                backgroundImage:  NetworkImage(pic),
                               ),
                             ),
                             SizedBox(width: 20,),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Yassin Oum',
-                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 24,fontWeight: FontWeight.w800),
+                                 Text(name,
+                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w800),
                                 ),
-                                Text('tassin@gmail.com',
+                                Text(email,
                                   style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w800),
                                 ),
                                 Container(
@@ -393,9 +416,5 @@ class _MyHomePageState extends State<DrawerComp> {
 
   }
 
-  void selectDestination(int index) {
-    setState(() {
-      _selectedDestination = index;
-    });
-  }
+
 }

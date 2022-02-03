@@ -7,8 +7,8 @@ import 'package:hopla_front_mob/view/phone_page.dart';
 
 class BBarH extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
-  const BBarH({ Key ?key}) : super(key: key);
-
+   BBarH({ Key ?key,required this.page}) : super(key: key);
+  String page ;
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
@@ -28,45 +28,30 @@ class BBarH extends StatelessWidget {
             child: Container(
               height: width*.07,
               width: width*.07,
-              decoration:const BoxDecoration(
-                image:   DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/home-button.png"),
-                ),
-              ),),
+             child: Icon(FontAwesomeIcons.home,color: page =='h'? Colors.orangeAccent:Colors.grey,size: 26,),),
           ),
           SizedBox(width: width*.25,),
           InkWell(
             onTap: (){},
-            child: Container(
+            child:  Container(
               height: width*.07,
               width: width*.07,
-              decoration:const BoxDecoration(
-                image:   DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/wallet.png"),
-                ),
-              ),),
+              child: Icon(FontAwesomeIcons.wallet,color: page =='w'? Colors.orangeAccent:Colors.grey,size: 26,),),
           ),
           SizedBox(width: width*.27,),
           InkWell(
             onTap: (){},
-            child: Container(
+            child:  Container(
               height: width*.07,
               width: width*.07,
-              decoration:const BoxDecoration(
-                image:   DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage("assets/images.png"),
-                ),
-              ),),
+              child: Icon(Icons.person,color: page =='p'? Colors.orangeAccent:Colors.grey,size: 26,),),
           ),
           SizedBox(width: width*.07,),
 
         ],
       ),
       decoration:const BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
       ),);
   }
 }

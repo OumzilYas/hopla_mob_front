@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Sign extends StatefulWidget {
   @override
@@ -21,7 +22,28 @@ class _HomePageState extends State<Sign> {
   String Name ="";
   String pic ="";
   String mail ="";
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counter;
 
+  Future<void> _incrementCounter(String name,String email,String pic ) async {
+    final SharedPreferences prefs = await _prefs;
+    final int counter = (prefs.getInt('counter') ?? 0) + 1;
+
+    setState(() {
+       prefs.setString('name', name);
+       prefs.setString('email', email);
+       prefs.setString('pic', pic);
+       prefs.setBool('login', true);
+
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _counter = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('counter') ?? 0;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
@@ -114,7 +136,7 @@ class _HomePageState extends State<Sign> {
 
                 }
                 print(userData);
-
+                _incrementCounter(userData!.displayName.toString(),userData.email.toString(),userData.photoUrl.toString());
 
               });
             }).catchError((e) {

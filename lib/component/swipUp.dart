@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
       LatLng(33.60410629793479, -7.645479613535697),
     ];
     return Scaffold(
-      drawerScrimColor: Colors.green.withOpacity(0.7),
+      drawerScrimColor: Colors.grey.withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
         child: DrawerComp(),),

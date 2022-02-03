@@ -25,7 +25,7 @@ class _OfferPageState extends State<OfferPage> {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
     return  Scaffold(
-      drawerScrimColor: const Color(0xffff9a08).withOpacity(0.7),
+      drawerScrimColor:  Colors.grey.withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
         child: DrawerComp(),
@@ -103,11 +103,11 @@ class _OfferPageState extends State<OfferPage> {
                 }));
               },),):const SizedBox(),),
 
-          const Positioned(
+           Positioned(
               bottom: 0.0,
               left: 0.0,
               right: 0.0,
-              child: BBarH()),
+              child: BBarH(page: 'o',)),
 
         ],
       ),

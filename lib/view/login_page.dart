@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               _button("FaceBook", FontAwesomeIcons.facebookF, Colors.blue),
               SizedBox(width: 20,),
-              _button("Instagram",  FontAwesomeIcons.google, Colors.grey),
+              _button("Google",  FontAwesomeIcons.google, Colors.grey),
             ],
           ),
 

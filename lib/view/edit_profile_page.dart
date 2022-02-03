@@ -5,7 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/widgets/bottom_bar.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -14,21 +17,41 @@ class EditProfilePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-final List<bool> imgList = [true,false];
-int _current = 0;
-List<T> map<T>(List list, Function handler) {
-  List<T> result = [];
-  for (var i = 0; i < list.length; i++) {
-    result.add(handler(i, list[i]));
-  }
+final ImagePicker _picker = ImagePicker();
 
-  return result;
+final List<bool> imgList = [true,false];
+_getFromGallery() async {
+  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
 }
 
 class _MyHomePageState extends State<EditProfilePage> {
   DateTime _date = DateTime(2020, 11, 17);
   bool isSwitched = false;
 
+  String name ='';
+  String email ='';
+  String pic ='';
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counter;
+
+  Future<void> getProfile() async {
+    final SharedPreferences prefs = await _prefs;
+    setState(() {
+      name = (prefs.getString('name') ?? "") ;
+      email = (prefs.getString('email') ?? "") ;
+      pic = (prefs.getString('pic') ?? "") ;
+      print(name+email+pic);
+    });
+
+  }
+  @override
+  void initState() {
+    getProfile();
+    super.initState();
+
+  }
 
   var dropdownValue1,dropdownValue2,dropdownValue3;
   final TextEditingController _pinPutController = TextEditingController();
@@ -237,7 +260,11 @@ class _MyHomePageState extends State<EditProfilePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(child: Container(
+                    GestureDetector(
+                      onTap: (){
+                        _getFromGallery();
+                      },
+                        child: Container(
                       height:50,
                       width: 200,
                       decoration:const  BoxDecoration(
@@ -264,7 +291,7 @@ class _MyHomePageState extends State<EditProfilePage> {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
     return Scaffold(
-      drawerScrimColor: const Color(0xffff9a08).withOpacity(0.7),
+      drawerScrimColor: Colors.grey.withOpacity(0.7),
       key: _scaffoldKey,
       drawer:  Container(child: Drawer(
         child: DrawerComp(),
@@ -333,17 +360,17 @@ class _MyHomePageState extends State<EditProfilePage> {
                           .width*.2,
                       child:CircleAvatar(
                         radius: 40,
-                        backgroundImage:  AssetImage("assets/profile.jpeg"),
+                        backgroundImage:  NetworkImage(pic),
                       ),
                     ),
                     SizedBox(width: 20,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Yassin Oum',
+                         Text(name,
                           style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 24,fontWeight: FontWeight.w800),
                         ),
-                        Text('tassin@gmail.com',
+                        Text(email,
                           style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w800),
                         ),
                         Container(
@@ -395,7 +422,8 @@ class _MyHomePageState extends State<EditProfilePage> {
                   ))
                 ],
               ),
-
+              SizedBox(height:height*.02,),
+              BBarH(page: 'p',)
             ]
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

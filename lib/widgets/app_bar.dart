@@ -93,7 +93,6 @@ class AppBarH extends StatelessWidget {
                     ),),
                 ),
                 SizedBox(width: width*.05,)
-
               ],
             ),
           )
