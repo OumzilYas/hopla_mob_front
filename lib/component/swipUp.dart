@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:ui';
 
 //import 'package:barcode_scan/platform_wrapper.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/countdown_controller.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,6 +17,7 @@ import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/tripEndPage.dart';
 import 'package:hopla_front_mob/widgets/info_dialoge.dart';
 import 'package:hopla_front_mob/widgets/scooter_container.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
 
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     _fabHeight = _initFabHeight;
   }
   bool station =true;
-
+  bool inAsyncCall = false;
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
@@ -93,190 +96,194 @@ class _HomePageState extends State<HomePage> {
       drawer:  Container(child: Drawer(
         child: DrawerComp(),),
         width: width*.8,color: Colors.white,),
-      body: Stack(
-        alignment: Alignment.topCenter,
-        children: <Widget>[
-          Positioned(
-            top: 0.0,
-            left: 0.0,
-            right: 0.0,
-            child: Container(height: height,
-              child: !widget.dirictions?MapPage(progress : inProgress!,press: (){setState(() {
-                station = false;
-              });},):MapDPage(progress : inProgress!,press: (){setState(() {
-                station = false;
-              });},)),
-          ),
-          station && !inProgress! ?
-          Positioned(
-            bottom : 40,
-            left: 0.0,
-            right: 0.0,
-            child: Container(
-              height: height*.1,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (BuildContext context, int index) => Card(
-                  color: Colors.white,
-                  child: Container(
-                    width: width*.65,
-                    decoration: const  BoxDecoration(
-                      borderRadius:  BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: (){
-                        setState(() {
-                          station = false;
-                        });
-                      },
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Center(
-                              child:  SizedBox(
-                                height: 50,
-                                width: 50,
-                                child:ScooterContainer(),
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Chfinja',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 14),
-                                ),),
-                                SizedBox(height: height*.01,),
-                                Text('064646556',style: GoogleFonts.lato(
-                                  textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
-                                ),),
-
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: width*.2,
-                                  height: height*.06,
-                                  child: Center(child: Row(
-                                    children: [
-                                      Icon(Icons.pin_drop,color: Colors.white,size: 20,),
-                                      SizedBox(width: 7,),
-                                      Text('3.5 KM',style: GoogleFonts.lato(
-                                        textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w500),
-                                      ),),                            ],
-                                  ),),
-                                  decoration:const  BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(10),),
-                                      color: Color(0xff00B72B)),
-                                ),
-
-                              ],
-                            ),
-                          ],
+      body: ModalProgressHUD(
+        dismissible: true,
+          inAsyncCall: inAsyncCall,
+          progressIndicator: SpinKitThreeBounce(
+            color: Colors.green,size: 60.0,),
+          child:Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              Positioned(
+                top: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(height: height,
+                    child: !widget.dirictions?MapPage(progress : inProgress!,press: (){setState(() {
+                      station = false;
+                    });},):MapDPage(progress : inProgress!,press: (){setState(() {
+                      station = false;
+                    });},)),
+              ),
+              station && !inProgress! ?
+              Positioned(
+                bottom : 40,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  height: height*.1,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    itemBuilder: (BuildContext context, int index) => Card(
+                      color: Colors.white,
+                      child: Container(
+                        width: width*.65,
+                        decoration: const  BoxDecoration(
+                          borderRadius:  BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)
+                          ),
                         ),
+                        child: InkWell(
+                          onTap: (){
+                            setState(() {
+                              station = false;
+                            });
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Center(
+                                  child:  SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child:ScooterContainer(),
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('Chfinja',style: GoogleFonts.lato(
+                                      textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 14),
+                                    ),),
+                                    SizedBox(height: height*.01,),
+                                    Text('064646556',style: GoogleFonts.lato(
+                                      textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+                                    ),),
+
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: width*.2,
+                                      height: height*.06,
+                                      child: Center(child: Row(
+                                        children: [
+                                          Icon(Icons.pin_drop,color: Colors.white,size: 20,),
+                                          SizedBox(width: 7,),
+                                          Text('3.5 KM',style: GoogleFonts.lato(
+                                            textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w500),
+                                          ),),                            ],
+                                      ),),
+                                      decoration:const  BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(10),),
+                                          color: Color(0xff00B72B)),
+                                    ),
+
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ),
+
                       ),
-
                     ),
-
                   ),
-                ),
-              ),
-            ),)
-              :
-          SlidingUpPanel(
-              maxHeight:_panelHeightOpen ,
-              minHeight: inProgress! ?_panelHeightClosed2:_panelHeightClosed,
-              parallaxEnabled: false,
-              onPanelClosed: (){
-                setState(() {
-                  if(inProgress!){
-                    //_panelHeightClosed2 = height*.08;
+                ),)
+                  :
+              SlidingUpPanel(
+                  maxHeight:_panelHeightOpen ,
+                  minHeight: inProgress! ?_panelHeightClosed2:_panelHeightClosed,
+                  parallaxEnabled: false,
+                  onPanelClosed: (){
+                    setState(() {
+                      if(inProgress!){
+                        _panelHeightClosed2 = height*.08;
+                      }
+
+                    });
+                  },
+                  onPanelOpened: (){
+                    if(inProgress!){
+                      _panelHeightClosed2 = height*.08;
+                    }
+                  },
+                  parallaxOffset: .5,
+                  panelBuilder: (sc) => _panel(sc),
+                  borderRadius:const  BorderRadius.only(
+                      topLeft: Radius.circular(18.0),
+                      topRight: Radius.circular(18.0)),
+                  onPanelSlide: (double pos)  {
+                    if (!inProgress!) {
+                      setState(() {
+                        station = true;
+                      });
+                    } else {
+                     // _panelHeightClosed2 = height*.08;
+                      setState(() {
+                        _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
+                            _initFabHeight;
+                      });
+
+                    }
                   }
-
-                });
-              },
-              onPanelOpened: (){
-                if(inProgress!){
-                  _panelHeightClosed2 = height*.08;
-                }
-              },
-              parallaxOffset: .5,
-              panelBuilder: (sc) => _panel(sc),
-              borderRadius:const  BorderRadius.only(
-                  topLeft: Radius.circular(18.0),
-                  topRight: Radius.circular(18.0)),
-              onPanelSlide: (double pos) => () {
-                if (!inProgress!) {
-                  setState(() {
-                    station = true;
-                  });
-                } else {
-                  print("ppp");
-
-                  setState(() {
-                    _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
-                        _initFabHeight;
-                  });
-
-                }
-              }
-          ),
-          // the fab
-          Positioned(
-            top: 52.0,
-            right: 20.0,
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
               ),
-              child: const Icon(
-                Icons.search,
-                color: Colors.grey,
-                size: 28,
-              ),
-
-            ),
-          ),
-          Positioned(
-              top: 52.0,
-              left: 20.0,
-              child:InkWell(
-                onTap: (){_scaffoldKey.currentState?.openDrawer();},
-                child : Container(
+              // the fab
+              Positioned(
+                top: 52.0,
+                right: 20.0,
+                child: Container(
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child:const Icon(
-                    Icons.menu,
+                  child: const Icon(
+                    Icons.search,
                     color: Colors.grey,
                     size: 28,
                   ),
 
-                ),)
-          ),
+                ),
+              ),
+              Positioned(
+                  top: 52.0,
+                  left: 20.0,
+                  child:InkWell(
+                    onTap: (){_scaffoldKey.currentState?.openDrawer();},
+                    child : Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child:const Icon(
+                        Icons.menu,
+                        color: Colors.grey,
+                        size: 28,
+                      ),
+
+                    ),)
+              ),
 
 
-          //the SlidingUpPanel Title
+              //the SlidingUpPanel Title
 
-        ],
-      ),
+            ],
+          ) ),
     );
   }
 
@@ -422,19 +429,16 @@ class _HomePageState extends State<HomePage> {
             ),
             InkWell(
                 onTap: ()async {
-                  /*
-                var result = await BarcodeScanner.scan();
-
-                print(result.type); // The result type (barcode, cancelled, failed)
-                print(result.rawContent); // The barcode content
-                print(result.format); // The barcode format (as enum)
-                print(result.formatNote);
-
-                 */
                   setState(() {
-
-                    inProgress =true;
+                    inAsyncCall = true;
                   });
+                  Timer(Duration(seconds: 3), () {
+                    setState(() {
+                      inAsyncCall = false;
+                      inProgress =true;
+                    });
+                  });
+
                 },
                 child:  Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -450,7 +454,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             SizedBox(width: width*.01,),
                             Icon(FontAwesomeIcons.qrcode,color: Colors.lightGreen,),
-                            Text('Scan Qr Code',style: GoogleFonts.lato(
+                            Text('Scan  Code',style: GoogleFonts.lato(
                               textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
                             ),),
                             SizedBox(width: width*.01,),

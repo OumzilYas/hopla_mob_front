@@ -117,26 +117,21 @@ class _MyHomePageState extends State<HomePage2> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 65,
-                                  width: 65,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.green,
-                                    child:
-                                    Icon(FontAwesomeIcons.fileInvoiceDollar,color: Colors.white,size: 25,),
-                                    onPressed: () {
-
-                                    },
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:  Colors.green,
+                                  image:   DecorationImage(
+                                    fit: BoxFit.contain,
+                                    image:const AssetImage("assets/price-tag.png"),
                                   ),
                                 ),
                               ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white),
                             ),
                             SizedBox(height: 10,),
                             Center(
@@ -170,27 +165,23 @@ class _MyHomePageState extends State<HomePage2> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 65,
-                                  width: 65,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Color(0xff002AD4),
-                                    child:
-                                    Icon(FontAwesomeIcons.fileContract,color: Colors.white,size: 25,),
-                                    onPressed: () {
-
-                                    },
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:  Color(0xff002AD4),
+                                  image:   DecorationImage(
+                                    fit: BoxFit.contain,
+                                    image:const AssetImage("assets/regulation.png"),
                                   ),
                                 ),
                               ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white),
                             ),
+
                             SizedBox(height: 10,),
                             Center(
                               child: Text('Rules',style: GoogleFonts.lato(
@@ -224,25 +215,38 @@ class _MyHomePageState extends State<HomePage2> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: 70,
-                              height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 65,
-                                  width: 65,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Color(0xffFF9A08),
-                                    child:
-                                    Icon(FontAwesomeIcons.star,color: Colors.white,size: 25,),
-                                    onPressed: () {
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color:  Colors.white,
 
-                                    },
-                                  ),
-                                ),
                               ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white),
+
+                              child:Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    child:  Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          height: 70,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(50),
+                                            color:  Color(0xffFF9A08),
+                                            image:   DecorationImage(
+                                              fit: BoxFit.contain,
+                                              image:const AssetImage("assets/star.png"),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
                             ),
                             SizedBox(height: 10,),
                             Center(

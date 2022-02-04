@@ -65,13 +65,11 @@ class _WeatherCompPageState extends State<WeatherComp> {
 
   Widget contentDownloading() {
     return Container(
-      margin: EdgeInsets.all(25),
       child: Center(
         child: Container(
-            height: 1,
-            width: 1,
-            margin: EdgeInsets.only(top: 50),
-            child: Center(child: CircularProgressIndicator(strokeWidth: 10))),
+            height: 20,
+            width: 20,
+            child: Center(child: CircularProgressIndicator(strokeWidth: 3,color: Colors.white,))),
       )
     );
   }

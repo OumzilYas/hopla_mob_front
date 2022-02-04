@@ -227,12 +227,34 @@ class _HomePageState extends State<TripEndPage> {
               height: height*.01,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                _button("FaceBook", FontAwesomeIcons.facebookF, Colors.blue),
-                _button("Instagram",  FontAwesomeIcons.instagram, Colors.pinkAccent),
-                _button("whatsapp", FontAwesomeIcons.whatsapp, Colors.green),
-                _button("twitter", FontAwesomeIcons.twitter, Colors.lightBlueAccent),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    height: height*.06,
+                    width: width*.7,
+                    decoration:  const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(25),),
+                      color: Colors.orangeAccent,
+                    ),
+                    child:InkWell(
+                      onTap: ()async{
+                        await Share.share("text");
+
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(Icons.share,color: Colors.white,size: 30,),
+                          SizedBox(width: width*.03,),
+                          Center(
+                            child:
+                            Text('Share',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ],
+                      )
+                    )),
+
               ],
             ),
             SizedBox(
