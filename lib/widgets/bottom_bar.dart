@@ -5,6 +5,8 @@ import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/edit_profile_page.dart';
 import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
+import 'package:hopla_front_mob/view/wallet_page.dart';
+import 'package:line_icons/line_icons.dart';
 
 class BBarH extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -29,15 +31,19 @@ class BBarH extends StatelessWidget {
             child: Container(
               height: width*.07,
               width: width*.07,
-             child: Icon(FontAwesomeIcons.home,color: page =='h'? Colors.orangeAccent:Colors.grey,size: 26,),),
+             child: Icon(LineIcons.home,color: page =='h'? Colors.orangeAccent:Colors.black,size: 26,),),
           ),
           SizedBox(width: width*.25,),
           InkWell(
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return  WalletPage();
+              }));
+            },
             child:  Container(
               height: width*.07,
               width: width*.07,
-              child: Icon(FontAwesomeIcons.wallet,color: page =='w'? Colors.orangeAccent:Colors.grey,size: 26,),),
+              child: Icon(LineIcons.wallet,color: page =='w'? Colors.orangeAccent:Colors.black,size: 26,),),
           ),
           SizedBox(width: width*.27,),
           InkWell(
@@ -49,14 +55,14 @@ class BBarH extends StatelessWidget {
             child:  Container(
               height: width*.07,
               width: width*.07,
-              child: Icon(Icons.person,color: page =='p'? Colors.orangeAccent:Colors.grey,size: 26,),),
+              child: Icon(LineIcons.user,color: page =='p'? Colors.orangeAccent:Colors.black,size: 26,),),
           ),
           SizedBox(width: width*.07,),
 
         ],
       ),
       decoration:const BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.white,
       ),);
   }
 }

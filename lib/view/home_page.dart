@@ -1,17 +1,15 @@
-
-
-//import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hopla_front_mob/component/Slider.dart';
 import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/component/weather.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/temp.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
+
+import 'new_map_page.dart';
 
 
 class HomePage2 extends StatefulWidget {
@@ -310,7 +308,9 @@ class _MyHomePageState extends State<HomePage2> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       HoplaButton(Colors.orangeAccent, width*.5, height*.05,Color(0xffDFE6EF), 'Join Us', (){
-
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return MapAnimation();
+                        }));
                       }),
 
                     ],))),

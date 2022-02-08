@@ -188,6 +188,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.3"
+  flutter_expanded_tile:
+    dependency: "direct main"
+    description:
+      name: flutter_expanded_tile
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -380,6 +387,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0+1"
+  line_icons:
+    dependency: "direct main"
+    description:
+      name: line_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   lints:
     dependency: transitive
     description:
