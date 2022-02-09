@@ -1,5 +1,17 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/countdown.dart';
+import 'package:flutter_countdown_timer/countdown_controller.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hopla_front_mob/component/drawer.dart';
+import 'package:hopla_front_mob/component/swipUp.dart';
+import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/widgets/info_dialoge.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 class MapAnimation extends StatefulWidget {
   const MapAnimation({Key? key}) : super(key: key);
   @override
@@ -10,21 +22,62 @@ class _MapAnimationState extends State<MapAnimation> {
   List<Marker> allMarkers = [];
   late PageController _pageController;
   late int prevPage = 0;
+  late BitmapDescriptor pinLocationIcon;
+  Set<Marker> _markers = {};
+  Completer<GoogleMapController> _controller2 = Completer();
+  bool details = false ;
+  bool ?inProgress  ;
+  bool isRunning = true;
+  bool isLocked = false;
+  final double _initFabHeight = 120.0;
+  double _fabHeight = 0;
+  double _panelHeightOpen = 0;
+  double _panelHeightClosed = 95.0;
+  double _panelHeightClosed2 = 300;
+  bool station = false;
+  bool inAsyncCall = false;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  CountdownController countdownController1 =
+  CountdownController(duration: Duration(seconds: 30,minutes: 15,hours: 1), onEnd: () {
+    print('onEnd');
+  });
+  CountdownController countdownController2 =
+  CountdownController(duration: Duration(seconds: 30,minutes: 1,hours: 0), onEnd: () {
+    print('onEnd');
+  });
+  void asyncMethod() async {
+    setState(() {
+      countdownController1.start();
 
+    });
+
+    setState(() {
+      isRunning = true;
+    });
+  }
 // make sure to initialize before map loading
+  initMapIcon()async{
 
-  @override
-  void initState() {
-
-    super.initState();
     for (var element in coffeeShops) {
+      BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(size: Size(0.1, 0.1)),
+        "assets/stations/7.png",
+      );
       allMarkers.add(Marker(
           markerId: MarkerId(element.shopName),
           draggable: false,
+          icon: markerbitmap,
           infoWindow:
           InfoWindow(title: element.shopName, snippet: element.address),
           position: element.locationCoords));
     }
+
+  }
+  @override
+  void initState() {
+    initMapIcon();
+    asyncMethod();
+    super.initState();
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8)
       ..addListener(_onScroll);
   }
@@ -53,6 +106,9 @@ class _MapAnimationState extends State<MapAnimation> {
       },
       child: InkWell(
           onTap: () {
+            setState(() {
+              details=true;
+            });
             moveCamera();
           },
           child: Stack(children: [
@@ -111,11 +167,24 @@ class _MapAnimationState extends State<MapAnimation> {
   }
   @override
   Widget build(BuildContext context) {
+    double height = SizeConfig.getHeight(context);
+    double width = SizeConfig.getWidth(context);
+    _panelHeightClosed =  height*.37;
+    _panelHeightOpen = height*.37;
     return Scaffold(
-        body: Stack(
+        drawerScrimColor: Colors.grey.withOpacity(0.7),
+        key: _scaffoldKey,
+        drawer:  Container(child: Drawer(
+          child: DrawerComp(),),
+          width: width*.8,color: Colors.white,),
+        body: ModalProgressHUD(
+            dismissible: true,
+            inAsyncCall: inAsyncCall,
+            progressIndicator: const SpinKitThreeBounce(color: Colors.green,size: 60.0,),
+            child : Stack(
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height - 50.0,
+              height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: GoogleMap(
                 initialCameraPosition:
@@ -124,6 +193,45 @@ class _MapAnimationState extends State<MapAnimation> {
                 onMapCreated: mapCreated,
               ),
             ),
+            Positioned(
+              top: 52.0,
+              right: 20.0,
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                  size: 28,
+                ),
+
+              ),
+            ),
+            Positioned(
+                top: 52.0,
+                left: 20.0,
+                child:InkWell(
+                  onTap: (){_scaffoldKey.currentState?.openDrawer();},
+                  child : Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child:const Icon(
+                      Icons.menu,
+                      color: Colors.grey,
+                      size: 28,
+                    ),
+
+                  ),)
+            ),
+            !details?
             Positioned(
               bottom: 5.0,
               child: SizedBox(
@@ -137,7 +245,590 @@ class _MapAnimationState extends State<MapAnimation> {
                   },
                 ),
               ),
-            )
+            ):
+            Positioned(
+              bottom: 0,
+              child: station?Container(
+                width: width,
+                child: SlidingUpPanel(
+                    maxHeight:_panelHeightOpen ,
+                    minHeight: _panelHeightClosed2,
+                    parallaxEnabled: false,
+                    onPanelClosed: (){
+                      setState(() {
+                        if(inProgress!){
+                          _panelHeightClosed2 = height*.08;
+                        }
+
+                      });
+                    },
+                    onPanelOpened: (){
+                      if(inProgress!){
+                        _panelHeightClosed2 = height*.08;
+                      }
+                    },
+                    parallaxOffset: .5,
+                    panelBuilder: (sc) => _panel(sc),
+                    borderRadius:const  BorderRadius.only(
+                        topLeft: Radius.circular(18.0),
+                        topRight: Radius.circular(18.0)),
+                    onPanelSlide: (double pos)  {
+                      if (!inProgress!) {
+                        setState(() {
+                          station = true;
+                        });
+                      } else {
+                        setState(() {
+                          _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
+                              _initFabHeight;
+                        });
+
+                      }
+                    }
+                ),
+              ):
+              Container(
+                height: height*.35,
+                width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    color:  Colors.white,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
+                  ),
+                  child:ListView(
+                  padding:  EdgeInsets.all(0),
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 2.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(child:Icon(FontAwesomeIcons.angleDoubleDown,color: Colors.green,size: 30,)
+                          ,
+                          onTap: (){
+                            setState(() {
+                              details=false;
+                            });
+                          },)
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                    InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Chfinja Station",
+                            style: GoogleFonts.lato(
+                              textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 24),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: height*.02,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                            Text(
+                              "Xiomi 1",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                Text(
+                                  "80%",
+                                  style: GoogleFonts.lato(
+                                    textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "90 Km",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                            Text(
+                              "Xiomi 1",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                Text(
+                                  "80%",
+                                  style: GoogleFonts.lato(
+                                    textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "90 Km",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon( Icons.electric_scooter, color: Colors.green,size: 30,),
+                            Text(
+                              "Xiomi 1",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Icon( Icons.battery_full_rounded, color: Colors.green,size: 30,),
+                                Text(
+                                  "80%",
+                                  style: GoogleFonts.lato(
+                                    textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "90 Km",
+                              style: GoogleFonts.lato(
+                                textStyle:const  TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w700,fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(
+                      height: height*.03,
+                    ),
+                    InkWell(
+                        onTap: ()async {
+                          setState(() {
+                            inAsyncCall = true;
+                          });
+                          Timer(Duration(seconds: 3), () {
+                            setState(() {
+                              inAsyncCall = false;
+                              inProgress =true;
+                            });
+                          });
+                          setState(() {
+                            station = true;
+                          });
+                        },
+                        child:  Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: height*.06,
+                                width: width*.6,
+                                decoration:  BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(10),),
+                                    border: Border.all(color: Colors.lightGreen)
+                                ),
+                                child:Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(width: width*.01,),
+                                    Icon(FontAwesomeIcons.qrcode,color: Colors.lightGreen,),
+                                    Text('Scan  Code',style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w600),
+                                    ),),
+                                    SizedBox(width: width*.01,),
+                                  ],
+                                )),
+
+                          ],)
+                    ),
+                    const SizedBox(
+                      height: 18.0,
+                    ),
+
+                  ],
+                )
+              ),
+            ),
+            Positioned(
+              top: 300.0,
+              right: 20.0,
+              child: Container(
+                  height: 90,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                          child:const  Icon(
+                            Icons.gps_fixed,
+                            color: Colors.grey,
+                          ),
+                          onTap:(){
+                         }
+                      ),
+                     const  SizedBox(height: 15,),
+                      InkWell(
+                        child:const  Icon(
+                          Icons.near_me,
+                          color: Colors.grey,
+                        ),
+                        onTap: (){
+
+                        },
+                      )
+
+                    ],
+                  )
+
+              ),
+            ),
+
+          ],
+        )));
+
+  }
+  Widget _panel(ScrollController sc) {
+    double height = SizeConfig.getHeight(context);
+    double width = SizeConfig.getWidth(context);
+    return MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child:
+        ListView(
+          controller: sc,
+          children: <Widget>[
+            Container(
+              decoration:  BoxDecoration(
+                color: isRunning? Color(0xff00B72B) :Colors.orangeAccent,
+                borderRadius: const  BorderRadius.only(
+                    topLeft: Radius.circular(18.0),
+                    topRight: Radius.circular(18.0)),
+              ),
+              height: height*.08,
+              width: width,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height*.005,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 30,
+                        height: 5,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: const BorderRadius.all(Radius.circular(12.0))),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: height*.005,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width:width*.05,),
+                      InkWell(
+                        onTap: (){
+                          if(!isLocked){
+                            if (!countdownController1.isRunning) {
+                              countdownController1.start();
+                              countdownController2.stop();
+
+                              setState(() {
+                                isRunning = true;
+                              });
+                            }
+                            else {
+                              countdownController1.stop();
+                              countdownController2.start();
+
+                              setState(() {
+                                isRunning = false;
+                              });
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              isRunning ? Icons.pause : Icons.play_arrow,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                            Text(isRunning?'Pause':'Play',
+                              style: TextStyle(fontFamily: 'Product Sans', color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width:width*.05,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('   Duration : ',style:  TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 14,
+                            color:  Colors.white,
+                          ),),
+                          Countdown(
+                              countdownController: countdownController1 ,
+                              builder: (_, Duration time) {
+                                return Text(
+                                  ' ${time.inHours}: ${time.inMinutes % 60} : ${time.inSeconds % 60}',
+                                  style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 30),
+
+                                );
+                              }),
+                        ],
+                      ),
+                      SizedBox(width:width*.1,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Délai',style:  TextStyle(
+                            fontFamily: 'Product Sans',
+                            fontSize: 14,
+                            color:  Colors.white,
+                          ),),
+                          SizedBox(height: height*.012,),
+                          Countdown(
+                              countdownController: countdownController2 ,
+                              builder: (_, Duration time) {
+                                return Text(
+                                  '${time.inMinutes % 60} : ${time.inSeconds % 60}',
+                                  style:const  TextStyle(color: Colors.white, fontFamily: 'Product Sans',
+                                      letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: 15),
+
+                                );
+                              }),
+                        ],
+                      ),
+                      SizedBox(width:width*.05,),
+
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(height: height*.15,width: width*.2, decoration:const
+                BoxDecoration(
+                  image:   DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage("assets/shadow.png"),
+                  ),
+                ),
+                  child: SizedBox(child:  Container(height: height*.15,width: width*.2,
+                    decoration:const BoxDecoration(
+                      image:   DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage("assets/e_scooter.png"),
+                      ),
+                    ),),),),
+                SizedBox(width: width*.05,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Trip in Progress ',
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 20),
+
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(width: width*.03,),
+                        Text(
+                          '312 -wgt ',
+                          style: TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: height*.03,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Distance ',
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: height*.01,),
+                            Text(
+                              '353 m',
+                              style:
+                              TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: width*.055,),
+                        Column(
+                          children: [
+                            Text(
+                              'Life ',
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: height*.01,),
+                            Text(
+                              '90 KM',
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: width*.055,),
+                        Column(
+                          children: [
+                            Text(
+                              'Power ',
+                              style:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 18),
+
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: height*.01,),
+                            Text(
+                              '71 %',
+                              style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: 15),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    )
+
+                  ],
+                ),
+              ],),
+            SizedBox(height: height*.03,),
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    height: height*.06,
+                    width: width*.43,
+                    decoration:  BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.all(Radius.circular(10),),
+                        border: Border.all(color: Colors.black)
+                    ),
+                    child:InkWell(
+                      onTap: (){
+                        if (!countdownController1.isRunning) {
+                          if(countdownController2.isRunning){
+                            setState(() {
+                              isLocked = true;
+                              countdownController2.stop();
+                            });
+                          }
+                          else {
+                            countdownController1.start();
+                            countdownController2.stop();
+
+                            setState(() {
+                              isRunning = true;
+                              isLocked = false;
+                            });
+                          }
+                        } else {
+                          countdownController1.stop();
+                          countdownController2.start();
+
+                          setState(() {
+                            isRunning = false;
+                            isLocked = true;
+
+                          });
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(width: width*.01,),
+                          Icon(isLocked?FontAwesomeIcons.unlock:FontAwesomeIcons.lock,color: Colors.white,size: 20,),
+                          Text(isLocked?'Unlock Scooter':'lock Scooter',style:TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(width: width*.01,),
+                        ],
+                      ),
+                    )),
+                SizedBox(width: width*.03,),
+                Container(
+                    height: height*.06,
+                    width: width*.43,
+                    decoration:  BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10),),
+                        color: Color(0xffFF0000),
+                        border: Border.all(color:Color(0xffFF0000))
+                    ),
+                    child:InkWell(
+                      onTap: (){
+                        if (isLocked){
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) => const InfoDialoge());
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(width: width*.01,),
+                          Icon(FontAwesomeIcons.flag,color: Colors.white,),
+                          Text('End trip',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: 16,fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(width: width*.01,),
+                        ],
+                      ),
+                    )),
+
+              ],)
+
           ],
         ));
   }
@@ -171,7 +862,7 @@ class Coffee {
 final List<Coffee> coffeeShops = [
   Coffee(
       shopName: 'Stumptown Coffee Roasters',
-      address: '18 W 29th St',
+      address: '5 Scooters',
       description:
       'Coffee bar chain offering house-roasted direct-trade coffee, along with brewing gear & whole beans',
       locationCoords: const LatLng(40.745803, -73.988213),
@@ -179,7 +870,7 @@ final List<Coffee> coffeeShops = [
       'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'),
   Coffee(
       shopName: 'Andrews Coffee Shop',
-      address: '463 7th Ave',
+      address: '5 Scooters',
       description:
       'All-day American comfort eats in a basic diner-style setting',
       locationCoords: const LatLng(40.751908, -73.989804),
@@ -187,7 +878,7 @@ final List<Coffee> coffeeShops = [
       'https://lh5.googleusercontent.com/p/AF1QipOfv3DSTkjsgvwCsUe_flDr4DBXneEVR1hWQCvR=w90-h90-n-k-no'),
   Coffee(
       shopName: 'Third Rail Coffee',
-      address: '240 Sullivan St',
+      address: '5 Scooters',
       description:
       'Small spot draws serious caffeine lovers with wide selection of brews & baked goods.',
       locationCoords: const LatLng(40.730148, -73.999639),
@@ -195,7 +886,7 @@ final List<Coffee> coffeeShops = [
       'https://lh5.googleusercontent.com/p/AF1QipPGoxAP7eK6C44vSIx4SdhXdp78qiZz2qKp8-o1=w90-h90-n-k-no'),
   Coffee(
       shopName: 'Hi-Collar',
-      address: '214 E 10th St',
+      address: '5 Scooters',
       description:
       'Snazzy, compact Japanese cafe showcasing high-end coffee & sandwiches, plus sake & beer at night.',
       locationCoords: const LatLng(40.729515, -73.985927),

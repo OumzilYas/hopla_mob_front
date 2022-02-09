@@ -377,7 +377,9 @@ class _MyHomePageState extends State<DrawerComp> {
                             .width*.09,),
                         InkWell(
                             onTap: (){
-
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  MyHomePage(title: false,);
+                              }));
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,

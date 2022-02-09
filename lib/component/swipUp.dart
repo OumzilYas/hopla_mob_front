@@ -230,7 +230,6 @@ class _HomePageState extends State<HomePage> {
                         station = true;
                       });
                     } else {
-                     // _panelHeightClosed2 = height*.08;
                       setState(() {
                         _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
                             _initFabHeight;
@@ -278,8 +277,6 @@ class _HomePageState extends State<HomePage> {
 
                     ),)
               ),
-
-
               //the SlidingUpPanel Title
 
             ],

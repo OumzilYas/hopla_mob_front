@@ -130,6 +130,9 @@ class _HomePageState extends State<Sign> {
                 if(userData!=null){
                   _isLoggedIn = true;
                   _userObj = userData;
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return PhonePage();
+                  }));
                 }
                 else {
                   _isLoggedIn = false;
