@@ -10,8 +10,11 @@ import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/widgets/info_dialoge.dart';
+import 'package:location/location.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:maps_curved_line/maps_curved_line.dart';
+
 class MapAnimation extends StatefulWidget {
   const MapAnimation({Key? key}) : super(key: key);
   @override
@@ -55,13 +58,54 @@ class _MapAnimationState extends State<MapAnimation> {
       isRunning = true;
     });
   }
+  static LatLng maPosition = LatLng(33.60281225109011, -7.6455879136084945);
+  static LatLng chfinja  = LatLng(33.6022700934326, -7.64625571821334);
+
+  var location = new Location();
+  bool ?_serviceEnabled;
+  PermissionStatus ?_permissionGranted;
+  LocationData ?_locationData;
+  double latitude =3.60414 ;double longitude=-7.64566;
+
+  local()async{
+    _serviceEnabled = await location.serviceEnabled();
+    try{
+      if (!_serviceEnabled!) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled!) {
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return;
+        }
+      }
+
+      _locationData = await location.getLocation();
+      latitude = (_locationData?.latitude ?? 3.60414 );
+      longitude = (_locationData?.longitude ?? -7.64566);
+      print(_locationData?.latitude.toString());
+      print(_locationData?.longitude.toString());
+      setState(() {
+        maPosition = LatLng(latitude, longitude);
+      });
+    }
+    catch(e){
+      print(e);
+    }
+
+  }
 // make sure to initialize before map loading
   initMapIcon()async{
 
     for (var element in coffeeShops) {
       BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
         const ImageConfiguration(size: Size(0.1, 0.1)),
-        "assets/stations/7.png",
+        "assets/stations/p.png",
       );
       allMarkers.add(Marker(
           markerId: MarkerId(element.shopName),
@@ -188,9 +232,10 @@ class _MapAnimationState extends State<MapAnimation> {
               width: MediaQuery.of(context).size.width,
               child: GoogleMap(
                 initialCameraPosition:
-                const CameraPosition(target: LatLng(40.7128, -74.0060), zoom: 12.0),
+                 CameraPosition(target: maPosition, zoom: 12.0),
                 markers: Set.from(allMarkers),
                 onMapCreated: mapCreated,
+                polylines: _polylines, // Add constructed polyline for curved line
               ),
             ),
             Positioned(
@@ -494,6 +539,7 @@ class _MapAnimationState extends State<MapAnimation> {
                             color: Colors.grey,
                           ),
                           onTap:(){
+                            moveCamera2();
                          }
                       ),
                      const  SizedBox(height: 15,),
@@ -503,6 +549,7 @@ class _MapAnimationState extends State<MapAnimation> {
                           color: Colors.grey,
                         ),
                         onTap: (){
+                          moveCameraToCloser();
 
                         },
                       )
@@ -517,9 +564,12 @@ class _MapAnimationState extends State<MapAnimation> {
         )));
 
   }
+  final Set<Polyline> _polylines = Set();
+
   Widget _panel(ScrollController sc) {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
+
     return MediaQuery.removePadding(
         context: context,
         removeTop: true,
@@ -832,14 +882,48 @@ class _MapAnimationState extends State<MapAnimation> {
           ],
         ));
   }
-  void mapCreated(controller) {
+  void mapCreated(controller)async {
+    await local();
     setState(() {
       _controller = controller;
     });
   }
   moveCamera() {
+    setState(() {
+      _polylines.clear();
+    });
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: coffeeShops[_pageController.page!.toInt()].locationCoords,
+        zoom: 14.0,
+        bearing: 45.0,
+        tilt: 45.0)));
+  }
+  moveCameraToCloser() {
+    setState(() {
+      _polylines.add(
+          Polyline(
+            polylineId: PolylineId("line 1"),
+            visible: true,
+            width: 2,
+            //latlng is List<LatLng>
+            patterns: [PatternItem.dash(30), PatternItem.gap(10)],
+            points: MapsCurvedLines.getPointsOnCurve(maPosition, chfinja), // Invoke lib to get curved line points
+            color: Colors.blue,
+          )
+      );
+    });
+    _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: chfinja,
+        zoom: 14.0,
+        bearing: 45.0,
+        tilt: 45.0)));
+  }
+  moveCamera2() {
+    setState(() {
+      _polylines.clear();
+    });
+    _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: maPosition,
         zoom: 14.0,
         bearing: 45.0,
         tilt: 45.0)));
@@ -865,7 +949,7 @@ final List<Coffee> coffeeShops = [
       address: '5 Scooters',
       description:
       'Coffee bar chain offering house-roasted direct-trade coffee, along with brewing gear & whole beans',
-      locationCoords: const LatLng(40.745803, -73.988213),
+      locationCoords: const LatLng(33.570127510987604, -7.65940454849847),
       thumbNail:
       'https://lh5.googleusercontent.com/p/AF1QipNNzoa4RVMeOisc0vQ5m3Z7aKet5353lu0Aah0a=w90-h90-n-k-no'),
   Coffee(
@@ -873,7 +957,7 @@ final List<Coffee> coffeeShops = [
       address: '5 Scooters',
       description:
       'All-day American comfort eats in a basic diner-style setting',
-      locationCoords: const LatLng(40.751908, -73.989804),
+      locationCoords: const LatLng(33.60234054924035, -7.6462636451948605),
       thumbNail:
       'https://lh5.googleusercontent.com/p/AF1QipOfv3DSTkjsgvwCsUe_flDr4DBXneEVR1hWQCvR=w90-h90-n-k-no'),
   Coffee(
@@ -881,7 +965,7 @@ final List<Coffee> coffeeShops = [
       address: '5 Scooters',
       description:
       'Small spot draws serious caffeine lovers with wide selection of brews & baked goods.',
-      locationCoords: const LatLng(40.730148, -73.999639),
+      locationCoords: const LatLng(33.55258632500581, -7.610646899803775),
       thumbNail:
       'https://lh5.googleusercontent.com/p/AF1QipPGoxAP7eK6C44vSIx4SdhXdp78qiZz2qKp8-o1=w90-h90-n-k-no'),
   Coffee(
@@ -889,7 +973,7 @@ final List<Coffee> coffeeShops = [
       address: '5 Scooters',
       description:
       'Snazzy, compact Japanese cafe showcasing high-end coffee & sandwiches, plus sake & beer at night.',
-      locationCoords: const LatLng(40.729515, -73.985927),
+      locationCoords: const LatLng(33.54843988414475, -7.627849760794339),
       thumbNail:
       'https://lh5.googleusercontent.com/p/AF1QipNhygtMc1wNzN4n6txZLzIhgJ-QZ044R4axyFZX=w90-h90-n-k-no'),
 ];
