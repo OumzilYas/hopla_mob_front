@@ -270,7 +270,7 @@ class _MyHomePageState extends State<HomePage2> {
               child: InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return HomePage(inProgress: false,dirictions: false,);
+                    return MapAnimation();
                   }));
                 },
                 child: Container(
@@ -290,17 +290,7 @@ class _MyHomePageState extends State<HomePage2> {
               ),
           ),
           Positioned(
-              top: 580.0,
-              left: width*.45,
-              right: width*.07,
-              child: Container(width: 10,height: 50,
-                  child: Text('Ready ?',style: GoogleFonts.lato(
-                    textStyle: TextStyle(color: Colors.grey, letterSpacing: .5,fontWeight: FontWeight.w800),
-                  ),),)),
-
-
-          Positioned(
-              top: 500.0,
+              top: 470.0,
               left: width*.07,
               right: width*.07,
               child: Container(width: 10,height: 50,

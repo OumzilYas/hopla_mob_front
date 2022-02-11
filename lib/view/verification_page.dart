@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
+import 'package:hopla_front_mob/view/new_map_page.dart';
 import 'package:hopla_front_mob/widgets/HoplaField.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -172,10 +173,8 @@ class _MyHomePageState extends State<VerificationPage> {
                           HoplaField('Continue', '',()
                           {
                             Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const HomePage(inProgress: false,dirictions: false,);
-                          }
-                          )
-                          );
+                              return MapAnimation();
+                            }));
                           })
                         ],
                       ),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/model/scooter.dart';
 
 
@@ -21,6 +22,8 @@ class _TabControllerPageState extends State<StatusSlider> {
 
   @override
   Widget build(BuildContext context) {
+    double height = SizeConfig.getHeight(context);
+    double width = SizeConfig.getWidth(context);
     final List<Widget> onestatus = status.map(
             (item) => InkWell(
               onTap: (){
@@ -51,15 +54,15 @@ class _TabControllerPageState extends State<StatusSlider> {
                         textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
                       )),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height:height*.007 ,),
                     Center(
                       child:  Container(
-                        width: 100,
-                        height: 100,
+                        width: height*.12 ,
+                        height: height*.12 ,
                         child:Center(
                           child: SizedBox(
-                            height: 90,
-                            width: 90,
+                            width: height*.11 ,
+                            height: height*.11,
                             child: FloatingActionButton(
                               backgroundColor: Colors.white,
                               child:
@@ -75,15 +78,15 @@ class _TabControllerPageState extends State<StatusSlider> {
                           color:  Colors.green,),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: height*.02,),
                     Center(
                       child: Container(
                         height: 1,
-                        width: 270,
+                        width: width*.7,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: height*.02,),
                     Center(
                       child:  Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,15 +95,15 @@ class _TabControllerPageState extends State<StatusSlider> {
                           Text('• Auto-renewable subscriptions on all Hoplaplatforms are eligible.',textAlign: TextAlign.center,style: GoogleFonts.lato(
                             textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
-                          SizedBox(height: 10,),
+                          SizedBox(height:height*.01,),
                           Text('• Days of paid service include all subscription offer types (introductory, promotional, and offer codes)',textAlign: TextAlign.center,style: GoogleFonts.lato(
                             textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
-                          SizedBox(height: 10,),
+                          SizedBox(height: height*.01,),
                           Text('• Free trials and renewal extensions are excluded from days of paid service.',textAlign: TextAlign.center,style: GoogleFonts.lato(
                             textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
-                          SizedBox(height: 10,),
+                          SizedBox(height: height*.01,),
                           Text('• Days of paid service are specific to each subscription group.',textAlign: TextAlign.center,style: GoogleFonts.lato(
                             textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),

@@ -8,6 +8,7 @@ import 'package:hopla_front_mob/component/google_sign_in.dart';
 import 'package:hopla_front_mob/component/swipUp.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/creat_account.dart';
+import 'package:hopla_front_mob/view/new_map_page.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
 
 
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final List<Widget> _views =  [
       Column(
         children: <Widget>[
-          SizedBox(height: 10,),
+          SizedBox(height: height*.011,),
           Container(
             height: 50,
             width: 300,
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          SizedBox(height: 13,),
+          SizedBox(height: height*.011,),
           Container(
             height: 50,
             width: 300,
@@ -107,26 +108,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          SizedBox(height: 12,),
+          SizedBox(height: height*.011,),
           Align(
             alignment: Alignment.center,
             child: Text("Forgot Password ?",style: GoogleFonts.montserrat(
               textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w200),
             )),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: height*.02,),
           Container(
             height: height*.06,
             width: width*.75,
             child: FlatButton(
               onPressed: ()async{
                // await Share.share("text");
-
                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return const HomePage(inProgress: false,dirictions: false,);
-                }
-                )
-                );
+                  return MapAnimation();
+                }));
               },
               padding: EdgeInsets.all(0),
               child: Ink(
@@ -154,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: height*.03,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

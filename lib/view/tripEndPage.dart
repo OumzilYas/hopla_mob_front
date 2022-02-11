@@ -320,6 +320,6 @@ class _HomePageState extends State<TripEndPage> {
   }
 
   Widget _body() {
-    return MapPage(press: (){},progress: false,);
+    return MapSample();
   }
 }

@@ -173,97 +173,100 @@ class _PayPageState extends State<PayPage> {
                         ],
                       ),
                     ),
-                    content:Column(
-                      children: [
-                        Container(
-                          decoration:  BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10),),
-                              border: Border.all(color:Color(0xffFFA400))
+                    content:Container(
+                      height: height*.18,
+                      child: ListView(
+                        children: [
+                          Container(
+                            decoration:  BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(10),),
+                                border: Border.all(color:Color(0xffFFA400))
 
-                          ),
-                          height: height*.06,
-                          width: width,
-                          child: Center(child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(width: width*.01,),
-                              Icon(FontAwesomeIcons.creditCard),
-                              Text('CIH Bank',style: GoogleFonts.lato(
-                                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
-                              ),),
-                              Text('*****8787',style: GoogleFonts.lato(
-                                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w900),
-                              ),),
-                              RoundCheckBox(
-                                onTap: (selected) {},
-                                border: Border.all(
-                                  width:3,
-                                  color: Colors.orangeAccent,
+                            ),
+                            height: height*.06,
+                            width: width,
+                            child: Center(child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(width: width*.01,),
+                                Icon(FontAwesomeIcons.creditCard),
+                                Text('CIH Bank',style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
+                                ),),
+                                Text('*****8787',style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w900),
+                                ),),
+                                RoundCheckBox(
+                                  onTap: (selected) {},
+                                  border: Border.all(
+                                    width:3,
+                                    color: Colors.orangeAccent,
+                                  ),
+                                  uncheckedColor: Colors.white,
+                                  checkedColor: Colors.orangeAccent,
+                                  size: 30,
                                 ),
-                                uncheckedColor: Colors.white,
-                                checkedColor: Colors.orangeAccent,
-                                size: 30,
-                              ),
-                              SizedBox(width: width*.01,),
-                            ],
-                          )),
-                        ),
-                        SizedBox(height: height*.01,),
-                        Container(
-                          decoration:  BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10),),
-                              border: Border.all(color:Color(0xffFFA400))
-
+                                SizedBox(width: width*.01,),
+                              ],
+                            )),
                           ),
-                          height: height*.06,
-                          width: width,
-                          child: Center(child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(width: width*.01,),
-                              Icon(FontAwesomeIcons.ccVisa),
-                              Text('BP Bank',style: GoogleFonts.lato(
-                                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
-                              ),),
-                              Text('*****8997',style: GoogleFonts.lato(
-                                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w900),
-                              ),),
-                              RoundCheckBox(
-                                onTap: (selected) {},
-                                border: Border.all(
-                                  width:3,
-                                  color: Colors.orangeAccent,
+                          SizedBox(height: height*.01,),
+                          Container(
+                            decoration:  BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(10),),
+                                border: Border.all(color:Color(0xffFFA400))
+
+                            ),
+                            height: height*.06,
+                            width: width,
+                            child: Center(child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(width: width*.01,),
+                                Icon(FontAwesomeIcons.ccVisa),
+                                Text('BP Bank',style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
+                                ),),
+                                Text('*****8997',style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w900),
+                                ),),
+                                RoundCheckBox(
+                                  onTap: (selected) {},
+                                  border: Border.all(
+                                    width:3,
+                                    color: Colors.orangeAccent,
+                                  ),
+                                  uncheckedColor: Colors.white,
+                                  checkedColor: Colors.orangeAccent,
+                                  size: 30,
+                                  isChecked: true,
                                 ),
-                                uncheckedColor: Colors.white,
-                                checkedColor: Colors.orangeAccent,
-                                size: 30,
-                                isChecked: true,
-                              ),
-                              SizedBox(width: width*.01,),
-                            ],
-                          )),
-                        ),
-                        SizedBox(height: height*.01,),
-                        Container(
-                          decoration:  BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10),),
+                                SizedBox(width: width*.01,),
+                              ],
+                            )),
                           ),
-                          height: height*.06,
-                          width: width*.5,
-                          child: Center(child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(width: width*.01,),
-                              Icon(FontAwesomeIcons.plusCircle),
-                              Text('Use New Pay',style: GoogleFonts.lato(
-                                textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
-                              ),),
-                              SizedBox(width: width*.01,),
-                            ],
-                          )),
-                        ),
+                          SizedBox(height: height*.01,),
+                          Container(
+                            decoration:  BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(10),),
+                            ),
+                            height: height*.06,
+                            width: width*.5,
+                            child: Center(child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(width: width*.01,),
+                                Icon(FontAwesomeIcons.plusCircle),
+                                Text('Use New Pay',style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w500),
+                                ),),
+                                SizedBox(width: width*.01,),
+                              ],
+                            )),
+                          ),
 
-                      ],
+                        ],
+                      ),
                     ),
 
                     contentHorizontalPadding: 20,
@@ -273,7 +276,7 @@ class _PayPageState extends State<PayPage> {
               ),
             ),),
           Positioned(
-              bottom: 170.0,
+              bottom: 150.0,
               left: 20,
               child:Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/component/drawer.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/widgets/bottom_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<EditProfilePage> {
     super.initState();
 
   }
-
+  bool disable = false;
   var dropdownValue1,dropdownValue2,dropdownValue3;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -63,233 +64,282 @@ class _MyHomePageState extends State<EditProfilePage> {
     );
   }
 
-  final List<Widget> stations = ['Profile','Map'].map(
-          (item) => Container(
-            margin: const EdgeInsets.all(5.0),
-            decoration: const BoxDecoration(
-                color: Color(0xffFFFFFF),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30.0),
-                )),
-            width: 350,
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(20.0),
-              children: [
-                SizedBox(height: 10,),
-                 Center(
-                  child: Text(
-                    item.toString()+  ' Stings',
-                    style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 140,
-                      height: 50,
-                      child:const TextField(
-                        decoration:  InputDecoration(
-                            labelText: "First Name",
-                            labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                            focusedBorder:  UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff63A6BE)),
-                              //  when the TextFormField in focused
-                            ) ,
-                            border:   UnderlineInputBorder(
-                              borderSide:  BorderSide(
-                                  color: Color(0xff63A6BE)
-                              ),
-
-                            )
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 140,
-                      height: 50,
-                      child:const TextField(
-                        decoration:  InputDecoration(
-                            labelText: "Last Name",
-                            labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                            focusedBorder:  UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff63A6BE)),
-                              //  when the TextFormField in focused
-                            ) ,
-                            border:   UnderlineInputBorder(
-                              borderSide:  BorderSide(
-                                  color: Color(0xff63A6BE)
-                              ),
-
-                            )
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration:  InputDecoration(
-                        labelText: "E-mail",
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder:const  UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border:const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    keyboardType: TextInputType.phone,
-                    decoration:  InputDecoration(
-                        labelText: "Phone Number",
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder:const  UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border: const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    keyboardType: TextInputType.streetAddress,
-                    decoration:  InputDecoration(
-                        labelText: "Street Address",
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder:const  UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border: const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    keyboardType: TextInputType.datetime,
-                    decoration:  InputDecoration(
-                        labelText: "Birth Date",
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder:const  UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border: const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    obscureText: false,
-                    decoration:  InputDecoration(
-                        labelText: "Password",
-                        suffixIcon: IconButton(icon: Icon(Icons.visibility_off),onPressed: (){
-
-                        },),
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border: const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 50,
-                  child:TextField(
-                    obscureText: false,
-                    decoration:  InputDecoration(
-                        labelText: "Confirme Password",
-                        suffixIcon: IconButton(icon: Icon(Icons.visibility_off),onPressed: (){
-
-                        },),
-                        labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff63A6BE)),
-                          //  when the TextFormField in focused
-                        ) ,
-                        border: const  UnderlineInputBorder(
-                          borderSide:  BorderSide(
-                              color: Color(0xff63A6BE)
-                          ),
-                        )
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        _getFromGallery();
-                      },
-                        child: Container(
-                      height:50,
-                      width: 200,
-                      decoration:const  BoxDecoration(
-                        color: Color(0xff42E0BF),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                      child:
-                      Center( child : Text('Upload Pictur ',
-                          style:   TextStyle(fontFamily: 'Product Sans', color: Colors.white, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
-                          )),
-                    ))
-                  ],
-                ),
-
-              ],
-            ),
-          )
-         ).toList();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.getHeight(context);
     double width = SizeConfig.getWidth(context);
+    final List<Widget> stations = ['Profile','App'].map(
+            (item) => Container(
+              margin: const EdgeInsets.all(5.0),
+              decoration: const BoxDecoration(
+                  color: Color(0xffFFFFFF),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30.0),
+                  )),
+              width: width*.9,
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(20.0),
+                children: [
+                  SizedBox(height: height*.01,),
+                  Center(
+                    child: Container(
+                      width: width*.7,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            item.toString()+  ' Stings',
+                            style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w500),
+                          ),
+                          InkWell(
+                            child:Icon(LineIcons.edit,size: 30,color: disable ? Colors.grey : Colors.green,),
+                            onTap: (){
+                              setState(() {
+                                disable=!disable;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    )
+                  ),
+                  SizedBox(height: height*.03,),
+                  Container(
+                      width: width*.9,
+                      height: height*.12,
+                      child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width*.2,
+                                child:CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage:  NetworkImage(pic),
+                                ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child:  Container(
+                                  width: width*.09,
+                                  height:width*.09,
+                                  padding: const EdgeInsets.all(1),
+                                  decoration:  BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: InkWell(
+                                      child: Icon(LineIcons.camera,),
+                                      onTap: (){
+                                        if(disable){
+                                          _getFromGallery();
+                                        }
+                                          },
+                                    ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: width*.48,
+                                height: height*.06,
+                                child: TextField(
+                                  decoration:  InputDecoration(
+                                    enabled: disable,
+                                      labelText:  name.toString(),
+                                      labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                                      focusedBorder:  UnderlineInputBorder(
+                                        borderSide: BorderSide(color: Color(0xff63A6BE)),
+                                        //  when the TextFormField in focused
+                                      ) ,
+                                      border:   UnderlineInputBorder(
+                                        borderSide:  BorderSide(
+                                            color: Color(0xff63A6BE)
+                                        ),
+
+                                      )
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: width*.48,
+                                height: height*.06,
+                                child: TextField(
+                                  enabled: disable,
+                                  decoration:  InputDecoration(
+                                      labelText: "First Name",
+                                      labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                                      focusedBorder:  UnderlineInputBorder(
+                                        borderSide: BorderSide(color: Color(0xff63A6BE)),
+                                        //  when the TextFormField in focused
+                                      ) ,
+                                      border:   UnderlineInputBorder(
+                                        borderSide:  BorderSide(
+                                            color: Color(0xff63A6BE)
+                                        ),
+
+                                      )
+                                  ),
+                                ),
+                              ),
+
+                            ],
+                          )
+                        ],
+                      )
+                  ),
+
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration:  InputDecoration(
+                          labelText: email,
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                          focusedBorder:const  UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border:const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration:  InputDecoration(
+                        prefixIcon: Icon(LineIcons.crown,size: 25,color: Colors.green,),
+                          labelText: 'Exprience',
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w900),
+                          focusedBorder:const  UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border:const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+                      keyboardType: TextInputType.phone,
+                      decoration:  InputDecoration(
+                          labelText: "Phone Number",
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                          focusedBorder:const  UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border: const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+
+                      keyboardType: TextInputType.streetAddress,
+                      decoration:  InputDecoration(
+                          labelText: "Street Address",
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                          focusedBorder:const  UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border: const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+
+                          )
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+                      obscureText: false,
+                      decoration:  InputDecoration(
+                          labelText: "Password",
+                          suffixIcon: IconButton(icon: Icon(Icons.visibility_off),onPressed: (){
+
+                          },),
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border: const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: width*.9,
+                    height: height*.06,
+                    child:TextField(
+                      enabled: disable,
+                      obscureText: false,
+                      decoration:  InputDecoration(
+                          labelText: "Confirme Password",
+                          suffixIcon: IconButton(icon: Icon(Icons.visibility_off),onPressed: (){
+
+                          },),
+                          labelStyle:   TextStyle(fontFamily: 'Product Sans', color: Colors.grey, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w300),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff63A6BE)),
+                            //  when the TextFormField in focused
+                          ) ,
+                          border: const  UnderlineInputBorder(
+                            borderSide:  BorderSide(
+                                color: Color(0xff63A6BE)
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            )
+    ).toList();
+
     return Scaffold(
       drawerScrimColor: Colors.grey.withOpacity(0.7),
       key: _scaffoldKey,
@@ -342,55 +392,7 @@ class _MyHomePageState extends State<EditProfilePage> {
                   style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
                 )
                   ],),
-              SizedBox(height:height*.02,),
-              Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width*.6,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 20,),
-                    Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width*.2,
-                      child:CircleAvatar(
-                        radius: 40,
-                        backgroundImage:  NetworkImage(pic),
-                      ),
-                    ),
-                    SizedBox(width: 20,),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                         Text(name,
-                          style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 24,fontWeight: FontWeight.w800),
-                        ),
-                        Text(email,
-                          style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w800),
-                        ),
-                        Container(
-                          width: 220,
-                          child: Row(
-                            children: [
-                              Icon(FontAwesomeIcons.crown,color: Colors.green,size: 20,),
-                              SizedBox( width: 10,),
-                              Text('Exprience',style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w800),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-
-                  ],
-                ),
-              ),
-              SizedBox(height:height*.02,),
+              SizedBox(height:height*.05,),
               CarouselSlider(
                 options: CarouselOptions(
                   autoPlay: false,
@@ -398,7 +400,7 @@ class _MyHomePageState extends State<EditProfilePage> {
                   viewportFraction: 0.9,
                   initialPage: 0,
                   enableInfiniteScroll: false,
-                  height: MediaQuery.of(context).size.height*.58,
+                  height: MediaQuery.of(context).size.height*.65,
             ),
             items: stations,
           ),
@@ -422,11 +424,10 @@ class _MyHomePageState extends State<EditProfilePage> {
                   ))
                 ],
               ),
-              SizedBox(height:height*.02,),
-              BBarH(page: 'p',)
             ]
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      bottomNavigationBar:  BBarH(page: 'p',),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

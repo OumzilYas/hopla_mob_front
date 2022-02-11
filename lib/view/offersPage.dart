@@ -71,7 +71,7 @@ class _OfferPageState extends State<OfferPage> {
                 ),)
           ),
           Positioned(
-            top: 130.0,
+            top: 120.0,
             left: 20.0,
             right: 0.0,
             child:Row(
@@ -82,7 +82,7 @@ class _OfferPageState extends State<OfferPage> {
             ),
           ),
           Positioned(
-            top: 130.0,
+            top: 120.0,
             child: SizedBox(
               height: height*.68,
               width: width,
@@ -95,8 +95,9 @@ class _OfferPageState extends State<OfferPage> {
               ),
             ),),
           Positioned(
-             bottom: 70.0,
-             left: 50,
+             bottom: 60.0,
+             left: 0,
+              right: 0,
               child: offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return  PayPage();

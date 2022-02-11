@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/login_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
 import 'package:hopla_front_mob/view/offers_Statuts_page.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerComp extends StatefulWidget {
@@ -72,45 +73,44 @@ class _MyHomePageState extends State<DrawerComp> {
                         width: MediaQuery
                             .of(context)
                             .size
-                            .width*.6,
+                            .width*.5,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width*.15,
-                              child:CircleAvatar(
-                                radius: 40,
-                                backgroundImage:  NetworkImage(pic),
-                              ),
-                            ),
-                            SizedBox(width: 20,),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 Text(name,
-                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w800),
+                                Text(name,
+                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w100),
                                 ),
                                 Text(email,
-                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w800),
+                                  style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 14,fontWeight: FontWeight.w100),
                                 ),
                                 Container(
                                   width: 220,
                                   child: Row(
                                     children: [
-                                      Icon(FontAwesomeIcons.crown,color: Colors.green,size: 20,),
+                                      Icon(LineIcons.crown,color: Colors.orangeAccent,),
                                       SizedBox( width: 10,),
-                                      Text('Exprience',style:  TextStyle(fontFamily: 'Product Sans', color: Colors.black, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w800),
+                                      Text('Exprience',style:  TextStyle(fontFamily: 'Product Sans', color: Colors.orangeAccent, letterSpacing: .5,fontSize: 18,fontWeight: FontWeight.w100),
                                       )
                                     ],
                                   ),
                                 )
                               ],
                             ),
-
+                            SizedBox(width: 10,),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width*.12,
+                              child:CircleAvatar(
+                                radius: 40,
+                                backgroundImage:  NetworkImage(pic),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.027,),
+                        .height*.02,),
                     Row(
                       children: [
                         InkWell(
@@ -135,12 +135,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.home,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.home,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   Text('Home',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -152,7 +152,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.015,),
                     Row(
                       children: [
                         InkWell(
@@ -169,12 +169,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.fileInvoiceDollar,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.dollarSign,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   Text('Offers',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.015,),
                     Row(
                       children: [
                         InkWell(
@@ -200,12 +200,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.mapMarkedAlt,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.alternateMapMarked,color: Colors.black,),
                                   SizedBox( width: 15,),
-                                  Text('trip',  style: TextStyle(
+                                  Text('Trip',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -216,7 +216,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.015,),
                     Row(
                       children: [
                         InkWell(
@@ -231,11 +231,11 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.wallet,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.wallet,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   const Text('Payment',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w300,
                                     color: const Color(0xff241332),
                                   ))
@@ -247,7 +247,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.015,),
                     Row(
                       children: [
                         InkWell(
@@ -262,12 +262,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.shoppingCart,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.shoppingCart,color: Colors.black,size: 25,),
                                   SizedBox( width: 15,),
                                   Text('Purchase',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -278,7 +278,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.015,),
                     Row(
                       children: [
                         InkWell(
@@ -293,12 +293,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.assistiveListeningSystems,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.assistiveListeningSystems,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   Text('Assitance',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -309,7 +309,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.02,),
                     Row(
                       children: [
                         InkWell(
@@ -324,12 +324,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.biking,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.biking,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   Text('Actvity',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -340,7 +340,7 @@ class _MyHomePageState extends State<DrawerComp> {
                     SizedBox(  height: MediaQuery
                         .of(context)
                         .size
-                        .height*.025,),
+                        .height*.02,),
                     Row(
                       children: [
                         InkWell(
@@ -355,12 +355,12 @@ class _MyHomePageState extends State<DrawerComp> {
                                       .of(context)
                                       .size
                                       .width*.02,),
-                                  Icon(FontAwesomeIcons.percent,color: Colors.black,size: 25,),
+                                  Icon(LineIcons.percent,color: Colors.black,),
                                   SizedBox( width: 15,),
                                   Text('PromoCode',  style: TextStyle(
                                     fontFamily: 'Product Sans',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                     color: const Color(0xff241332),
                                   ))
                                 ],
@@ -374,7 +374,7 @@ class _MyHomePageState extends State<DrawerComp> {
                         SizedBox(width: MediaQuery
                             .of(context)
                             .size
-                            .width*.09,),
+                            .width*.01,),
                         InkWell(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -393,13 +393,13 @@ class _MyHomePageState extends State<DrawerComp> {
                                     width: 220,
                                     child: Row(
                                       children: [
-                                        Icon(FontAwesomeIcons.signOutAlt,color: Colors.green,size: 20,),
+                                        Icon(LineIcons.alternateSignOut,color: Colors.blueGrey,),
                                         SizedBox( width: 15,),
                                         Text('Log Out',  style: TextStyle(
                                           fontFamily: 'Product Sans',
                                           fontSize: 20,
-                                          fontWeight: FontWeight.w300,
-                                          color:  Colors.green,
+                                          fontWeight: FontWeight.w100,
+                                          color:  Colors.blueGrey,
                                         ))
                                       ],
                                     ),
