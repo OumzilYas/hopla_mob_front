@@ -1,44 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:hopla_front_mob/view/home_page.dart';
+import 'package:hopla_front_mob/view/login_page.dart';
+import 'package:hopla_front_mob/view/test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counter;
+  bool l = false ;
+  final SharedPreferences prefs = await _prefs;
+  l  = (prefs.getBool('login') ?? false) ;
+  runApp( MyApp(login:l ,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key,required this.login}) : super(key: key);
+  bool login ;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:login? HomePage2():  MyHomePage(title: false,),// HomePage(inProgress: false,dirictions: false,),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(child:  Text('hopla'),),
-       // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
