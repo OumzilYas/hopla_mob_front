@@ -237,30 +237,33 @@ class _TabControllerPageState extends State<TabControllerPage> {
         width:  MediaQuery.of(context).size.width,
         child: DefaultTabController(
           length: temp.length,
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              shadowColor: Colors.transparent,
-              backgroundColor: Colors.transparent,
-              automaticallyImplyLeading: false,
-              flexibleSpace: SafeArea(
-                  child: Center(
-                    child: TabBar(
-                      indicatorWeight: 3,
-                      isScrollable: true,
-                      indicatorColor: Colors.orangeAccent,
-                      tabs: List<Widget>.generate(temp.length, (int index){
-                        return  Tab(child : Container(height: 70,child:Center(child:Text(temp[index].toString(),style: GoogleFonts.lato(
+          child: ListView(
+            children: [
+              Container(
+                width:  MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height*.06,
+                child: Center(
+                  child: TabBar(
+                    indicatorWeight: 3,
+                    isScrollable: true,
+                    indicatorColor: Colors.orangeAccent,
+                    tabs: List<Widget>.generate(temp.length, (int index){
+                      return  Tab(child : Container(height: 70,child:Center(child:Text(temp[index].toString(),style: GoogleFonts.lato(
                         textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w800),
-                        ),))));
-                      }),
-                    ),
-                  )
+                      ),))));
+                    }),
+                  ),
+                ),
               ),
-            ),
-            body:  TabBarView(
-              children: _views
-            ),
+              Container(
+                width:  MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height*.7,
+                child: TabBarView(
+                    children: _views
+                ),
+              )
+            ],
+
           ),
         ));
   }

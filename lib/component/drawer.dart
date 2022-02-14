@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/view/home_page.dart';
 import 'package:hopla_front_mob/view/login_page.dart';
 import 'package:hopla_front_mob/view/offersPage.dart';
 import 'package:hopla_front_mob/view/offers_Statuts_page.dart';
+import 'package:hopla_front_mob/view/wallet_page.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -221,7 +222,9 @@ class _MyHomePageState extends State<DrawerComp> {
                       children: [
                         InkWell(
                             onTap: (){
-
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return  WalletPage();
+                              }));
                             },
                             child: Container(padding: const EdgeInsets.only(top: 10),
                               width: 220,

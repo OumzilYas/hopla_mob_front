@@ -84,7 +84,7 @@ class _OfferPageState extends State<OfferPage> {
           Positioned(
             top: 120.0,
             child: SizedBox(
-              height: height*.68,
+              height: height*.7,
               width: width,
               child:TabControllerPage(
                 offersList: offers,

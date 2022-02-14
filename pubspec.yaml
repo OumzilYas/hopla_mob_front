@@ -64,6 +64,7 @@ dependencies:
   maps_curved_line: ^1.0.2
   flutter_expanded_tile: ^0.3.6
   cupertino_stepper: ^0.2.1
+  screenshot: ^1.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

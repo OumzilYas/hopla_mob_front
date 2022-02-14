@@ -276,35 +276,41 @@ class _MyHomePageState extends State<MyHomePage> {
                   child:Center(child: Image.asset("assets/icon.png",height: 200,width: width*.5,),),
                 ),
               ),
-              SizedBox(height:height*.1 ,),
+              SizedBox(height:height*.08 ,),
               Container(
-              height:  height*.5,
+              height:  height*.55,
               width:  MediaQuery.of(context).size.width,
               child: DefaultTabController(
                 length: temp.length,
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  appBar: AppBar(
-                    shadowColor: Colors.transparent,
-                    backgroundColor: Colors.transparent,
-                    automaticallyImplyLeading: false,
-                    flexibleSpace: SafeArea(
-                        child: Center(
-                          child: TabBar(
-                            indicatorWeight: 3,
-                            isScrollable: true,
-                            indicatorColor: Colors.orangeAccent,
-                            tabs: List<Widget>.generate(temp.length, (int index){
-                              return  Tab(child : Container(height: 70,child:Center(child:Text(temp[index].toString(),style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w800),
-                              ),))));
-                            }),
-                          ),
-                        )
-                    ),
-                  ),
-                  body:  TabBarView(
-                      children: _views
+                child: Container(
+                  height:  height*.53,
+                  width:  MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Container(
+                          width:  MediaQuery.of(context).size.width,
+                          height: height*.08,
+                          child: Center(
+                            child: TabBar(
+                              indicatorWeight: 3,
+                              isScrollable: true,
+                              indicatorColor: Colors.orangeAccent,
+                              tabs: List<Widget>.generate(temp.length, (int index){
+                                return  Tab(child : Container(height: 70,child:Center(child:Text(temp[index].toString(),style: GoogleFonts.lato(
+                                  textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontSize: 20,fontWeight: FontWeight.w800),
+                                ),))));
+                              }),
+                            ),
+                          )
+                      ),
+                      Container(
+                          height:  height*.4,
+                          width:  MediaQuery.of(context).size.width,
+                        child: TabBarView(
+                            children: _views
+                        ),
+                      )
+                    ],
                   ),
                 ),
               )),
