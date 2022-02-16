@@ -61,8 +61,8 @@ class BBarH extends StatelessWidget {
 
         ],
       ),
-      decoration:const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Color(0xffDFE6EF).withOpacity(0.1),
       ),);
   }
 }
