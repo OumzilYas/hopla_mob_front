@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/phone_page.dart';
+import 'package:line_icons/line_icons.dart';
 
 class AppBarH extends StatelessWidget {
 
@@ -39,7 +40,7 @@ class AppBarH extends StatelessWidget {
                   child: Center(
                     child: InkWell(
                       // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                      child:const FaIcon(FontAwesomeIcons.bars,color: Colors.grey,size: 25,),
+                      child: Icon(LineIcons.bars,color: Colors.grey,size: 25,),
                       onTap: press,
                     ),),                      ),
                 SizedBox(width: width*.05,),

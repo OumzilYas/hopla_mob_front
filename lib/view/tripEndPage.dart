@@ -7,6 +7,7 @@ import 'package:hopla_front_mob/component/googleMap.dart';
 import 'package:hopla_front_mob/component/map.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/home_page.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:share/share.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -30,7 +31,7 @@ class _HomePageState extends State<TripEndPage> {
 
   @override
   Widget build(BuildContext context) {
-    _panelHeightOpen = MediaQuery.of(context).size.height * .80;
+    _panelHeightOpen = MediaQuery.of(context).size.height * .72;
 
     return Material(
       child: Stack(
@@ -40,6 +41,7 @@ class _HomePageState extends State<TripEndPage> {
             maxHeight: _panelHeightOpen,
             minHeight: _panelHeightOpen,
             parallaxEnabled: true,
+
             parallaxOffset: .5,
             body: _body(),
             panelBuilder: (sc) => _panel(sc),
@@ -97,28 +99,37 @@ class _HomePageState extends State<TripEndPage> {
               ],
             ),
             SizedBox(
-              height: height*.01,
+              height: height*.02,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: height*.3,
-                  width: width*.7,
-                  color: Colors.black,
+                  width: width*.6,
 
-                  child:MapSample(),
+                  child:Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: MapSample(),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: height*.01,
+              height: height*.02,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    height: height*.13,
-                    width: width*.43,
+                    height: height*.112,
+                    width: width*.35,
                     decoration:  BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10),),
                         border: Border.all(color: Colors.blueGrey)
@@ -160,59 +171,55 @@ class _HomePageState extends State<TripEndPage> {
                         ),
                       )
                     )),
-                SizedBox(width: width*.03,),
+                SizedBox(width: width*.002,),
                 Container(
-                    height: height*.2,
-                    width: width*.43,
+                    height: height*.15,
+                    width: width*.3,
                     child:Center(
                         child: Container(
-                          height: height*.13,
-                          width: width*.3,
+                          height: height*.1,
+                          width: width*.2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(FontAwesomeIcons.mapMarker,color: Colors.green,),
+                                  Icon(LineIcons.mapMarker,color: Colors.green,size: 20,),
                                   SizedBox(width: width*.01,),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('Chfinja',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
+                                      Text('Chfinja',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w600),
                                       ),
                                       Text('16:10',style:TextStyle(fontFamily: 'Product Sans',color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: width*.01,),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(width: width*.03,),
-                                  Container(height: height*.04,width: 1,color: Colors.blueGrey,)
+                                  Container(height: height*.02,width: 1,color: Colors.blueGrey,)
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(FontAwesomeIcons.mapMarked,color: Colors.redAccent,),
+                                  Icon(LineIcons.mapMarker,color: Colors.red,size: 20,),
                                   SizedBox(width: width*.01,),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('Marina',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 15,fontWeight: FontWeight.w600),
+                                      Text('Marin',style: TextStyle(fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w600),
                                       ),
-                                      Text('16:41',style:  TextStyle(fontFamily: 'Product Sans',color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
+                                      Text('16:40',style:TextStyle(fontFamily: 'Product Sans',color: Colors.grey, letterSpacing: .5,fontSize: 12,fontWeight: FontWeight.w300),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: width*.01,),
                                 ],
                               ),
 
@@ -224,17 +231,17 @@ class _HomePageState extends State<TripEndPage> {
               ],),
 
             SizedBox(
-              height: height*.01,
+              height: height*.02,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    height: height*.06,
+                    height: height*.05,
                     width: width*.7,
                     decoration:  const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(25),),
-                      color: Colors.orangeAccent,
+                      color: Color(0xffFF8800),
                     ),
                     child:InkWell(
                       onTap: ()async{
@@ -264,11 +271,11 @@ class _HomePageState extends State<TripEndPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    height: height*.06,
+                    height: height*.05,
                     width: width*.7,
                     decoration:  const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(25),),
-                        color: Colors.green,
+                        color: Color(0xff31CB00),
                     ),
                     child:InkWell(
                       onTap: ()async{

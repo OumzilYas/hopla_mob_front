@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hopla_front_mob/config/size_config.dart';
 import 'package:hopla_front_mob/view/tripEndPage.dart';
 import 'package:hopla_front_mob/widgets/hopla_button.dart';
+import 'package:line_icons/line_icons.dart';
 typedef void StringCallback(String val);
 
 class InfoDialoge extends StatefulWidget {
@@ -48,10 +49,20 @@ class _DialogState extends State<InfoDialoge> {
     return Form(
         child:  Builder(builder: (BuildContext context) {return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            title: Text("Notice",style : TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+            backgroundColor: Color(0xffD9E1E7),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Notice",style : TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+                ),
+                Icon(FontAwesomeIcons.ellipsisH)
+              ],
             ),
             content: Text("Do you want really to end the trip",style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
             ),
+
             actions: [
               cancelButton,
               continueButton,

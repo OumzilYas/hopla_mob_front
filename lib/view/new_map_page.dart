@@ -43,26 +43,26 @@ class _MapAnimationState extends State<MapAnimation> {
   bool station = false;
   bool inAsyncCall = false;
   final info01 = InfoProperties(
-      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 16),
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 10),
       bottomLabelText: 'Battery',
-      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:8),
       modifier: (double value) {
         final temp = (value*100/600).toInt();
         return '$temp %';
       });
 
   final info02 = InfoProperties(
-      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 16),
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 10),
       bottomLabelText: 'Life',
-      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.orangeAccent, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.orangeAccent, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:8),
       modifier: (double value) {
         final temp = value.toInt();
         return '$temp KM';
       });
   final info03 = InfoProperties(
-      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 9),
       bottomLabelText: 'Distance',
-      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.indigo, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.indigo, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:8),
       modifier: (double value) {
         final temp = value.toInt();
         return '$temp KM';
@@ -430,7 +430,7 @@ class _MapAnimationState extends State<MapAnimation> {
                       width: width*.9,
                       decoration:  BoxDecoration(
                         color:  Colors.white.withOpacity(0.95),
-                        border: Border.all(color: Colors.black,width: 2),
+                        border: Border.all(color: Color(0xffFF8800),width: 2),
                         borderRadius:const BorderRadius.all(Radius.circular(30)),
                       ),
                       child:ListView(
@@ -443,7 +443,7 @@ class _MapAnimationState extends State<MapAnimation> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               SizedBox(width: width*.2,),
-                              InkWell(child:Icon(LineIcons.timesCircle,color: Colors.black,size: 30,),
+                              InkWell(child:Icon(LineIcons.timesCircle,color: Color(0xffFF8800),size: 30,),
                                 onTap: (){
                                   setState(() {
                                     details=false;
@@ -458,7 +458,7 @@ class _MapAnimationState extends State<MapAnimation> {
                                 Text(
                                   "Chfinja Station",
                                   style: TextStyle(
-                                    fontFamily: 'Product Sans',color: Colors.blueGrey, letterSpacing: .5,fontWeight: FontWeight.w400, fontSize: height*.03,
+                                    fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w400, fontSize: height*.03,
                                     ),
                                 ),
                               ],
@@ -499,9 +499,15 @@ class _MapAnimationState extends State<MapAnimation> {
                                                 Column(
                                                   children: <Widget>[
                                                     SizedBox(height: height*.003,),
-                                                    Icon( Icons.battery_full_rounded, color: Colors.orange,size: 32,),
+                                                    Container(height: height*.05,width: width*.12,
+                                                      decoration: BoxDecoration(
+                                                        image:   DecorationImage(
+                                                          fit: BoxFit.fitHeight,
+                                                          image: AssetImage("assets/battery/battery-icons${index+1}.png"),
+                                                        ),
+                                                      ),),
                                                     Text(
-                                                      "80%",
+                                                      (100-(index*25))<0?'3%' : "${100-(index*25)}%",
                                                       style: TextStyle(
                                                         fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800,fontSize: height*.01,),
 
@@ -541,19 +547,13 @@ class _MapAnimationState extends State<MapAnimation> {
                                       width: width*.6,
                                       decoration:  BoxDecoration(
                                           borderRadius: BorderRadius.all(Radius.circular(10),),
-                                          border: Border.all(color: Colors.blueGrey)
+                                          border: Border.all(color: Color(0xffFF8800))
                                       ),
                                       child:Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           SizedBox(width: width*.01,),
-                                          Container(height: height*.05,width: width*.12,
-                                            decoration:const BoxDecoration(
-                                              image:   DecorationImage(
-                                                fit: BoxFit.fitHeight,
-                                                image: AssetImage("assets/scan.png"),
-                                              ),
-                                            ),),
+                                          Icon(LineIcons.qrcode,color: Color(0xffFF8800),size: 30,),
                                           Text('Scan  Code',style: TextStyle(
                                               fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontSize: height*.02,fontWeight: FontWeight.w400),
                                           ),
@@ -633,7 +633,7 @@ class _MapAnimationState extends State<MapAnimation> {
           children: <Widget>[
             Container(
               decoration:  BoxDecoration(
-                color: isRunning? Color(0xff00B72B) :Colors.orangeAccent,
+                color: isRunning? Color(0xff00B72B) :Color(0xffFF8800),
                 borderRadius: const  BorderRadius.only(
                     topLeft: Radius.circular(18),
                     topRight: Radius.circular(18)),
@@ -760,18 +760,33 @@ class _MapAnimationState extends State<MapAnimation> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(height: height*.15,width: width*.2, decoration:const
+                BoxDecoration(
+                  image:   DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage("assets/shadow.png"),
+                  ),
+                ),
+                  child: SizedBox(child:  Container(height: height*.15,width: width*.2,
+                    decoration:const BoxDecoration(
+                      image:   DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage("assets/e_scooter.png"),
+                      ),
+                    ),),),),
+                SizedBox(width: width*.03,),
                 Container(
-                  height: height*.15,
-                  width: width*.8,
+                  height: height*.13,
+                  width: width*.63,
                   decoration:  BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10),),
-                      border: Border.all(color: Colors.black)
+                      border: Border.all(color: Color(0xffFF8800),width: 2)
                   ),
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: width*.75,
+                        width: width*.55,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -789,13 +804,13 @@ class _MapAnimationState extends State<MapAnimation> {
                             ),
                             SizedBox(height: height*.01,),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Column(
                                   children: [
                                     Container(
-                                      height: height*.09,
-                                      width: width*.2,
+                                      height: height*.06,
+                                      width: width*.18,
                                       child : Countdown(
                                           countdownController: countdownController1 ,
                                           builder: (_, Duration time) {
@@ -815,8 +830,8 @@ class _MapAnimationState extends State<MapAnimation> {
                                 Column(
                                   children: [
                                     Container(
-                                      height: height*.09,
-                                      width: width*.2,
+                                      height: height*.06,
+                                      width: width*.18,
                                       child: Countdown(
                                           countdownController: countdownController1 ,
                                           builder: (_, Duration time) {
@@ -833,12 +848,11 @@ class _MapAnimationState extends State<MapAnimation> {
                                     )
                                   ],
                                 ),
-
                                 Column(
                                   children: [
                                     Container(
-                                      height: height*.09,
-                                      width: width*.2,
+                                      height: height*.06,
+                                      width: width*.18,
                                       child: SleekCircularSlider(
 
                                           appearance: CircularSliderAppearance(customColors: customColors03, customWidths: customWidth02,
@@ -865,11 +879,10 @@ class _MapAnimationState extends State<MapAnimation> {
               children: [
                 Container(
                     height: height*.06,
-                    width: width*.43,
+                    width: width*.4,
                     decoration:  BoxDecoration(
-                        color: Colors.black,
                         borderRadius: BorderRadius.all(Radius.circular(10),),
-                        border: Border.all(color: Colors.black)
+                        border: Border.all(color: Color(0xff31CB00),width: 3)
                     ),
                     child:InkWell(
                       onTap: (){
@@ -904,8 +917,8 @@ class _MapAnimationState extends State<MapAnimation> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(width: width*.01,),
-                          Icon(isLocked?FontAwesomeIcons.unlock:FontAwesomeIcons.lock,color: Colors.white,size: 20,),
-                          Text(isLocked?'Unlock Scooter':'lock Scooter',style:TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: height*.016,fontWeight: FontWeight.w500),
+                          Icon(isLocked?LineIcons.unlock:LineIcons.lock,color: Colors.black,size: 20,),
+                          Text(isLocked?'Unlock Scooter':'lock Scooter',style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontSize: height*.016,fontWeight: FontWeight.w500),
                           ),
                           SizedBox(width: width*.01,),
                         ],
@@ -914,11 +927,10 @@ class _MapAnimationState extends State<MapAnimation> {
                 SizedBox(width: width*.03,),
                 Container(
                     height: height*.06,
-                    width: width*.43,
+                    width: width*.4,
                     decoration:  BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10),),
-                        color: Color(0xffFF0000),
-                        border: Border.all(color:Color(0xffFF0000))
+                        border: Border.all(color:Color(0xffFF0000),width: 3)
                     ),
                     child:InkWell(
                       onTap: (){
@@ -933,8 +945,8 @@ class _MapAnimationState extends State<MapAnimation> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(width: width*.01,),
-                          Icon(FontAwesomeIcons.flag,color: Colors.white,),
-                          Text('End trip',style: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: height*.016,fontWeight: FontWeight.w500),
+                          Icon(LineIcons.flag,color: Colors.black,),
+                          Text('End trip',style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontSize: height*.016,fontWeight: FontWeight.w500),
                           ),
                           SizedBox(width: width*.01,),
                         ],

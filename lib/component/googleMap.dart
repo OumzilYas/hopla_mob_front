@@ -104,8 +104,7 @@ class MapSampleState extends State<MapSample> {
   }
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: GoogleMap(
+    return  GoogleMap(
         polylines: Set<Polyline>.of(_mapPolylines.values),
         mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
@@ -113,7 +112,6 @@ class MapSampleState extends State<MapSample> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
-      ),
     );
   }
 
