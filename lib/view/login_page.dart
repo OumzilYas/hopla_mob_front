@@ -60,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           SizedBox(height: height*.011,),
           Container(
-            height: 50,
-            width: 300,
+            height: height*.065,
+            width: width*.7,
             child: TextField(
               decoration: InputDecoration(
                 labelText: "Email ID",
@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           SizedBox(height: height*.011,),
           Container(
-            height: 50,
-            width: 300,
+            height: height*.065,
+            width: width*.7,
             child: TextField(
               decoration: InputDecoration(
                 labelText: "Password",
@@ -278,12 +278,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height:height*.08 ,),
               Container(
-              height:  height*.55,
+              height:  height*.58,
               width:  MediaQuery.of(context).size.width,
               child: DefaultTabController(
                 length: temp.length,
                 child: Container(
-                  height:  height*.53,
+                  height:  height*.55,
                   width:  MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
@@ -304,7 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                       ),
                       Container(
-                          height:  height*.4,
+                          height:  height*.5,
                           width:  MediaQuery.of(context).size.width,
                         child: TabBarView(
                             children: _views

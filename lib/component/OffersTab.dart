@@ -24,6 +24,7 @@ class _TabControllerPageState extends State<TabControllerPage> {
   @override
   Widget build(BuildContext context) {
     List temp = ["Experience","Recharge"];
+    List temp2 = ["assets/Iconsooffre/experience.png","assets/Iconsooffre/rechargee.png"];
 
       final List<Widget> _views =  [
         ListView.builder(
@@ -61,25 +62,15 @@ class _TabControllerPageState extends State<TabControllerPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: 70,
                               height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 60,
-                                  width: 60,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.white,
-                                    child:
-                                    Icon(Icons.electric_scooter_outlined,color: Colors.deepOrangeAccent,size: 25,),
-                                    onPressed: () {
-
-                                    },
-                                  ),
+                              width: 70,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                image:   DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image:const AssetImage("assets/Iconsoffre/experience.png"),
                                 ),
                               ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.deepOrangeAccent),
                             ),
                             SizedBox(height: 10,),
                             Row(
@@ -164,25 +155,14 @@ class _TabControllerPageState extends State<TabControllerPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: 70,
-                              height: 70,
-                              child:Center(
-                                child: SizedBox(
-                                  height: 60,
-                                  width: 60,
-                                  child: FloatingActionButton(
-                                    backgroundColor: Colors.white,
-                                    child:
-                                    Icon(Icons.electric_scooter_outlined,color: Colors.deepOrangeAccent,size: 25,),
-                                    onPressed: () {
-
-                                    },
-                                  ),
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                image:   DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image:const AssetImage("assets/Iconsoffre/rechargeee.png"),
                                 ),
                               ),
-                              decoration:const  BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.deepOrangeAccent),
                             ),
                             SizedBox(height: 10,),
                             Row(
@@ -237,7 +217,7 @@ class _TabControllerPageState extends State<TabControllerPage> {
         width:  MediaQuery.of(context).size.width,
         child: DefaultTabController(
           length: temp.length,
-          child: ListView(
+          child: Column(
             children: [
               Container(
                 width:  MediaQuery.of(context).size.width,
@@ -257,7 +237,7 @@ class _TabControllerPageState extends State<TabControllerPage> {
               ),
               Container(
                 width:  MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height*.7,
+                height: MediaQuery.of(context).size.height*.58,
                 child: TabBarView(
                     children: _views
                 ),

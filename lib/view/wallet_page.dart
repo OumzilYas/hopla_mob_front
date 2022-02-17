@@ -468,7 +468,7 @@ class _MyHomePageState extends State<WalletPage> {
                          body: Container(
                            height: height*.45,
                            width: width,
-                           child: Column(
+                           child: ListView(
                                children :  [
                                  Text(
                                    'Well Done ! ',
@@ -477,7 +477,7 @@ class _MyHomePageState extends State<WalletPage> {
                                      fontSize: 20,
                                      color:  Colors.black,
                                    ),
-                                   textAlign: TextAlign.left,
+                                   textAlign: TextAlign.center,
                                  ),
                                  SizedBox(height:height*.02 ,),
                                  Text(

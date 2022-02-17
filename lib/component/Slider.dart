@@ -16,7 +16,8 @@ class StatusSlider extends StatefulWidget {
   @override
   _TabControllerPageState createState() => _TabControllerPageState();
 }
-List status = [false,false,false];
+List status = [[false,'Access','assets/Iconsprofil/access.png'],
+[false,'Pass','assets/Iconsprofil/pass.png'],[false,'Subscription','assets/Iconsprofil/abon.png']];
 int _current = 1;
 class _TabControllerPageState extends State<StatusSlider> {
 
@@ -29,18 +30,18 @@ class _TabControllerPageState extends State<StatusSlider> {
               onTap: (){
                 setState(() {
                   for (var i = 0; i < status.length; i++) {
-                    status[i] = false;
+                    status[i][0] = false;
                   }
                 });
                 setState(() {
-                  status[_current]  =true;
+                  status[_current][0]  =true;
                 });
                 widget.callback('Selected');
               },
               child: Container(
                 decoration:  BoxDecoration(
-                  color: Color(0xffFFA400),
-                    border: Border.all(color:item? Colors.green: Colors.transparent),
+                  color: Colors.green,
+                    border: Border.all(color:item[0]? Color(0xffFFA400): Colors.transparent,width: 3),
                     borderRadius: const BorderRadius.all(
                        Radius.circular(30),
 
@@ -50,32 +51,23 @@ class _TabControllerPageState extends State<StatusSlider> {
                   padding:  EdgeInsets.all(10),
                   children: [
                     Center(
-                      child:  Text('Pass',style: GoogleFonts.lato(
-                        textStyle: const TextStyle(color: Colors.black, letterSpacing: .5,fontSize: 30,fontWeight: FontWeight.w800),
-                      )),
+                      child:  Text(item[1],style:TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontSize: height*.04,fontWeight: FontWeight.w500)),
                     ),
                     SizedBox(height:height*.007 ,),
                     Center(
                       child:  Container(
-                        width: height*.12 ,
-                        height: height*.12 ,
-                        child:Center(
-                          child: SizedBox(
-                            width: height*.11 ,
-                            height: height*.11,
-                            child: FloatingActionButton(
-                              backgroundColor: Colors.white,
-                              child:
-                              Icon(Icons.electric_scooter_outlined,color:  Colors.green,size: 50,),
-                              onPressed: () {
-
-                              },
+                        width: height*.09 ,
+                        height: height*.09 ,
+                        child:Container(
+                          height: 70,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            image:   DecorationImage(
+                              fit: BoxFit.contain,
+                              image: AssetImage(item[2]),
                             ),
                           ),
                         ),
-                        decoration:const  BoxDecoration(
-                          shape: BoxShape.circle,
-                          color:  Colors.green,),
                       ),
                     ),
                     SizedBox(height: height*.02,),
@@ -83,7 +75,7 @@ class _TabControllerPageState extends State<StatusSlider> {
                       child: Container(
                         height: 1,
                         width: width*.7,
-                        color: Colors.black87,
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(height: height*.02,),
@@ -93,19 +85,19 @@ class _TabControllerPageState extends State<StatusSlider> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('• Auto-renewable subscriptions on all Hoplaplatforms are eligible.',textAlign: TextAlign.center,style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                            textStyle: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
                           SizedBox(height:height*.01,),
                           Text('• Days of paid service include all subscription offer types (introductory, promotional, and offer codes)',textAlign: TextAlign.center,style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                            textStyle: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
                           SizedBox(height: height*.01,),
                           Text('• Free trials and renewal extensions are excluded from days of paid service.',textAlign: TextAlign.center,style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                            textStyle: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
                           SizedBox(height: height*.01,),
                           Text('• Days of paid service are specific to each subscription group.',textAlign: TextAlign.center,style: GoogleFonts.lato(
-                            textStyle: TextStyle(color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w800),
+                            textStyle: TextStyle(fontFamily: 'Product Sans',color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.w800),
                           ),),
 
                         ],

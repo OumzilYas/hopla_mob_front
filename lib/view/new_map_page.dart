@@ -14,6 +14,7 @@ import 'package:hopla_front_mob/widgets/info_dialoge.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:location/location.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:maps_curved_line/maps_curved_line.dart';
 
@@ -41,9 +42,48 @@ class _MapAnimationState extends State<MapAnimation> {
   double _panelHeightClosed2 = 300;
   bool station = false;
   bool inAsyncCall = false;
+  final info01 = InfoProperties(
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 16),
+      bottomLabelText: 'Battery',
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      modifier: (double value) {
+        final temp = (value*100/600).toInt();
+        return '$temp %';
+      });
+
+  final info02 = InfoProperties(
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 16),
+      bottomLabelText: 'Life',
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.orangeAccent, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      modifier: (double value) {
+        final temp = value.toInt();
+        return '$temp KM';
+      });
+  final info03 = InfoProperties(
+      bottomLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: 15),
+      bottomLabelText: 'Distance',
+      mainLabelStyle:  TextStyle(fontFamily: 'Product Sans',color: Colors.indigo, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize:13),
+      modifier: (double value) {
+        final temp = value.toInt();
+        return '$temp KM';
+      });
+  final customWidth02 = CustomSliderWidths(trackWidth: 1, progressBarWidth: 4);
+  final customColors01 = CustomSliderColors(
+      trackColor: Colors.grey,
+      progressBarColor: Colors.green,
+      hideShadow: true);
+  final customColors02 = CustomSliderColors(
+      trackColor: Colors.grey,
+      progressBarColor: Colors.orangeAccent,
+      hideShadow: true);
+  final customColors03 = CustomSliderColors(
+      trackColor: Colors.grey,
+      progressBarColor: Colors.indigo,
+      hideShadow: true);
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   CountdownController countdownController1 =
-  CountdownController(duration: Duration(seconds: 30,minutes: 15,hours: 1), onEnd: () {
+  CountdownController(duration: Duration(seconds: 0,minutes: 10,hours: 0), onEnd: () {
     print('onEnd');
   });
   CountdownController countdownController2 =
@@ -486,11 +526,9 @@ class _MapAnimationState extends State<MapAnimation> {
                                 setState(() {
                                   inAsyncCall = true;
                                 });
-                                Timer(Duration(seconds: 3), () {
-                                  setState(() {
-                                    inAsyncCall = false;
-                                    inProgress =true;
-                                  });
+                                setState(() {
+                                  inAsyncCall = false;
+                                  inProgress =true;
                                 });
                                 setState(() {
                                   station = true;
@@ -718,106 +756,106 @@ class _MapAnimationState extends State<MapAnimation> {
                 ],
               ),
             ),
+            SizedBox(height: height*.02,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(height: height*.15,width: width*.2, decoration:const
-                BoxDecoration(
-                  image:   DecorationImage(
-                    fit: BoxFit.contain,
-                    image: AssetImage("assets/shadow.png"),
-                  ),
-                ),
-                  child: SizedBox(child:  Container(height: height*.15,width: width*.2,
-                    decoration:const BoxDecoration(
-                      image:   DecorationImage(
-                        fit: BoxFit.contain,
-                        image: AssetImage("assets/e_scooter.png"),
-                      ),
-                    ),),),),
-                SizedBox(width: width*.05,),
                 Container(
-                  height: height*.12,
+                  height: height*.15,
+                  width: width*.8,
                   decoration:  BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10),),
                       border: Border.all(color: Colors.black)
                   ),
-                  child:Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child:Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Trip in Progress ',
-                            style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: height*.026,),
-                            textAlign: TextAlign.center,
-                          ),
+                    children: [
+                      Container(
+                        width: width*.75,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:  [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Trip in Progress ',
+                                  style: TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: height*.026,),
+                                  textAlign: TextAlign.center,
+                                ),
 
-                        ],
-                      ),
-                      SizedBox(height: height*.02,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                'Distance ',
-                                style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: height*.019,),
+                              ],
+                            ),
+                            SizedBox(height: height*.01,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: height*.09,
+                                      width: width*.2,
+                                      child : Countdown(
+                                          countdownController: countdownController1 ,
+                                          builder: (_, Duration time) {
+                                            return SleekCircularSlider(
+                                                min: 0,
+                                                max: 600,
+                                                initialValue: time.inSeconds.toDouble(),
+                                                appearance: CircularSliderAppearance(customColors: customColors01, customWidths: customWidth02,
+                                                    spinnerDuration: 3,infoProperties: info01),
+                                                onChange: (double value) {
+                                                  print(value);
+                                                });
+                                          }),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: height*.09,
+                                      width: width*.2,
+                                      child: Countdown(
+                                          countdownController: countdownController1 ,
+                                          builder: (_, Duration time) {
+                                            return SleekCircularSlider(
+                                                min: 0,
+                                                max: 10,
+                                                initialValue: time.inMinutes % 60,
+                                                appearance: CircularSliderAppearance(customColors: customColors02, customWidths: customWidth02,
+                                                    spinnerDuration: 3,infoProperties: info02),
+                                                onChange: (double value) {
+                                                  print(value);
+                                                });
+                                          }),
+                                    )
+                                  ],
+                                ),
 
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: height*.01,),
-                              Text(
-                                '353 m',
-                                style:
-                                TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: height*.015,),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: height*.09,
+                                      width: width*.2,
+                                      child: SleekCircularSlider(
 
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: width*.055,),
-                          Column(
-                            children: [
-                              Text(
-                                'Life ',
-                                style:TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: height*.018),
+                                          appearance: CircularSliderAppearance(customColors: customColors03, customWidths: customWidth02,
+                                              spinnerDuration: 3,infoProperties: info03),
+                                          onChange: (double value) {
+                                            print(value);
+                                          }),
+                                    )
+                                  ],
+                                ),
 
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: height*.01,),
-                              Text(
-                                '90 KM',
-                                style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: height*.015),
+                              ],
+                            )
 
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: width*.055,),
-                          Column(
-                            children: [
-                              Text(
-                                'Power ',
-                                style:  TextStyle(fontFamily: 'Product Sans',color: Colors.black, letterSpacing: .5,fontWeight: FontWeight.w500,fontSize: height*.018),
-
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: height*.01,),
-                              Text(
-                                '71 %',
-                                style:TextStyle(fontFamily: 'Product Sans',color: Colors.green, letterSpacing: .5,fontWeight: FontWeight.w900,fontSize: height*.015),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-
-                        ],
+                          ],
+                        ),
                       )
-
                     ],
                   ),
                 )

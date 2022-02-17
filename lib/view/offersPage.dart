@@ -82,7 +82,7 @@ class _OfferPageState extends State<OfferPage> {
             ),
           ),
           Positioned(
-            top: 120.0,
+            top: 150.0,
             child: SizedBox(
               height: height*.7,
               width: width,
@@ -95,7 +95,7 @@ class _OfferPageState extends State<OfferPage> {
               ),
             ),),
           Positioned(
-             bottom: 60.0,
+             top: 720.0,
              left: 0,
               right: 0,
               child: offers.indexOf(true)!=-1?Center(child: HoplaButton(Colors.white,width*.7,height*.07,Colors.orangeAccent,'Buy Now',(){
